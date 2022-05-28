@@ -1,8 +1,8 @@
 import React, {Component, Fragment, useEffect } from 'react'
 import {connect, useSelector, useDispatch } from 'react-redux'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
-import { Login, Signup } from './components/AuthForm';
-import Home from './components/Home';
+import { Login, Signup } from './components/AuthForm/AuthForm';
+import Home from './components/Home/Home';
 import {me} from './store'
 
 /**
@@ -29,6 +29,7 @@ const Routes = () => {
             <Route path='/' exact >{Login}</Route>
             <Route path="/login">{Login}</Route>
             <Route path="/signup">{Signup}</Route>
+            <Redirect to="/" />
           </Switch>
         )}
       </div>
