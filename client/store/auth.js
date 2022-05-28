@@ -1,7 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 
-const TOKEN = 'token'
+export const TOKEN = 'token'
 
 /**
  * ACTION TYPES
@@ -41,6 +41,19 @@ export const authenticate = (username, password, method) => async dispatch => {
 export const logout = () => {
   window.localStorage.removeItem(TOKEN)
   history.push('/login')
+  if (window.gapi) {
+    const auth2 = window.gapi.auth2.getAuthInstance()
+    if (auth2 != null) {
+      auth2.then(
+        () => {
+          auth2.signOut().then(() => {
+            auth2.disconnect()
+          })
+        },
+        err => onFailure(err)
+      )
+    }
+  }
   return {
     type: SET_AUTH,
     auth: {}
