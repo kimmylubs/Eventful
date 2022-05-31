@@ -1,3 +1,22 @@
+Making a public calender, it will have a public calender and a private calender
+
+Ideas. 
+1. App that generates a list of avalibilities for users based on their calenders
+2. See what others are doing 
+3. Events going on (food, music, etc) (news?)
+4. If a friend is going on vacation we can invite them
+
+technologies
+1. google oauth 
+2. google calender api 
+3. eventbrite api - inviting people or joining and event
+
+technologies 2 
+1. react
+2. db (user, user-events, user info, participants who are attending not going t/f)
+3. react-native
+
+
 # FS-App-Template
 
 ## Setup
