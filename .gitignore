@@ -6,3 +6,5 @@ npm-debug.log
 yarn-error.log
 package-lock.json
 .env
+client/components/EventBrite/apikey.txt
+client/components/EventBrite/eventbriteapiv3public.apib
