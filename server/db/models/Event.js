@@ -12,7 +12,7 @@ const Event = db.define("event", {
     type: Sequelize.STRING,
   },
   ticketCount: {
-    type: Sequelize.INTEGER(2),
+    type: Sequelize.INTEGER,
   },
   price: {
     type: Sequelize.DECIMAL(0, 2),
@@ -26,17 +26,17 @@ const Event = db.define("event", {
   imageClick: {
     type: Sequelize.STRING,
   },
-  category: {
-    type: Sequelize.ENUM(
-      "business",
-      "fashion",
-      "food",
-      "general",
-      "music",
-      "sports"
-    ),
-    defaultValue: "general",
-  },
+//   category: {
+//     type: Sequelize.ENUM(
+//       "business",
+//       "fashion",
+//       "food",
+//       "general",
+//       "music",
+//       "sports"
+//     ),
+//     defaultValue: "general",
+//   },
   description: {
     type: Sequelize.STRING,
   },
@@ -50,7 +50,7 @@ const Event = db.define("event", {
     type: Sequelize.STRING,
   },
   zipcode: {
-    type: Sequelize.INTEGER(5),
+    type: Sequelize.INTEGER,
   },
 });
 
