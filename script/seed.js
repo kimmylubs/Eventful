@@ -1,6 +1,8 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const { default: axios } = require('axios')
+const {db, models: {User, Event} } = require('../server/db')
+// const SeedEvents = require('./seedEvents');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -15,7 +17,10 @@ async function seed() {
     User.create({ username: 'cody', password: '123' }),
     User.create({ username: 'murphy', password: '123' }),
   ])
-
+  const events = await Promise.all([
+    Event.create({ data: 'stuff'
+    })
+  ])
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
   return {
@@ -35,6 +40,7 @@ async function runSeed() {
   console.log('seeding...')
   try {
     await seed()
+    // await SeedEvents();
   } catch (err) {
     console.error(err)
     process.exitCode = 1
