@@ -15,12 +15,12 @@ const User = db.define('user', {
   password: {
     type: Sequelize.STRING,
   },
-  classMethods: {
-    associate: function (models) {
-      User.hasMany(models.User, {as: 'Friends', through: models.Friendship})
-    }
-  }
 })
+
+User.associate = function (models) {
+  User.hasMany(models.User, {as: 'Friends', through: models.Friendship})
+}
+
 
 module.exports = User
 
