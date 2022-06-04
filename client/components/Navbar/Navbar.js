@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../../store'
+import EventBrite from '../EventBrite/EventBrite'
 
 const Navbar = () =>  {
   const isLoggedIn = useSelector(state => !!state.auth.id)
@@ -13,6 +14,7 @@ const Navbar = () =>  {
       <nav>
         {isLoggedIn ? (
           <div>
+            <EventBrite/>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
             <a href="#" onClick={ () => dispatch(logout()) }>
