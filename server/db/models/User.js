@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
+const Friendship = require('./Friendship')
 
 const SALT_ROUNDS = 5;
 
@@ -13,6 +14,11 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
+  },
+  classMethods: {
+    associate: function (models) {
+      User.hasMany(models.User, {as: 'Friends', through: models.Friendship})
+    }
   }
 })
 
