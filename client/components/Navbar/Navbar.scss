@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .navbar {
   display: inline-flex;
   flex-direction: column;
@@ -6,8 +8,8 @@
   border-right: 1px solid lightgray;
 
   .user-avatar {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background-color: blanchedalmond;
     display: flex;
@@ -17,15 +19,30 @@
     margin-bottom: 20px;
   }
 
+  .profile-link,
+  .friends-link {
+    margin-bottom: 20px;
+  }
+
+  .add-friends-btn,
   .logout-btn {
     width: 150px;
-    background: lightgray;
-    border-radius: 16px;
-    height: 30px;
+    
+    border-radius: 30px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: black;
     cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .add-friends-btn {
+    background: $turquoise;
+  }
+
+  .logout-btn {
+    background: lightgray;
   }
 }

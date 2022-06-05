@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link as a } from 'react-router-dom';
 
 import { logout } from "../../store";
 import EventBrite from "../EventBrite/EventBrite";
@@ -14,12 +15,17 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <h1>App Name</h1>
-      <h3>Hello, {user.firstName}!</h3>
+      <h2>Hello, {user.firstName}!</h2>
       <div className="user-avatar">
         {user.firstName[0]}
       </div>
+      <a className="profile-link">my profile</a>
+      <a className="friends-link">my friends</a>
+      <span className="add-friends-btn">
+        +  add friends
+      </span>
       <span className="logout-btn" onClick={() => dispatch(logout())}>
-        Log Out
+        Log out
       </span>
       <EventBrite />
     </div>
