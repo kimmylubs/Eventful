@@ -1,21 +1,23 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import {authenticate} from '../../store'
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { authenticate } from "../../store";
+import GoogleAuth from "../GoogleAuth";
 
 /**
  * COMPONENT
  */
 const AuthForm = ({ name, displayName }) => {
-  const { error } = useSelector(state => state.auth)
-  const dispatch = useDispatch()
+  const { error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {
-    evt.preventDefault()
-    const formName = evt.target.name
-    const username = evt.target.username.value
-    const password = evt.target.password.value
-    dispatch(authenticate(username, password, formName))
-  }
+    evt.preventDefault();
+    const formName = evt.target.name;
+    const username = evt.target.username.value;
+    const password = evt.target.password.value;
+    dispatch(authenticate(username, password, formName));
+  };
 
   return (
     <div>
@@ -37,9 +39,9 @@ const AuthForm = ({ name, displayName }) => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
+      <GoogleAuth />
     </div>
-  )
-}
+  );
+};
 
-export const Login = <AuthForm name="login" displayName="Login" />
-export const Signup = <AuthForm name="signup" displayName="Sign Up" />
+export default AuthForm;

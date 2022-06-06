@@ -21,7 +21,13 @@ function GoogleAuth() {
 
   const handleLoginSuccess = async (gResponse) => {
     console.log("successfully logged in: ", gResponse);
-    const response = await axios.post("/auth/google", { token: gResponse.tokenId });
+    const firstName = gResponse.profileObj.givenName;
+    const lastName = gResponse.profileObj.familyName;
+    const response = await axios.post("/auth/google", {
+      token: gResponse.tokenId,
+      firstName,
+      lastName,
+    });
     window.localStorage.setItem(TOKEN, response.data.token);
     console.log("response: ", response);
     await dispatch(me());
