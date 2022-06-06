@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./EventsSugesstion.scss";
+import "./EventSuggestion.scss";
 
-const EventsSugesstion = (props) => {
+const EventSuggestion = (props) => {
 
   return (
     <div className="upcoming-events">
@@ -12,4 +12,4 @@ const EventsSugesstion = (props) => {
   );
 };
 
-export default EventsSugesstion;
+export default EventSuggestion;
