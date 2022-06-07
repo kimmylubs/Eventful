@@ -37,7 +37,10 @@ const UpcomingEvents = (props) => {
         <Swiper modules={[Navigation]} navigation spaceBetween={20} slidesPerView={4}>
           {events.map((event) => (
             <SwiperSlide key={event.id}>
-              <div className="event">{event.title}</div>
+              <div className="event">
+                <div className="img">{event.title}</div>
+                <div className="text"></div>
+              </div>
             </SwiperSlide>
           ))}
           <SwiperNavigation direction="prev" counter={prevCounter} />

@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <h1>App Name</h1>
-      <h2>Hello, {user.firstName}!</h2>
+      <h2 className="user-name">Hello, {user.firstName}!</h2>
       <div className="user-avatar">
         {user.firstName[0]}
       </div>
