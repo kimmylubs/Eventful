@@ -6,14 +6,14 @@ const bcrypt = require("bcrypt");
 const Event = db.define("event", {
   data: {
     type: db.Sequelize.JSON
-  }
+  },
 //   id: {
 //     type: Sequelize.UUID,
 //     primaryKey: true,
 //   },
-//   name: {
-//     type: Sequelize.STRING,
-//   },
+  name: {
+    type: Sequelize.STRING,
+  },
 //   ticketCount: {
 //     type: Sequelize.INTEGER,
 //   },
@@ -42,9 +42,9 @@ const Event = db.define("event", {
 // //       "sports",
 // //     ),
 // //   },
-//   description: {
-//     type: Sequelize.STRING,
-//   },
+  description: {
+    type: Sequelize.STRING,
+  },
 //   address: {
 //     type: Sequelize.STRING,
 //   },
