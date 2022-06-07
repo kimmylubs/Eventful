@@ -1,0 +1,39 @@
+.upcoming-events {
+  .slider-img {
+    display: flex;
+    align-items: center;
+    
+    .swiper {
+      display: flex;
+      width: 900px;
+
+      .swiper-button-prev, .swiper-button-next {
+        display: none;
+      }
+
+      .event {
+        border: 1px solid black;
+        // width: 80%;
+        margin: 0 auto;
+
+        // .img {
+        //   height: 180px;
+        //   width: 230px;
+        //   border: solid grey 1px;
+        //   margin: 0 20px 10px 20px;
+        // }
+
+        // .text {
+        //   height: 80px;
+        //   width: 230px;
+        //   border: solid grey 1px;
+        //   margin: 0 20px 0 20px;
+        // }
+      }
+    }
+  }
+
+  hr {
+    margin: 60px 0 60px 0;
+  }
+}

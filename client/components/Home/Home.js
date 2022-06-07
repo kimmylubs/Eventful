@@ -5,8 +5,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import TextField from "@mui/material/TextField";
 
 import UpcomingEvents from "../UpcomingEvents/UpcomingEvents";
-import FriendsSugesstion from "../FriendsSugesstion/FriendsSugesstion";
-import EventsSugesstion from "../EventsSugesstion";
+import FriendSuggestion from "../FriendSuggestion/FriendSuggestion";
+import EventSuggestion from "../EventSuggestion";
 
 import "./Home.scss";
 
@@ -26,8 +26,8 @@ const Home = (props) => {
         </span>
       </div>
       <UpcomingEvents />
-      <FriendsSugesstion/>
-      <EventsSugesstion />
+      <FriendSuggestion/>
+      <EventSuggestion />
     </div>
   );
 };
