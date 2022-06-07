@@ -7,6 +7,10 @@
   width: 200px;
   border-right: 1px solid lightgray;
 
+  .user-name {
+    margin-top: 30px;
+  }
+
   .user-avatar {
     width: 100px;
     height: 100px;
@@ -16,7 +20,7 @@
     justify-content: center;
     align-items: center;
     font-size: 24px;
-    margin-bottom: 20px;
+    margin: 10px 0 29.92px 0;
   }
 
   .profile-link,
