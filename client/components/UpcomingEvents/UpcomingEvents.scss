@@ -1,0 +1,45 @@
+.upcoming-events {
+  .header {
+    margin: 30px 0 30px 0;
+  }
+
+  .slider-img {
+    display: flex;
+    align-items: center;
+
+    .swiper {
+      display: flex;
+      width: 900px;
+
+      .swiper-button-prev, .swiper-button-next {
+        display: none;
+      }
+
+      .event {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+
+        .img {
+          height: 180px;
+          width: 200px;
+          border: solid grey 1px;
+          margin-bottom: 10px;
+        }
+
+        .text {
+          height: 80px;
+          width: 200px;
+          border: solid grey 1px;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  hr {
+    margin: 60px 0 60px 0;
+  }
+}

@@ -1,0 +1,33 @@
+@import "../../variables.scss";
+
+.home {
+  padding: 0 25px;
+
+  .icon-container {
+    display: flex;
+    margin-top: 21.44px;
+
+    .create-events-btn {
+      width: 150px;
+      border-radius: 30px;
+      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: black;
+      cursor: pointer;
+      border: 2px solid $turquoise;
+      margin-bottom: 9.77px;
+    }
+
+    .search {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-left: 30px;
+      height: 45px;
+    }
+  }
+  
+  
+}

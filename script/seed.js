@@ -14,15 +14,21 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
+    User.create({ username: 'cody', password: '123', fistName: 'Cody', lastName: 'Murphy' }),
+    User.create({ username: 'murphy', password: '123', firstName: 'Murphy', lastName: 'Cody' }),
+    
   ])
   const events = await Promise.all([
     Event.create({ data: 'stuff'
-    })
+    }),
+    Event.create({name: 'Fullstack Graduation', description: 'Fullstack Part-Time Cohort Graduation'}),
+    Event.create({name: 'Bar Hangout', description: 'Bar hangout with friends from university'}),
+    Event.create({name: 'Movie', description: 'Watching the new Marvel film with friends from work'})
   ])
-  console.log(`seeded ${users.length} users`)
+
+
   console.log(`seeded successfully`)
+  
   return {
     users: {
       cody: users[0],

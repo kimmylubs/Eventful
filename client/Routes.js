@@ -1,40 +1,41 @@
-import React, {Component, Fragment, useEffect } from 'react'
-import {connect, useSelector, useDispatch } from 'react-redux'
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
-import { Login, Signup } from './components/AuthForm/AuthForm';
-import Home from './components/Home/Home';
-import {me} from './store'
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Routes as RouterRoutes, Navigate } from "react-router-dom";
+import AuthForm from "./components/AuthForm";
+import Home from "./components/Home/Home";
+import { me } from "./store";
 
 /**
  * COMPONENT
  */
-  
+
 const Routes = () => {
-  const isLoggedIn = useSelector(state => !!state.auth.id)
-  const dispatch = useDispatch()
+  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(me())
-  }, [])
+    dispatch(me());
+  }, []);
 
- return (
-   <div>
+  return (
+    <div>
+      <RouterRoutes>
         {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Redirect to="/home" />
-          </Switch>
+          <>
+            <Route path="home" element={<Home />} />
+            <Route path="*" element={<Navigate to="/home" replace />} />
+          </>
         ) : (
-          <Switch>
-            <Route path='/' exact >{Login}</Route>
-            <Route path="/login">{Login}</Route>
-            <Route path="/signup">{Signup}</Route>
-            <Redirect to="/" />
-          </Switch>
+          <>
+            <Route path="/" element={<AuthForm name="login" displayName="Login" />} exact />
+            <Route path="login" element={<AuthForm name="login" displayName="Login" />} />
+            <Route path="signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </>
         )}
-      </div>
-  )
+      </RouterRoutes>
+    </div>
+  );
+};
 
-}
-
-export default Routes
+export default Routes;
