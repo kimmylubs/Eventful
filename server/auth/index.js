@@ -56,3 +56,21 @@ router.get("/me", async (req, res, next) => {
     next(ex);
   }
 });
+
+router.put("/me", async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    const updatedUser = await user.update({
+      username: req.body.username,
+      streetAddress: req.body.streetAddress,
+      email: req.body.email,
+      city: req.body.city,
+      state: req.body.state,
+      zip: req.body.zip,
+      phone: req.body.phone,
+    });
+    res.send(updatedUser);
+  } catch (ex) {
+    next(ex);
+  }
+});
