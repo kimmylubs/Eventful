@@ -15,12 +15,20 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <h1>App Name</h1>
+<<<<<<< HEAD
       <h2>Hello, {user.firstName}!</h2>
       <div className="user-avatar">{user.firstName}</div>
 
       <Link to="/profile" className="profile-link">
         my profile
       </Link>
+=======
+      <h2 className="user-name">Hello, {user.firstName}!</h2>
+      <div className="user-avatar">
+        {user.firstName[0]}
+      </div>
+      <a className="profile-link">my profile</a>
+>>>>>>> main
       <a className="friends-link">my friends</a>
       <span className="add-friends-btn">+ add friends</span>
       <span className="logout-btn" onClick={() => dispatch(logout())}>
