@@ -21,19 +21,19 @@ class EventBrite extends React.Component {
     // this.getCategories = this.getCategories.bind(this)
   }
   // window.location
-  async getCategories() {
-    console.log("hi");
-    const categoriesResponse = (
-      await axios.get(`https://www.eventbriteapi.com/v3/categories/`, {
-        headers: {
-          Authorization: `Bearer ${privatetoken}`,
-        },
-      })
-    ).data.categories;
-    console.log(categoriesResponse);
-    console.log(categoriesResponse.map(el => el.name))
-    return categoriesResponse;
-  }
+  // async getCategories() {
+  //   console.log("hi");
+  //   const categoriesResponse = (
+  //     await axios.get(`https://www.eventbriteapi.com/v3/categories/`, {
+  //       headers: {
+  //         Authorization: `Bearer ${privatetoken}`,
+  //       },
+  //     })
+  //   ).data.categories;
+  //   console.log(categoriesResponse);
+  //   console.log(categoriesResponse.map((el) => el.name));
+  //   return categoriesResponse;
+  // }
   // render() {
   //   return (
   //     <div>
@@ -83,19 +83,18 @@ class EventBrite extends React.Component {
 }
 
 const Events = () => {
-  const events = new EventBrite();
-  const categories = events.getCategories();
-  return (
-    <div>
-      <div>
-        {categories.name?.map(el => {
-          return (
-            <p>{el} </p>
-            )})}
-        OK
-      </div>
-    </div>
-  );
+  // const events = new EventBrite();
+  // const categories = events.getCategories();
+  // return (
+  //   <div>
+  //     <div>
+  //       {categories.name?.map((el) => {
+  //         return <p>{el} </p>;
+  //       })}
+  //       OK
+  //     </div>
+  //   </div>
+  // );
 };
 
 export default Events;

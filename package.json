@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "ajax": "^0.0.4",
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.0",
     "cheerio": "^1.0.0-rc.11",
     "compression": "^1.7.3",
@@ -44,7 +45,7 @@
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.8.2",
-    "@mui/material": "^5.8.2",
+    "@mui/material": "^5.8.3",
     "axios-mock-adapter": "^1.16.0",
     "babel-loader": "^8.2.2",
     "chai": "^4.2.0",

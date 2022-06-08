@@ -8,6 +8,7 @@ import Home from "./components/Home/Home";
 import { me } from "./store";
 
 import "./App.scss";
+import Profile from "./components/Profile";
 
 const Test = () => {
   return <div className="test">tetsef;alksdjf;laksdjf</div>;
@@ -19,7 +20,7 @@ const App = () => {
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(me())
+    dispatch(me());
   }, []);
 
   return (
@@ -30,15 +31,29 @@ const App = () => {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="/asdf" element={<Test />} />
+              <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </>
         ) : (
           <>
-            <Route path="/" element={<AuthForm name="login" displayName="Login" />} exact />
-            <Route path="login" element={<AuthForm name="login" displayName="Login" />} />
-            <Route path="signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
-            <Route path="*" element={<Navigate to="/" state={{ from: location }} replace />} />
+            <Route
+              path="/"
+              element={<AuthForm name="login" displayName="Login" />}
+              exact
+            />
+            <Route
+              path="login"
+              element={<AuthForm name="login" displayName="Login" />}
+            />
+            <Route
+              path="signup"
+              element={<AuthForm name="signup" displayName="Sign Up" />}
+            />
+            <Route
+              path="*"
+              element={<Navigate to="/" state={{ from: location }} replace />}
+            />
           </>
         )}
       </Routes>
