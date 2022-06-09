@@ -13,7 +13,8 @@ const clientsecret = "YYVNVOLAQRPTUKHAS53NKBOD4UW5POTBBL3ZBXBGMUVT5M7PZT";
 const privatetoken = "JEWHBXVJCBGU2HWD76D2";
 const publictoken = "IJFSN65CEYRDTZNSUXHD";
 const allvenueids = [
-  99994959, 99948699, 99940489, 99926989, 99925819, 99925639, 99924299,
+  99994959, 99948699, 99940489, 
+  // 99926989, 99925819, 99925639, 99924299,
   // 99922359, 99869419, 99811989, 99803679, 99763149, 99753429, 99747879,
   // 99742129, 99437919, 99394999, 99319439, 99319239, 99263149, 99262759,
   // 99262519, 99262419, 99261789, 99261589, 99219569, 99175819, 99130169,
@@ -57,43 +58,100 @@ class EventBrite extends React.Component {
     // this.state = [];
     // this.getCategories = this.getCategories.bind(this)
   }
-  // window.location
+
+  ////// window.location
   ////// CATEGORIES
+
+  async getCategories() {
+    console.log("hi");
+    const allvenuesfromId = await Promise.all(
+      allvenueids.map(id => (axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/events/`, {
+        headers:{
+          Authorization: `Bearer ${myprivatetoken}`,
+        },
+      })))
+    )
+    console.log('venues',allvenuesfromId);
+
+    const venuesToEvents = allvenuesfromId.map(el => el.data.events)
+    console.log('venuestoevents',venuesToEvents);
+
+    const venuesToNames = venuesToEvents.map(el => {
+      return (el.map (e => e.name.text))
+    })
+    console.log('venuesToNames',venuesToNames);
+
+    const eventCategory = venuesToEvents.map(el => {
+      return (el.map (e => e.category_id))
+    })
+    console.log('eventCategory',eventCategory);
+
+    const eventURL = venuesToEvents.map(el => {
+      return (el.map (e => e.url))
+    })
+    console.log('eventURL',eventURL);
+    
+    //logoimage is a src iamge! make sure to put it in an image bracket!
+    const eventLogoimage = venuesToEvents.map(el => {
+      return (el.map (e => e.logo.url))
+    })
+    console.log('eventLogoimage',eventLogoimage);
+
+    const eventInpersonOnline = venuesToEvents.map(el => {
+      return (el.map (e => e.online_event))
+    })
+    console.log('eventInpersonOnline',eventInpersonOnline);
+
+    // const eventID = venuesToEvents.map(el => {
+    //   return (el.map (e => e.id))
+    // })
+    // console.log('eventID',eventID);
+
+    // const eventDescription = venuesToEvents.map(el => {
+    //   return (el.map (e => e.description.text))
+    // })
+    // console.log('eventDescription',eventDescription);
+
+    // const eventStartLocal = venuesToEvents.map(el => {
+    //   return (el.map (e => {
+    //     return (e.start.local)}))
+    // })
+    // console.log('eventStartLocal',eventStartLocal);
+
+    // const eventStartLocation = venuesToEvents.map(el => {
+    //   return (el.map (e => {
+    //     return (e.start.location)}))
+    // })
+    // console.log('eventStartLocation',eventStartLocation);
+
+    const venuesToPagination = allvenuesfromId.map(el => el.data.pagination)
+    console.log('venuestoevents',venuesToPagination);
+  }
+
+    ////// CATEGORIES
+
   // async getCategories() {
   //   console.log("hi");
-  //   const venues = await Promise.all(
-  //     allvenueids.map(id => (axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/events/`, {
-  //       headers:{
-  //         Authorization: `Bearer ${myprivatetoken}`,
-  //       },
-  //     })).data)
-  //   )
+  //   const venues = (
+  //     await axios.get(
+  //       // categories
+  //       // `https://www.eventbriteapi.com/v3/categories/`,
+  //       // venues_id
+  //       // `https://www.eventbriteapi.com/v3/venues/${allvenueids[0]}/events/`,
+  //       // event id === id
+  //       `https://www.eventbriteapi.com/v3/venues/100096669/events/`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${myprivatetoken}`,
+  //         },
+  //       }
+  //     )
+  //   ).data;
   //   console.log('venues',venues);
   //   // console.log(allVenues.map(el => el.name))
   //   return venues;
   // }
-    ////// CATEGORIES
-  async getCategories() {
-    console.log("hi");
-    const venues = (
-      await axios.get(
-        // categories
-        // `https://www.eventbriteapi.com/v3/categories/`,
-        // venues_id
-        // `https://www.eventbriteapi.com/v3/venues/${allvenueids[0]}/events/`,
-        // event id === id
-        `https://www.eventbriteapi.com/v3/venues/100096669/events/`,
-        {
-          headers: {
-            Authorization: `Bearer ${myprivatetoken}`,
-          },
-        }
-      )
-    ).data;
-    console.log('venues',venues);
-    // console.log(allVenues.map(el => el.name))
-    return venues;
-  }
+
 }
 
 const Events = () => {
