@@ -42,9 +42,9 @@ const Event = db.define("event", {
 // //       "sports",
 // //     ),
 // //   },
-  description: {
-    type: Sequelize.STRING,
-  },
+  // description: {
+  //   type: Sequelize.STRING,
+  // },
 //   address: {
 //     type: Sequelize.STRING,
 //   },
