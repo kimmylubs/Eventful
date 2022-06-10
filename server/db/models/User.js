@@ -40,6 +40,9 @@ const User = db.define("user", {
   phone: {
     type: STRING,
   },
+  imageUrl: {
+    type: STRING,
+  }
 });
 
 User.associate = function (models) {

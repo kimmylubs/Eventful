@@ -1,0 +1,14 @@
+.css-nen11g-MuiStack-root {
+  align-items: center;
+}
+
+.user-avatar {
+  position: relative;
+
+  > :last-child {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: green;
+  }
+}
