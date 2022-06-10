@@ -11,9 +11,9 @@ const Event = db.define("event", {
 //     type: Sequelize.UUID,
 //     primaryKey: true,
 //   },
-//   name: {
-//     type: Sequelize.STRING,
-//   },
+  name: {
+    type: Sequelize.STRING,
+  },
 //   ticketCount: {
 //     type: Sequelize.INTEGER,
 //   },
