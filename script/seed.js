@@ -63,13 +63,13 @@ async function seed() {
   //     },
   //   })).data)
   // )
-  // const events = await Promise.all([
-  //   Event.create({ data: 'stuff'
-  //   }),
-  //   Event.create({name: 'Fullstack Graduation', description: 'Fullstack Part-Time Cohort Graduation'}),
-  //   Event.create({name: 'Bar Hangout', description: 'Bar hangout with friends from university'}),
-  //   Event.create({name: 'Movie', description: 'Watching the new Marvel film with friends from work'})
-  // ])
+  const events = await Promise.all([
+    Event.create({ data: 'stuff'
+    }),
+    Event.create({name: 'Fullstack Graduation', description: 'Fullstack Part-Time Cohort Graduation'}),
+    Event.create({name: 'Bar Hangout', description: 'Bar hangout with friends from university'}),
+    Event.create({name: 'Movie', description: 'Watching the new Marvel film with friends from work'})
+  ])
 
 
   console.log(`seeded successfully`)

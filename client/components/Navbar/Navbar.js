@@ -23,6 +23,7 @@ const Navbar = () => {
       <Link to="/profile" className="profile-link">
         my profile
       </Link>
+      <Link to="/calendar">my calendar</Link>
       <a className="friends-link">my friends</a>
       <span className="add-friends-btn">+ add friends</span>
       <span className="logout-btn" onClick={() => dispatch(logout())}>
