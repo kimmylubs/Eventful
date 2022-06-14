@@ -1,0 +1,90 @@
+@import "../../variables.scss";
+
+
+.create-event-btn {
+  width: 150px;
+  border-radius: 30px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  cursor: pointer;
+  border: 2px solid $turquoise;
+  margin-bottom: 9.77px;
+}
+
+
+/* modal styling */
+.create-event-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 650px;
+  border: solid 20px $turquoise;
+  outline: none;
+  box-shadow: 24;
+  background-color: white;
+  padding: 30px;
+}
+
+.create-event-form {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  max-height: 600px;
+
+  .input-form-right {
+    flex: 1;
+
+    .select-container {
+      margin: 0 0 0 20px;
+      color: grey;
+
+      .checkbox-label {
+        font-weight: bold;
+        margin-left: 10px;
+      }
+
+      .checkbox-container {
+        margin: 0 0 20px 0;
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+
+        .checkbox {
+          width: 130px;
+        }
+      }
+    }
+
+    .submit-btn {
+      display: flex;
+      justify-content: flex-end;
+      margin: 80px 40px 0 0;
+    }
+  }
+
+  .input-form-left {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .input-event {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 0 20px;
+
+    .label {
+      margin: 0 20px 0 20px;
+      color: rgb(134, 134, 134);
+    }
+  }
+  
+  .input-event-small {
+    display: flex;
+    flex-direction: row;
+  }
+}

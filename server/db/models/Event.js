@@ -14,6 +14,12 @@ const Event = db.define("event", {
   name: {
     type: Sequelize.STRING,
   },
+  date: {
+    type: Sequelize.DATEONLY,
+  },
+  time: {
+    type: Sequelize.TIME,
+  },
 //   ticketCount: {
 //     type: Sequelize.INTEGER,
 //   },
@@ -45,15 +51,15 @@ const Event = db.define("event", {
   // description: {
   //   type: Sequelize.STRING,
   // },
-//   address: {
-//     type: Sequelize.STRING,
-//   },
-//   city: {
-//     type: Sequelize.STRING,
-//   },
-//   state: {
-//     type: Sequelize.STRING,
-//   },
+  address: {
+    type: Sequelize.STRING,
+  },
+  city: {
+    type: Sequelize.STRING,
+  },
+  state: {
+    type: Sequelize.STRING,
+  },
 //   zipcode: {
 //     type: Sequelize.INTEGER,
 //   },
