@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import EventBrite from "./components/EventBrite/EventBrite";
 
 import Layout from "./components/Layout";
 import AuthForm from "./components/AuthForm";
@@ -39,6 +40,11 @@ const App = () => {
           </>
         ) : (
           <>
+            <Route
+              path="/eb"
+              element={<EventBrite/>}
+              exact
+            />
             <Route
               path="/"
               element={<AuthForm name="login" displayName="Login" />}
