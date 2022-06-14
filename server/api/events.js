@@ -15,6 +15,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post("/", async(req, res, next) => {
+  console.log(req.body);
   try {
     res.status(201).send(
       await Event.create({...req.body})

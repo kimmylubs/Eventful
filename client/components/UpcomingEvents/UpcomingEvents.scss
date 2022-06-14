@@ -23,7 +23,7 @@
         align-items: center;
 
         .img {
-          height: 180px;
+          height: 150px;
           width: 200px;
           border: solid grey 1px;
           margin-bottom: 10px;
@@ -34,6 +34,25 @@
           width: 200px;
           border: solid grey 1px;
           margin: 0;
+          text-align: start;
+
+          .event-name {
+            font-weight: bold;
+            padding: 0 5px;
+            font-size: 22px;
+          }
+
+          .event-date {
+            padding: 5px 5px;
+            color: orangered;
+            font-size: 16px;
+          }
+
+          .event-place {
+            padding: 0 5px;
+            color: grey;
+            font-size: 16px;
+          }
         }
       }
     }

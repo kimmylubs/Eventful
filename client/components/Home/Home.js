@@ -9,7 +9,7 @@ import { getEvents } from "../../store";
 import UpcomingEvents from "../UpcomingEvents/UpcomingEvents";
 import FriendSuggestion from "../FriendSuggestion/FriendSuggestion";
 import EventSuggestion from "../EventSuggestion";
-import CreateEvents from "../CreateEvents";
+import CreateEvent from "../CreateEvent";
 
 import "./Home.scss";
 
@@ -27,7 +27,7 @@ const Home = (props) => {
   return (
     <div className="home">
       <div className="icon-container">
-        <CreateEvents />
+        <CreateEvent />
         <span className="search">
           <SearchIcon fontSize="large" />
           <TextField id="standard-basic" variant="standard"/>
