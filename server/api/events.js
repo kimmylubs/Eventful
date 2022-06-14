@@ -11,3 +11,14 @@ router.get('/', async (req, res, next) => {
     next(e)
   }
 })
+
+router.post("/", async(req, res, next) => {
+  try {
+    res.status(201).send(
+      await Event.create({...req.body})
+    );
+  }
+  catch(ex) {
+    next(ex);
+  }
+});
