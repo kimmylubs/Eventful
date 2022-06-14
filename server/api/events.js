@@ -14,6 +14,16 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.post("/", async(req, res, next) => {
+  try {
+    res.status(201).send(
+      await Event.create({...req.body})
+    );
+  }
+  catch(ex) {
+    next(ex);
+  }
+});
 
 router.get('/:id', async (req, res, next) => {
   try {
