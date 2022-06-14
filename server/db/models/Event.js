@@ -4,34 +4,34 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const Event = db.define("event", {
-  data: {
+  name: {
     type: db.Sequelize.JSON
   },
-//   id: {
-//     type: Sequelize.UUID,
-//     primaryKey: true,
-//   },
-//   name: {
-//     type: Sequelize.STRING,
-//   },
-//   ticketCount: {
-//     type: Sequelize.INTEGER,
-//   },
-//   price: {
-//     type: Sequelize.DECIMAL(0, 2),
-//   },
-//   // image for the boxes
-//   imageUrl: {
-//     type: Sequelize.STRING,
-//     // defaultValue:
-//   },
+  // id: {
+  //   type: Sequelize.UUID,
+  //   // primaryKey: true,
+  // },
+  imageUrl: {
+    type: Sequelize.STRING,
+    // defaultValue:
+  },
+  description: {
+    type: Sequelize.STRING,
+  },
+  category: {
+    type: Sequelize.INTEGER,
+  },
+  price: {
+    type: Sequelize.STRING,
+  },
+  // image for the boxes
 //   // image when you click on event
 //   imageClick: {
 //     type: Sequelize.STRING,
 //   },
-//   category: {
-//     type: Sequelize.STRING,
-//   },
+  local: {
+    type: Sequelize.STRING,
+  },
 // //   key: {
 // //     type: Sequelize.ENUM(
 // //       "business",
@@ -42,15 +42,18 @@ const Event = db.define("event", {
 // //       "sports",
 // //     ),
 // //   },
-  // description: {
-  //   type: Sequelize.STRING,
-  // },
-//   address: {
-//     type: Sequelize.STRING,
-//   },
+  timezone: {
+    type: Sequelize.STRING,
+  },
+  venueId: {
+    type: Sequelize.STRING,
+  },
 //   city: {
 //     type: Sequelize.STRING,
 //   },
+  address: {
+    type: Sequelize.STRING,
+  },
 //   state: {
 //     type: Sequelize.STRING,
 //   },
