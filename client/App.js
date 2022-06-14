@@ -9,6 +9,7 @@ import { me } from "./store";
 
 import "./App.scss";
 import Profile from "./components/Profile";
+import UserCalendar from "./components/UserCalendar";
 
 const Test = () => {
   return <div className="test">tetsef;alksdjf;laksdjf</div>;
@@ -32,6 +33,7 @@ const App = () => {
               <Route index element={<Home />} />
               <Route path="/asdf" element={<Test />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/calendar" element={<UserCalendar />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </>

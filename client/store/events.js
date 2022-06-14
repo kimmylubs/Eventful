@@ -4,8 +4,8 @@ const FETCH_EVENTS = "FETCH_EVENTS";
 const FETCH_CATEGORIES = "FETCH_CATEGORIES";
 const CREATE_EVENT = "CREATE_EVENT";
 
-const _fetchEvents = (events) => ({ type: FETCH_EVENTS, events });
-const _fetchCategories = (ategories) => (FETCH_CATEGORIES, categories);
+const _fetchEvents = (events) => (FETCH_EVENT, events);
+const _fetchCategories = (categories) => (FETCH_CATEGORIES, categories);
 
 export const getEvents = () => {
   return async (dispatch) => {

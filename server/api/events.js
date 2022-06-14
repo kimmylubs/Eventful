@@ -1,12 +1,14 @@
 const router = require('express').Router()
-const { models: { Event}} = require('../db')
+//const { default: Events } = require('../../client/components/EventBrite/EventBrite')
+const { models: { Event }} = require('../db')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-      const events = await Event.findAll();
-      console.log('finding events')
-      res.send(events)
+    console.log('test')
+    const events = await Event.findAll();
+    console.log('finding events')
+    res.send(events)
   } catch (e) {
     next(e)
   }
@@ -22,3 +24,15 @@ router.post("/", async(req, res, next) => {
     next(ex);
   }
 });
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    console.log('/events/id')
+    const data = await Event.findAll({
+      where: { id: req.params.id}
+    })
+    res.send(data)
+  } catch (e) {
+    next(e)
+  }
+})
