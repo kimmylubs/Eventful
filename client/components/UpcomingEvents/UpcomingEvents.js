@@ -38,7 +38,7 @@ const UpcomingEvents = (props) => {
           {events.map((event) => (
             <SwiperSlide key={event.id}>
               <Link to={`/event/${event.id}`} className="event">
-                <div className="img"></div>
+                <div className="img">  <img className ='img' src={event.logo}/> </div>
                 <div className="text">
                   <div className="event-name">{event.name}</div>
                   <div className="event-date">

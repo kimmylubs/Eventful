@@ -220,7 +220,7 @@ const Events = () => {
   return (
     <div>
       <div>
-        NOT OK
+        {/* NOT OK */}
       </div>
     </div>
   );

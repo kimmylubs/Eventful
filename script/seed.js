@@ -13,9 +13,13 @@ const myprivatetoken = "B6THKWOK44JPHM3UHUIM";
 
 // VENUE IDS
 const allvenueids = [
-  95082199, 
-  99219569, 53044587, 88179059, 
-  78543159,
+  // NEW
+  91310299, 96678299, 61946327, 87029679, 96493399, 84764769, 60894531,88116599,
+
+  // OLD
+  // 95082199,
+  // 99219569, 53044587, 88179059,
+  // 78543159,
   // 99994959, 99948699, 99940489,
   //  99926989, 99925819, 99925639, 99924299,
   // 99922359, 99869419, 99811989, 99803679, 99763149, 99753429, 99747879,
@@ -56,8 +60,13 @@ const allvenueids = [
 
 // EVENT ID
 const alleventids = [
-  238638142107, 
-  297996614897, 241546380727, 351067681887, 331309223807,
+  // NEW
+  313790394517, 337433983127, 274471009177, 338346823457, 328105782227,
+  304776433517, 297447131377, 292877914727,
+
+  // OLD
+  // 238638142107,
+  // 297996614897, 241546380727, 351067681887, 331309223807,
   //   // 339272863267, 294282907097, 312103418727, 333911296677, 308177084957,
   //   // 336662435407, 156816788235, 252398409437, 238625684847, 338197797717,
   //   // 349504446207, 258857318207, 290994060067, 337074738617, 322275202807,
@@ -196,58 +205,68 @@ async function seed() {
   //   return  e.venue_id
   // })
 
-  
-let allEvents = allEventsByID.map((e) => 
-  Event.create({
-    // data: e,
-    // venueAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)),
-    eventId: e.id,
-    name:  e.name.text,
-    description: e.description.text,
-    url: e.url,
-    timezone: e.start.timezone,
-    localStart: e.start.local,
-    localEnd: e.end.local,
-    organizationId: e.organization_id,
-    status: e.status,
-    eventVenueId: e.venue_id,
-    isFree: e.is_free,
-    category: e.category_id,
-    subcategory: e.subcategory_id,
-    logo: e.logo.url,
-    venueId: (allvenuesfromId.find(venue => e.venue_id === venue.id)).id,
-    venueName: (allvenuesfromId.find(venue => e.venue_id === venue.id)).name,
-    fullAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.localized_multi_line_address_display,
-    localizedAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.localized_address_display,
-    localizedArea: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.localized_area_display,
-    address1: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.address_1,
-    address2: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.address_2,
-    city: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.city,
-    region: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.region,
-    postal: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.postal_code,
-    country: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.country,
+  let allEvents = allEventsByID.map((e) =>
+    Event.create({
+      // data: e,
+      // venueAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)),
+      eventId: e.id,
+      name: e.name.text,
+      description: e.description.text,
+      url: e.url,
+      timezone: e.start.timezone,
+      localStart: e.start.local,
+      localEnd: e.end.local,
+      organizationId: e.organization_id,
+      status: e.status,
+      eventVenueId: e.venue_id,
+      isFree: e.is_free,
+      category: e.category_id,
+      subcategory: e.subcategory_id,
+      logo: e.logo.url,
+      venueId: allvenuesfromId.find((venue) => e.venue_id === venue.id).id,
+      venueName: allvenuesfromId.find((venue) => e.venue_id === venue.id).name,
+      fullAddress: allvenuesfromId.find((venue) => e.venue_id === venue.id)
+        .address.localized_multi_line_address_display,
+      localizedAddress: allvenuesfromId.find((venue) => e.venue_id === venue.id)
+        .address.localized_address_display,
+      localizedArea: allvenuesfromId.find((venue) => e.venue_id === venue.id)
+        .address.localized_area_display,
+      address1: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+        .address_1,
+      address2: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+        .address_2,
+      city: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+        .city,
+      region: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+        .region,
+      postal: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+        .postal_code,
+      country: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+        .country,
 
-    // (allvenuesfromId.find(venue => e.venue_id === venue.id)),
-    // .map(e => e)
-    
-    //CUT
+        // LOOP DE LOOP
+      // (allvenuesfromId.find(venue => e.venue_id === venue.id)),
+      // .map(e => e)
 
-    // venueId: allEventsByID.map((e) => e.venue_id),
-    // address: allEventsByID.map((e => 
-    //   // {
-    //   // return {
-    //   //   // ...e.venue_id,
-        
-    //     // venue: 
-    //     (allvenuesfromId.find(venue => e.venue_id === venue.id))
-    //   // }
-    // // }
-    // )),
-    // name: allEventsByID.map((e) => e.name.text),
+      //CUT
 
-    //CUT
-    // address: allvenuesfromId.map((e) => e.address.localized_address_display),
-  } ));
+      // venueId: allEventsByID.map((e) => e.venue_id),
+      // address: allEventsByID.map((e =>
+      //   // {
+      //   // return {
+      //   //   // ...e.venue_id,
+
+      //     // venue:
+      //     (allvenuesfromId.find(venue => e.venue_id === venue.id))
+      //   // }
+      // // }
+      // )),
+      // name: allEventsByID.map((e) => e.name.text),
+
+      //CUT
+      // address: allvenuesfromId.map((e) => e.address.localized_address_display),
+    })
+  );
   // await Event.create({
   //   venueIdEvents: allEventsByID.map((e) => e.venue_id),
   //   venueIdVenues: allvenuesfromId.map((e) => e.id),

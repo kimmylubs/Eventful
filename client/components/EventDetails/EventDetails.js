@@ -15,33 +15,46 @@ import events from "../../store/events";
 const parseTime = (time) => {
   if (!time) return "";
 
-  const hrs = +time.substring(0, 2);
-  const hh = ((+hrs + 11) % 12) + 1;
-  const mm = time.substring(3, 4);
-  return `${hh}:${mm} ${hrs > 11 ? "PM" : "AM"}`;
+  // const hrs = +time.substring(0, 2);
+  // const hh = ((+hrs + 8) % 12) ;
+  // const mm = time.substring(3, 5);
+  // return `${hh}:${mm} ${hrs > 11 ? "PM" : "AM"}`;
+
+  const hh = time.substring(11,13) ;
+  const hhs = ((+hh + 11) % 12 + 1);
+  const mm = time.substring(14, 16);
+  return `${hhs}:${mm} ${hh > 11 ? "PM" : "AM"}`;
 };
 
-function stringToDate(date,_format,_delimiter)
-      {
-        var formatLowerCase=_format.toLowerCase();
-        var formatItems=formatLowerCase.split(_delimiter);
-        var dateItems=_date.split(_delimiter);
-        var monthIndex=formatItems.indexOf("mm");
-        var dayIndex=formatItems.indexOf("dd");
-        var yearIndex=formatItems.indexOf("yyyy");
-        var month=parseInt(dateItems[monthIndex]);
-        month-=1;
-        var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
-        return formatedDate;
-  }
+const parseTimeEnd = (time) => {
+  if (!time) return "";
+
+  const hh = time.substring(11,13) ;
+  const hhs = ((+hh + 11) % 12 + 1);
+  const mm = time.substring(14, 16);
+  return `${hhs}:${mm} ${hh > 11 ? "PM" : "AM"}`;
+};
 
 const parseDate = (date) => {
-  if (!time) return "";
+  if (!date) return "";
   
-  date.substring(0,10)
-  return stringToDate("date", "mm/dd/yyyy", "-")
+  let year = date.substring(0,4)
+  let month = date.substring(5,7)
+  let day = date.substring(8,10)
 
-}
+  let newDate = (`${month}/${day}/${year}`)
+
+  return newDate;
+};
+
+const getDayOfWeek = (date) => {
+  const weekday = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+
+  const d = new Date(date);
+  let day = weekday[d.getDay()];  
+
+  return day;
+};
 
 class EventDetails extends Component {
 
@@ -58,7 +71,10 @@ class EventDetails extends Component {
             </div>
             <div className="details-right">
               <div className="event-name">{event.name}</div>
-              <div className="event-date">{(event.localStart)}, {parseTime(event.time)}</div>
+              <div className="event-date">{getDayOfWeek(event.localStart)}, {parseDate(event.localStart)}, {parseTime(event.localStart)} 
+              {/* to  */}
+              {/* {parseTimeEnd(event.localEnd)}  */}
+              </div>
               <div className="event-place"><div> {event.venueName}</div> {event.localizedAddress}</div>
               <div className="event-holder">
                 <div className="user-avator">
