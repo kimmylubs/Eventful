@@ -30,7 +30,7 @@ class EventDetails extends Component {
             <div className="event-place">Central Park, NY, NY</div>
             <div className="event-holder">
               <div className="user-avator">
-                <Avatar sx={{ width:150, height: 150 }}></Avatar>
+                <Avatar sx={{ width:100, height: 100 }}></Avatar>
               </div>
               <div className="comments">
                 <Paper 
@@ -47,17 +47,21 @@ class EventDetails extends Component {
           <div className="join-list-left">
             <div className="join-users">who join this event</div>
             <div className="avatar-container">
-              <AvatarGroup max={8}>
-                <Avatar sx={{ width: 100, height: 100 }}></Avatar>
-                <Avatar sx={{ width: 100, height: 100 }}></Avatar>
-                <Avatar sx={{ width: 100, height: 100 }}></Avatar>
-                <Avatar sx={{ width: 100, height: 100 }}></Avatar>
+              <AvatarGroup max={7}>
+                <Avatar sx={{ width: 80, height: 80 }}></Avatar>
+                <Avatar sx={{ width: 80, height: 80 }}></Avatar>
+                <Avatar sx={{ width: 80, height: 80 }}></Avatar>
+                <Avatar sx={{ width: 80, height: 80 }}></Avatar>
+                <Avatar sx={{ width: 80, height: 80 }}></Avatar>
+                <Avatar sx={{ width: 80, height: 80 }}></Avatar>
+                <Avatar sx={{ width: 80, height: 80 }}></Avatar>
+                <Avatar sx={{ width: 80, height: 80 }}></Avatar>
               </AvatarGroup>
             </div>
           </div>
           <div className="join-list-right">
-            <span>Join this event</span>
-            <span>Invite friends</span>
+            <span className="join-btn">Join this event</span>
+            <span className="invite-btn">Invite friends</span>
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 .event-details {
-  margin: 20px;
+  margin: 30px 50px;
   display: flex;
   flex-direction: column;
 
@@ -14,6 +14,7 @@
         height: 420px;
         width: 520px;
         border: solid black 1px;
+        border-radius: 10px;
       }
     }
 
@@ -23,17 +24,18 @@
 
       .event-name {
         font-weight: bold;
-        font-size: 40px;
+        font-size: 30px;
+        padding-top: 20px;
       }
 
       .event-date {
-        font-size: 24px;
+        font-size: 20px;
         color: orangered;
         padding-top: 20px;
       }
 
       .event-place {
-        font-size: 24px;
+        font-size: 20px;
         color: grey;
         padding-top: 20px;
       }
@@ -51,28 +53,52 @@
   }
 
   .event-join-list {
-    margin: 20px 0;
+    margin: 50px 0;
     display: flex;
-
-    
 
     .join-list-left {
       flex: 1;
+      font-size: 20px;
+
 
       .join-users {
-        font-size: 30px;
+        font-weight: bolder;
       }
 
       .avatar-container {
         display: flex;
         align-items: flex-start;
+        padding-top: 20px;
       }
     }
 
     .join-list-right {
       flex: 1;
-    }
+      font-size: 18px;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-    
+      .join-btn,
+      .invite-btn {
+        width: 50%;
+        height: 60px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin: 20px 0;
+      }
+
+      .join-btn {
+        background-color: beige;
+      }
+
+      .invite-btn {
+        background-color: rgb(238, 246, 158);
+      }
+    }
   }
 }
