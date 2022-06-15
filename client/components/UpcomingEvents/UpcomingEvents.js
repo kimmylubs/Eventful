@@ -20,14 +20,14 @@ const UpcomingEvents = (props) => {
   const handlePrev = () => setPrevCounter(prevCounter + 1);
   const handleNext = () => setNextCounter(nextCounter + 1);
 
-  const parseTime = (time) => {
-    if (!time) return "";
+  // const parseTime = (time) => {
+  //   if (!time) return "";
 
-    const hrs = +time.substring(0, 2);
-    const hh = ((+hrs + 11) % 12) + 1;
-    const mm = time.substring(3, 5);
-    return `${hh}:${mm} ${hrs > 11 ? "PM" : "AM"}`;
-  };
+  //   const hrs = +time.substring(0, 2);
+  //   const hh = ((+hrs + 11) % 12) + 1;
+  //   const mm = time.substring(3, 5);
+  //   return `${hh}:${mm} ${hrs > 11 ? "PM" : "AM"}`;
+  // };
 
   return (
     <div className="upcoming-events">
@@ -37,15 +37,13 @@ const UpcomingEvents = (props) => {
         <Swiper modules={[Navigation]} navigation spaceBetween={20} slidesPerView={4}>
           {events.map((event) => (
             <SwiperSlide key={event.id}>
-              <Link to={`/event/${event.id}`} className="event">
-                <div className="img">  <img className ='img' src={event.logo}/> </div>
+              <Link to="" className="event">
+                <div className="img"></div>
                 <div className="text">
-                  <div className="event-name">{event.name}</div>
+                  <div className="event-name"></div>
                   <div className="event-date">
-                    {event.date}, {parseTime(event.time)}
                   </div>
                   <div className="event-place">
-                    {event.address}, {event.city}
                   </div>
                 </div>
               </Link>
