@@ -1,0 +1,78 @@
+.event-details {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+
+  .event-details-main {
+    display: flex;
+
+    .details-left {
+      flex: 1;
+      margin-top: 85px;
+
+      .event-img {
+        height: 420px;
+        width: 520px;
+        border: solid black 1px;
+      }
+    }
+
+    .details-right {
+      flex: 1;
+      margin: 85px 0 0 40px;
+
+      .event-name {
+        font-weight: bold;
+        font-size: 40px;
+      }
+
+      .event-date {
+        font-size: 24px;
+        color: orangered;
+        padding-top: 20px;
+      }
+
+      .event-place {
+        font-size: 24px;
+        color: grey;
+        padding-top: 20px;
+      }
+
+      .event-holder {
+        display: flex;
+        padding-top: 60px;
+        align-items: center;
+
+        .user-avator {
+          padding-right: 30px;
+        }
+      }
+    }
+  }
+
+  .event-join-list {
+    margin: 20px 0;
+    display: flex;
+
+    
+
+    .join-list-left {
+      flex: 1;
+
+      .join-users {
+        font-size: 30px;
+      }
+
+      .avatar-container {
+        display: flex;
+        align-items: flex-start;
+      }
+    }
+
+    .join-list-right {
+      flex: 1;
+    }
+
+    
+  }
+}

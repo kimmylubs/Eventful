@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -27,14 +28,14 @@ const UpcomingEvents = (props) => {
         <Swiper modules={[Navigation]} navigation spaceBetween={20} slidesPerView={4}>
           {events.map((event) => (
             <SwiperSlide key={event.id}>
-              <div className="event">
+              <Link to={`/event/${event.id}`} className="event">
                 <div className="img"></div>
                 <div className="text">
                   <div className="event-name">{event.name}</div>
                   <div className="event-date">{event.date}, {event.time}</div>
                   <div className="event-place">{event.address}, {event.city}</div>
                 </div>
-              </div>
+              </Link>
             </SwiperSlide>
           ))}
           <SwiperNavigation direction="prev" counter={prevCounter} />
