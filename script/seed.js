@@ -160,7 +160,7 @@ async function seed() {
       )
     )
   ).map((el) => el.data);
-  console.log("allEventsfromId", allEventsByID);
+  // console.log("allEventsfromId", allEventsByID);
 
   // addresss
   const allvenuesfromId = (
