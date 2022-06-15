@@ -117,7 +117,7 @@ class EventBrite extends React.Component {
   ////// CATEGORIES
 
   async getEvents() {
-    console.log("hi");
+    // console.log("hi");
     const alleventsfromId = (await Promise.all(
       alleventids.map((id) =>
         (axios.get(`https://www.eventbriteapi.com/v3/events/${id}/`, {
@@ -127,12 +127,12 @@ class EventBrite extends React.Component {
         }))
       ))
     ).map(el => el.data);
-    console.log("alleventsfromid", alleventsfromId[0]);
+    // console.log("alleventsfromid", alleventsfromId[0]);
 
-    const eventId = alleventsfromId.map(el => el.id)
-    console.log('eventId',eventId);
-    console.log('eventId',eventId);
-    return alleventsfromId
+    // const eventId = alleventsfromId.map(el => el.id)
+    // console.log('eventId',eventId);
+    // console.log('eventId',eventId);
+    // return alleventsfromId
 
     // const eventImg = alleventsfromId.map(el => el.logo.url)
     // console.log('eventImg',eventImg);
@@ -167,16 +167,17 @@ class EventBrite extends React.Component {
         },
       }))))
     ).map(e => e.data)
-    console.log('venues',allvenuesfromId[4]);
-    console.log((await this.getEvents()).map(e => {
-      return {
-        ...e,
+    // console.log('venues',allvenuesfromId[4]);
+    // console.log((await this.getEvents()).map(e => {
+      // return {
+      //   ...e,
         
-        venue: allvenuesfromId.find(venue => e.venue_id === venue.id) 
-      }
-    })
+      //   venue: allvenuesfromId.find(venue => e.venue_id === venue.id) 
+      // }
+    // }
+    // ))
 
-    )
+  }
 
 
     // const venuesToEvents = allvenuesfromId.map(el => el.events)
@@ -209,7 +210,7 @@ class EventBrite extends React.Component {
   //     </div>
   //   )
   }
-}
+
 
 const Events = () => {
   const events = new EventBrite();
