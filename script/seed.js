@@ -198,7 +198,6 @@ async function seed() {
 
   
 let allEvents = allEventsByID.map((e) => 
-        allvenuesfromId.map((v) =>
   Event.create({
     eventId: e.id,
     data: e,
@@ -239,7 +238,7 @@ let allEvents = allEventsByID.map((e) =>
 
     //CUT
     // address: allvenuesfromId.map((e) => e.address.localized_address_display),
-  } )));
+  } ));
   // await Event.create({
   //   venueIdEvents: allEventsByID.map((e) => e.venue_id),
   //   venueIdVenues: allvenuesfromId.map((e) => e.id),
