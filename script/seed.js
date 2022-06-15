@@ -199,10 +199,11 @@ async function seed() {
   
 let allEvents = allEventsByID.map((e) => 
   Event.create({
+    // data: e,
+    // venueAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)),
     eventId: e.id,
-    data: e,
     name:  e.name.text,
-    description: e.description,
+    description: e.description.text,
     url: e.url,
     timezone: e.start.timezone,
     localStart: e.start.local,
@@ -214,10 +215,18 @@ let allEvents = allEventsByID.map((e) =>
     category: e.category_id,
     subcategory: e.subcategory_id,
     logo: e.logo.url,
-    // venueAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id))
+    venueId: (allvenuesfromId.find(venue => e.venue_id === venue.id)).id,
+    venueName: (allvenuesfromId.find(venue => e.venue_id === venue.id)).name,
     fullAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.localized_multi_line_address_display,
-    venueId: (allvenuesfromId.find(venue => e.venue_id === venue.id)).id
-    // fullAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.localized_multi_line_address_display,
+    localizedAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.localized_address_display,
+    localizedArea: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.localized_area_display,
+    address1: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.address_1,
+    address2: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.address_2,
+    city: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.city,
+    region: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.region,
+    postal: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.postal_code,
+    country: (allvenuesfromId.find(venue => e.venue_id === venue.id)).address.country,
+
     // (allvenuesfromId.find(venue => e.venue_id === venue.id)),
     // .map(e => e)
     
