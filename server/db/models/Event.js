@@ -4,62 +4,112 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const Event = db.define("event", {
-  name: {
+  // data: {
+  //   type: db.Sequelize.JSON
+  // },
+  venueAddress: {
     type: db.Sequelize.JSON
   },
-  // id: {
-  //   type: Sequelize.UUID,
-  //   // primaryKey: true,
-  // },
-  imageUrl: {
-    type: Sequelize.STRING,
-    // defaultValue:
+
+  
+  eventId: {
+    type: db.Sequelize.JSON,
+    // primaryKey: true,
+  },
+  name: {
+    type: db.Sequelize.JSON,
   },
   description: {
-    type: Sequelize.STRING,
+    type: db.Sequelize.JSON,
+  },
+  url: {
+    type: db.Sequelize.JSON,
+    // defaultValue:
+  },
+  timezone: {
+    type: db.Sequelize.JSON,
+  },
+  localStart: {
+    type: db.Sequelize.JSON,
+  },
+  localEnd: {
+    type: db.Sequelize.JSON,
+  },
+  organizationId: {
+    type: db.Sequelize.JSON,
+  },
+  status: {
+    type: db.Sequelize.JSON,
+  },
+  eventVenueId: {
+    type: db.Sequelize.JSON,
+  },
+  isFree: {
+    type: db.Sequelize.JSON,
   },
   category: {
-    type: Sequelize.INTEGER,
+    type: db.Sequelize.JSON,
   },
-  price: {
-    type: Sequelize.STRING,
+  subcategory: {
+    type: db.Sequelize.JSON,
   },
-  // image for the boxes
-//   // image when you click on event
-//   imageClick: {
-//     type: Sequelize.STRING,
-//   },
-  local: {
-    type: Sequelize.STRING,
+  logo: {
+    type: db.Sequelize.JSON,
   },
-// //   key: {
-// //     type: Sequelize.ENUM(
-// //       "business",
-// //       "fashion",
-// //       "food",
-// //       "general",
-// //       "music",
-// //       "sports",
-// //     ),
-// //   },
-  timezone: {
-    type: Sequelize.STRING,
+  // venueAddress: {
+  //   type: db.Sequelize.JSON
+  // },
+  fullAddress: {
+    type: db.Sequelize.JSON
   },
   venueId: {
-    type: Sequelize.STRING,
+    type: db.Sequelize.JSON
   },
-//   city: {
-//     type: Sequelize.STRING,
-//   },
-  address: {
-    type: Sequelize.STRING,
-  },
-//   state: {
-//     type: Sequelize.STRING,
-//   },
-//   zipcode: {
-//     type: Sequelize.INTEGER,
-//   },
+  //   timezone: {
+  //     type: Sequelize.INTEGER,
+  //   },
+  //   price: {
+  //     type: Sequelize.STRING,
+  //   },
+  //   // image for the boxes
+  // //   // image when you click on event
+  // //   imageClick: {
+  // //     type: Sequelize.STRING,
+  // //   },
+  //   local: {
+  //     type: Sequelize.STRING,
+  //   },
+  // // //   key: {
+  // // //     type: Sequelize.ENUM(
+  // // //       "business",
+  // // //       "fashion",
+  // // //       "food",
+  // // //       "general",
+  // // //       "music",
+  // // //       "sports",
+  // // //     ),
+  // // //   },
+  //   timezone: {
+  //     type: Sequelize.STRING,
+  //   },
+  // venueIdEvents: {
+  //   type: db.Sequelize.JSON,
+  // },
+  // venueId: {
+  //   type: db.Sequelize.JSON,
+  // },
+  // //   city: {
+  // //     type: Sequelize.STRING,
+  // //   },
+  // address: {
+  //   type: db.Sequelize.JSON,
+  // },
+  //   state: {
+  //     type: Sequelize.STRING,
+  //   },
+  //   zipcode: {
+  //     type: Sequelize.INTEGER,
+  //   },
 });
 
-module.exports = Event
+module.exports = Event;
