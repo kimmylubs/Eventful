@@ -4,20 +4,24 @@ import { updateProfile } from "../../store";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+
+import "./Profile.scss";
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: this.props.auth.username ? this.props.auth.username : "",
-      streetAddress: this.props.auth.streetAddress
-        ? this.props.auth.streetAddress
-        : "",
+      streetAddress: this.props.auth.streetAddress ? this.props.auth.streetAddress : "",
       email: this.props.auth.email ? this.props.auth.email : "",
       city: this.props.auth.city ? this.props.auth.city : "",
       state: this.props.auth.state ? this.props.auth.state : "",
       zip: this.props.auth.zip ? this.props.auth.zip : "",
       phone: this.props.auth.phone ? this.props.auth.phone : "",
+      imageUrl: this.props.auth.imageUrl ? this.props.auth.imageUrl : "",
     };
   }
 
@@ -32,14 +36,21 @@ class Profile extends Component {
     this.props.update(this.state);
   };
   render() {
-    const { username, streetAddress, email, city, state, zip, phone } =
-      this.state;
+    const { username, streetAddress, email, city, state, zip, phone, imageUrl } = this.state;
     const { saveProfile, onChange } = this;
     return (
       <React.Fragment>
         <Typography variant="h6" gutterBottom>
           Profile
         </Typography>
+        <Stack>
+          <span className="user-avatar">
+            <Avatar sx={{ width: 200, height: 200 }}>{imageUrl}</Avatar>
+            <Avatar sx={{ width: 50, height: 50 }}>
+              <ModeEditIcon />
+            </Avatar>
+          </span>
+        </Stack>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <TextField

@@ -8,6 +8,8 @@ const Event = require('./models/Event')
 //associations could go here!
 Event.hasMany(User)
 User.hasMany(Event)
+//User.hasOne(Calendar)
+//CalendarItem.belongsTo(Calendar)
 
 module.exports = {
   db,

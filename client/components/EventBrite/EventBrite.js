@@ -1,10 +1,10 @@
-import axios from "axios";
-import React from "react";
+// import axios from "axios";
+// import React from "react";
 
-// main page
-// https://www.eventbrite.com/d/ny--new-york/free--food-and-drink--events/?end_date=2022-12-31&page=1&start_date=2022-06-25
+// // main page
+// // https://www.eventbrite.com/d/ny--new-york/free--food-and-drink--events/?end_date=2022-12-31&page=1&start_date=2022-06-25
 
-// sample event: https://www.eventbrite.com/e/kimeventbrite-intro-tickets-353140130637
+// // sample event: https://www.eventbrite.com/e/kimeventbrite-intro-tickets-353140130637
 
 const auth_token = "";
 const myprivatetoken = "B6THKWOK44JPHM3UHUIM"; //** */

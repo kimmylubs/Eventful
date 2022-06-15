@@ -34,12 +34,13 @@ const FriendSuggestion = (props) => {
       <h2 className="header">Haven't met your friends recently?</h2>
       <div className="slider-friend">
         <ChevronLeftIcon slot="container-start" onClick={handlePrev} />
-        <Swiper modules={[Navigation]} navigation spaceBetween={20} slidesPerView={4}>
+        <Swiper modules={[Navigation]} navigation spaceBetween={20} slidesPerView={5}>
           {friends.map((friend) => (
             <SwiperSlide key={friend.id}>
               <div className="friend">
-                <div className="avatar">{friend.title}</div>
-                <div className="user-name">user name</div>
+                <div className="text">Last seen:</div>
+                <div className="avatar"></div>
+                <div className="user-name">{friend.title}</div>
               </div>
             </SwiperSlide>
           ))}

@@ -10,10 +10,9 @@ import { me } from "./store";
 
 import "./App.scss";
 import Profile from "./components/Profile";
+import EventDetails from "./components/EventDetails";
+import UserCalendar from "./components/UserCalendar";
 
-const Test = () => {
-  return <div className="test">tetsef;alksdjf;laksdjf</div>;
-};
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,8 +30,9 @@ const App = () => {
           <>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="/asdf" element={<Test />} />
+              <Route path="/event/:id" element={<EventDetails />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/calendar" element={<UserCalendar />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </>
