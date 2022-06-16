@@ -43,7 +43,6 @@ const CreateEvent = (props) => {
     setOpen(false);
   };
 
-  // const { handleSubmit } = useForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();

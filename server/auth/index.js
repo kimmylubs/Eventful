@@ -78,6 +78,7 @@ router.put("/me", async (req, res, next) => {
       state: req.body.state,
       zip: req.body.zip,
       phone: req.body.phone,
+      imageUrl: req.body.imageUrl,
     });
     res.send(updatedUser);
   } catch (ex) {
