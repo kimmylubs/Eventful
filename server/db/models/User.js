@@ -8,6 +8,11 @@ const { BOOLEAN, STRING } = require("sequelize");
 const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
+  UUID: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    allowNull: false,
+  },
   username: {
     type: STRING,
     unique: true,

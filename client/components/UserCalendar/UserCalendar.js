@@ -8,6 +8,7 @@ class UserCalendar extends Component {
         return (
             <div>
                 <h1>Calendar Test Page</h1>
+                
                 <button>RSVP</button>
             </div>      
         )
