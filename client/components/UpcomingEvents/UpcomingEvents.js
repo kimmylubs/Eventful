@@ -15,7 +15,8 @@ import "./UpcomingEvents.scss";
 const UpcomingEvents = (props) => {
   const [prevCounter, setPrevCounter] = useState(0);
   const [nextCounter, setNextCounter] = useState(0);
-  const events = useSelector((state) => state.events);
+  const user = useSelector(state => state.auth);
+  const events = user.joinedEvents;
 
   const handlePrev = () => setPrevCounter(prevCounter + 1);
   const handleNext = () => setNextCounter(nextCounter + 1);

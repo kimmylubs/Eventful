@@ -51,7 +51,17 @@ router.post("/google", async (req, res, next) => {
 
 router.get("/me", async (req, res, next) => {
   try {
-    res.send(await User.findByToken(req.headers.authorization));
+    let user = await User.findByToken(req.headers.authorization);
+    if (user) {
+      user = await User.findOne({
+        where: {
+          id: user.id,
+        },
+        include: ["joinedEvents"],
+      });
+    }
+
+    res.send(user);
   } catch (ex) {
     next(ex);
   }

@@ -8,6 +8,7 @@ export const TOKEN = "token";
  */
 const SET_AUTH = "SET_AUTH";
 const UPDATE_AUTH = "UPDATE_AUTH";
+const JOIN_EVENT = "JOIN_EVENT";
 
 /**
  * ACTION CREATORS
@@ -30,16 +31,15 @@ export const me = () => async (dispatch) => {
   }
 };
 
-export const authenticate =
-  (username, password, method) => async (dispatch) => {
-    try {
-      const res = await axios.post(`/auth/${method}`, { username, password });
-      window.localStorage.setItem(TOKEN, res.data.token);
-      dispatch(me());
-    } catch (authError) {
-      return dispatch(setAuth({ error: authError }));
-    }
-  };
+export const authenticate = (username, password, method) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/auth/${method}`, { username, password });
+    window.localStorage.setItem(TOKEN, res.data.token);
+    dispatch(me());
+  } catch (authError) {
+    return dispatch(setAuth({ error: authError }));
+  }
+};
 
 export const updateProfile = (user) => {
   return async (dispatch) => {
@@ -70,6 +70,17 @@ export const logout = () => async (dispatch) => {
   });
 };
 
+export const joinEvent = (id) => {
+  return async (dispatch, getState) => {
+    const { auth } = getState();
+    const response = await axios.post(`/api/events/${id}`, { id: auth.id });
+    dispatch({
+      type: JOIN_EVENT,
+      event: response.data,
+    });
+  };
+};
+
 /**
  * REDUCER
  */
@@ -77,6 +88,8 @@ export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
       return action.auth;
+    case JOIN_EVENT:
+      return { ...state, joinedEvents: [...state.joinedEvents, action.event] };
     default:
       return state;
   }

@@ -1,11 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { useForm } from 'react-hook-form';
 
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
+import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
+import { Paper } from "@mui/material";
+import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import Checkbox from "@mui/material/Checkbox";
 
 import { createEvent } from "../../store";
 
@@ -13,201 +18,201 @@ import "./CreateEvent.scss";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-class CreateEvent extends Component {
-  state = {
+const CreateEvent = (props) => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.auth);
+  const [open, setOpen] = useState(false);
+  const [event, setEvent] = useState({
     name: "",
-    date: "",
-    time: "",
-    ticketCount: "",
-    price: "",
-    imageUrl: "",
-    imageClick: "",
-    category: "",
-    description: "",
     address: "",
+    venue: "",
     city: "",
-    state: "",
-    zipcode: "",
-    open: false,
+    region: "",
+    postal: "",
+    description: "",
+    date: new Date(),
+    time: new Date(),
+  });
+  // const [textValue, setValue] = useState<string>("");
+
+  const handleOpen = () => {
+    setOpen(true);
   };
 
-  handleOpen = () => this.setState({ open: true });
-  handleClose = () => this.setState({ open: false });
-
-  onSubmit = (event) => {
-    event.preventDefault();
-    this.props.createEvent(this.state);
-    this.handleClose();
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  onChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+  // const { handleSubmit } = useForm();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { address, city, region, postal, name, description, venue, date, time } = event;
+    const YYYYMMDD = date.toISOString().split("T")[0];
+    const HHmmss = time.toISOString().split("T")[1];
+    const eventStart = new Date(YYYYMMDD + " " + HHmmss);
+    const localizedAddress = [address, city, region].join(", ") + postal;
+    const newEvent = {
+      name,
+      description,
+      city,
+      region,
+      postal,
+      venueName: venue,
+      localStart: eventStart,
+      address1: address,
+      localizedAddress: localizedAddress,
+      userId: user.id,
+    };
+    dispatch(createEvent(newEvent));
   };
 
-  render() {
-    return (
-      <div className="create-event">
-        <span className="create-event-btn" onClick={this.handleOpen}>
-          + create event
-        </span>
-        <Modal open={this.state.open} onClose={this.handleClose}>
-          <div className="create-event-modal">
-            <form onSubmit={this.onSubmit} className="form-container">
-              <div className="create-event-form">
-                <div className="input-form-left">
-                  <TextField
-                    name="name"
-                    label="Event name"
-                    multiline
-                    fullWidth
-                    onChange={this.onChange}
-                  />
-                  <Stack noValidate spacing={3} sx={{ margin: "0" }}>
-                    <span className="input-event-small">
-                      <TextField
-                        name="date"
-                        label="Date"
-                        type="date"
-                        onChange={this.onChange}
-                        fullWidth
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        sx={{ marginRight: "10px" }}
-                      />
-                      <TextField
-                        name="time"
-                        label="Time"
-                        type="time"
-                        onChange={this.onChange}
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        fullWidth
-                        sx={{ marginLeft: "10px" }}
-                      />
-                    </span>
-                  </Stack>
-                  <TextField
-                    name="address"
-                    label="Place"
-                    onChange={this.onChange}
-                    multiline
-                    fullWidth
-                  ></TextField>
-                  <span className="input-event-small">
+  const handleChange = (e) => {
+    setEvent({ ...event, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <div className="create-event">
+      <span className="create-event-btn" onClick={handleOpen}>
+        + create event
+      </span>
+      <Modal open={open} onClose={handleClose}>
+        <div className="create-event-modal">
+          <div className="create-event-header">
+            <p>New Event</p>
+          </div>
+          <div className="create-event-main">
+            <form className="form-container" onSubmit={handleSubmit}>
+              <div className="input-form-left">
+                <div className="input-event">
+                  <span className="label">Event Name</span>
+                  <span>
+                    <TextField name="name" fullWidth onChange={handleChange} value={event.name} />
+                  </span>
+                </div>
+                <div className="input-event">
+                  <span className="label">Venue</span>
+                  <span>
+                    <TextField name="venue" fullWidth onChange={handleChange} value={event.venue} />
+                  </span>
+                </div>
+                <div className="input-event">
+                  <span className="label">Address</span>
+                  <span>
                     <TextField
-                      name="city"
-                      label="City"
-                      onChange={this.onChange}
-                      multiline
+                      name="address"
                       fullWidth
-                    />
-                    <TextField
-                      name="state"
-                      label="State"
-                      onChange={this.onChange}
-                      multiline
-                      fullWidth
-                      sx={{ marginLeft: "10px" }}
+                      onChange={handleChange}
+                      value={event.address}
                     />
                   </span>
-                  <TextField
-                    name="description"
-                    label="Comments"
-                    onChange={this.onChange}
-                    multiline
-                    rows={4}
-                    fullWidth
-                    sx={{ marginRight: "10px" }}
-                  />
-                  <TextField
-                    name="imageUrl"
-                    label="Image URL"
-                    onChange={this.onChange}
-                    multiline
-                    fullWidth
-                  />
                 </div>
-                <div className="input-form-right">
-                  <div className="select-container">
-                    <div className="checkbox-label">Category</div>
-                    <div className="checkbox-container">
-                      <span className="checkbox">
-                        <Checkbox {...label} /> music
-                      </span>
-                      <span className="checkbox">
-                        <Checkbox {...label} /> movie
-                      </span>
-                      <span className="checkbox">
-                        <Checkbox {...label} /> activity
-                      </span>
-                      <span className="checkbox">
-                        <Checkbox {...label} /> sports
-                      </span>
-                      <span className="checkbox">
-                        <Checkbox {...label} /> ???
-                      </span>
-                      <span className="checkbox">
-                        <Checkbox {...label} /> ???
-                      </span>
-                      <span className="checkbox">
-                        <Checkbox {...label} /> ???
-                      </span>
-                    </div>
-                    <div className="checkbox-label">Time</div>
-                    <div className="checkbox-container">
-                      <span className="checkbox">
-                        <Checkbox {...label} /> morning
-                      </span>
-                      <span className="checkbox">
-                        <Checkbox {...label} /> afternoon
-                      </span>
-                      <span className="checkbox">
-                        <Checkbox {...label} /> evening
-                      </span>
-                      <span className="checkbox">
-                        <Checkbox {...label} /> night
-                      </span>
-                    </div>
-                    <div className="checkbox-label">Place</div>
-                    <div className="checkbox-container">
-                      <span className="checkbox">
-                        <Checkbox {...label} /> outdoor
-                      </span>
-                      <span className="checkbox">
-                        <Checkbox {...label} /> indoor
-                      </span>
-                      <span className="checkbox">
-                        <Checkbox {...label} /> online
-                      </span>
-                    </div>
+                <div className="input-event-small">
+                  <div className="input-event">
+                    <span className="label">City</span>
+                    <span>
+                      <TextField name="city" onChange={handleChange} value={event.city} />
+                    </span>
                   </div>
-                  <div className="submit-btn">
-                    <Button type="submit" variant="contained">
-                      Create
-                    </Button>
+                  <div className="input-event">
+                    <span className="label">State</span>
+                    <span>
+                      <TextField
+                        name="region"
+                        onChange={handleChange}
+                        value={event.state}
+                        fullWidth
+                      />
+                    </span>
                   </div>
                 </div>
+                <div className="input-event">
+                  <span className="label">Zipcode</span>
+                  <span>
+                    <TextField
+                      name="postal"
+                      onChange={handleChange}
+                      value={event.zip}
+                      sx={{ width: "180px" }}
+                    />
+                  </span>
+                </div>
+                <div className="input-event">
+                  <span className="label">Description</span>
+                  <span>
+                    <TextField
+                      name="description"
+                      fullWidth
+                      rows={4}
+                      onChange={handleChange}
+                      value={event.description}
+                    />
+                  </span>
+                </div>
+                <div className="input-img">
+                  <div className="label">Photo</div>
+                  <div className="img">
+                    <CloudUploadOutlinedIcon />
+                  </div>
+                </div>
+                <div className="upload-img">
+                  <span className="upload-btn">Add Photo</span>
+                </div>
+              </div>
+              <div className="input-form-right">
+                <div className="date-picker">
+                  <Paper elevation={3}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <StaticDatePicker
+                        sx={{ width: "320px" }}
+                        okLabel=""
+                        cancelLabel=""
+                        orientation="landscape"
+                        openTo="day"
+                        name="date"
+                        value={event.date}
+                        onChange={(date) => setEvent({ ...event, date })}
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                    </LocalizationProvider>
+                  </Paper>
+                </div>
+                <div className="time-picker">
+                  <Paper elevation={3} sx={{ marginTop: "30px" }}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <StaticTimePicker
+                        ampm
+                        orientation="landscape"
+                        openTo="minutes"
+                        name="time"
+                        value={event.time}
+                        onChange={(time) => setEvent({ ...event, time })}
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                    </LocalizationProvider>
+                  </Paper>
+                </div>
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    borderRadius: "20px",
+                    width: "100px",
+                    alignSelf: "end",
+                    marginTop: "30px",
+                    backgroundColor: "blue",
+                  }}
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </Button>
               </div>
             </form>
           </div>
-        </Modal>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return state;
+        </div>
+      </Modal>
+    </div>
+  );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createEvent: (event) => dispatch(createEvent(event)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateEvent);
+export default CreateEvent;
