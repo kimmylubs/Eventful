@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
@@ -57,7 +57,6 @@ const getDayOfWeek = (date) => {
 };
 
 class EventDetails extends Component {
-
   render() {
     const { event } = this.props;
     console.log("event: ", event);
@@ -68,6 +67,7 @@ class EventDetails extends Component {
           <div className="event-details-main">
             <div className="details-left">
               <img src={event.logo} className="event-img" />
+              <div className="event-place">View on <a href={event.url}>EventBrite</a></div>
             </div>
             <div className="details-right">
               <div className="event-name">{event.name}</div>
@@ -81,8 +81,9 @@ class EventDetails extends Component {
                   <Avatar sx={{ width: 100, height: 100 }}></Avatar>
                 </div>
                 <div className="comments">
-                  <Paper elevation={3} sx={{ width: 260, height: 140, padding: 4 }}>
-                    <div> {event.description} </div>
+                  <Paper elevation={3} sx={{ width: 260, height: 140, padding: 3 }}>
+                    <div> <b>Event Description </b><br></br>
+                    {event.description} </div>
                   </Paper>
                 </div>
               </div>
