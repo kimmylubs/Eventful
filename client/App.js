@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+// import EventBrite from "./components/EventBrite/EventBrite";
 
 import Layout from "./components/Layout";
 import AuthForm from "./components/AuthForm";
@@ -9,11 +10,9 @@ import { me } from "./store";
 
 import "./App.scss";
 import Profile from "./components/Profile";
+import EventDetails from "./components/EventDetails";
 import UserCalendar from "./components/UserCalendar";
 
-const Test = () => {
-  return <div className="test">tetsef;alksdjf;laksdjf</div>;
-};
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,7 +30,7 @@ const App = () => {
           <>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="/asdf" element={<Test />} />
+              <Route path="/event/:id" element={<EventDetails />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/calendar" element={<UserCalendar />} />
             </Route>
@@ -39,6 +38,11 @@ const App = () => {
           </>
         ) : (
           <>
+            {/* <Route
+              path="/eb"
+              element={<EventBrite/>}
+              exact
+            /> */}
             <Route
               path="/"
               element={<AuthForm name="login" displayName="Login" />}

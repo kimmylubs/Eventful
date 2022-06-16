@@ -1,6 +1,6 @@
 .event-suggestion {
   .header {
-    margin-bottom: 100px;
+    margin-bottom: 50px;
   }
 
   .event-container {
@@ -8,52 +8,73 @@
     grid-template-columns: 33% 33% 33%;
     justify-items: center;
 
-    .user-avator {
-      position: relative;
-
-      > :last-child {
-        position: absolute;
-        right: 50px;
-        bottom: -50px;
-      }
-    }
-
     .suggested-event {
+      .like-btn {
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          .MuiSvgIcon-root {
+            opacity: 0.7;
+          }
+        }
+
+        .like-btn-circle {
+          position: absolute;
+          left: 210px;
+          bottom: 125px;
+          background-color: white;
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+          border: solid 0.5px grey;
+        }
+
+        > :last-child {
+          position: absolute;
+          left: 220px;
+          bottom: 135px;
+        }
+      }
+
       .event {
-        height: 270px;
-        width: 240px;
+        height: 300px;
+        width: 300px;
         border: solid grey 1px;
         margin-bottom: 80px;
         border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: start;
+        align-items: center;
         justify-content: center;
+        grid-template-rows: 60px 40px 40px 160px;
+        display: grid;
+        justify-items: center;
 
         .event-name {
-          margin: 60px 0 0 30px;
           font-weight: bold;
+          color: black;
+          margin: 10px 20px 0 20px;
+          text-align: center;
         }
 
         .event-date {
-          margin: 5px 0 0 30px;
+          font-size: smaller;
+          color: rgb(223, 114, 20);
+        }
+
+        .event-place {
           font-size: smaller;
           color: rgb(162, 157, 157);
         }
 
-        .event-place {
-          margin: 5px 0 0 30px;
-          font-size: smaller;
-          color: rgb(223, 114, 20)
-        }
-        
         .event-image {
           border: solid grey 1px;
-          height: 105px;
-          width: 200px;
+          height: 140px;
+          width: 250px;
           border-radius: 8px;
-          margin: 20px 10px 20px 10px;
+          margin-bottom: 10px;
           align-self: center;
+          object-fit: cover;
         }
       }
     }

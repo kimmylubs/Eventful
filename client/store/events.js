@@ -1,9 +1,10 @@
 import axios from "axios";
 
-const FETCH_EVENT = "FETCH_EVENT";
+const FETCH_EVENTS = "FETCH_EVENTS";
 const FETCH_CATEGORIES = "FETCH_CATEGORIES";
+const CREATE_EVENT = "CREATE_EVENT";
 
-const _fetchEvents = (events) => (FETCH_EVENT, events);
+const _fetchEvents = (events) => ({ type: FETCH_EVENTS, events });
 const _fetchCategories = (categories) => (FETCH_CATEGORIES, categories);
 
 export const getEvents = () => {
@@ -20,11 +21,25 @@ export const getCategories = () => {
   };
 };
 
+export const createEvent = (event) => {
+  return async (dispatch) => {
+    const response = await axios.post("/api/events", event);
+    dispatch({
+      type: CREATE_EVENT,
+      event: response.data,
+    });
+  };
+};
+
 const events = (state = [], action) => {
-  if ((action.type = FETCH_EVENT)) {
-    return action.events;
+  switch (action.type) {
+    case FETCH_EVENTS:
+      return action.events;
+    case CREATE_EVENT:
+      return [...state, action.event];
+    default:
+      return state;
   }
-  return state;
 };
 
 export default events;

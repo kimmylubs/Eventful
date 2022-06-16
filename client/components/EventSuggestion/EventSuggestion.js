@@ -1,67 +1,89 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { joinEvent } from "../../store";
 
-import Stack from "@mui/material/Stack";
-import Avatar from "@mui/material/Avatar";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import "./EventSuggestion.scss";
 
-const events = [
-  { id: 1, title: "event 1" },
-  { id: 2, title: "event 2" },
-  { id: 3, title: "event 3" },
-  { id: 4, title: "event 4" },
-  { id: 5, title: "event 5" },
-  { id: 6, title: "event 6" },
-  { id: 7, title: "event 7" },
-  { id: 8, title: "event 8" },
-  { id: 9, title: "event 9" },
-]
+const EventSuggestion = (props) => {
+  const dispatch = useDispatch();
+  const events = useSelector((state) => state.events);
+  const user = useSelector((state) => state.auth);
 
-class EventSuggestion extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      imageUrl: this.props.auth.imageUrl ? this.props.auth.imageUrl : "",
-    };
+  const parseTime = (time) => {
+    if (!time) return "";
+
+    const hh = time.substring(11, 13);
+    const hhs = ((+hh + 11) % 12) + 1;
+    const mm = time.substring(14, 16);
+    return `${hhs}:${mm} ${hh > 11 ? "PM" : "AM"}`;
   };
 
-  render() {
-    const { imageUrl } = this.state;
+  const parseDate = (date) => {
+    if (!date) return "";
 
-    return (
-      <div className="event-suggestion">
-        <h2 className="header">Join events</h2>
-        <div className="event-container">
-          {events.map((event) => (
-            <Stack key={event.id}>
-              <span className="user-avator">
-                <Avatar sx={{ width:100, height: 100 }}>{imageUrl}</Avatar>
+    let year = date.substring(0, 4);
+    let month = date.substring(5, 7);
+    let day = date.substring(8, 10);
+    let newDate = `${month}/${day}/${year}`;
+
+    return newDate;
+  };
+
+  const getDayOfWeek = (date) => {
+    const weekday = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    const d = new Date(date);
+    let day = weekday[d.getDay()];
+
+    return day;
+  };
+
+  const handleJoin = (id) => {
+    console.log("id: ", id);
+    dispatch(joinEvent(id));
+  };
+
+  const userHasJoinedEvent = (eventId) => {
+    const event = user.joinedEvents.find((event) => event.id === eventId);
+    return Boolean(event);
+  };
+
+  return (
+    <div className="event-suggestion">
+      <h2 className="header">Join events</h2>
+      <div className="event-container">
+        {events.map((event) => (
+          <div className="suggested-event" key={event.id}>
+            <div className="event">
+              <span className="event-name">{event.name}</span>
+              <span className="event-date">
+                {getDayOfWeek(event.localStart)}, {parseDate(event.localStart)},{" "}
+                {parseTime(event.localStart)}
               </span>
-              <div className="suggested-event">
-                <div className="event">
-                  <span className="event-name">{event.title}</span>
-                  <span className="event-date">date, time</span>
-                  <span className="event-place">place</span>
-                  <span className="event-image">
-                    <img />
-                  </span>
-                </div>
-              </div>
-            </Stack>
-            
-          ))}
-        </div>
+              <span className="event-place">{event.localizedArea}</span>
+              <span className="">
+                <span className="like-btn" onClick={() => handleJoin(event.id)}>
+                  <span className="like-btn-circle"></span>
+                  {userHasJoinedEvent(event.id) ? (
+                    <FavoriteIcon sx={{ width: 30, height: 30, color: "red" }} />
+                  ) : (
+                    <FavoriteBorderIcon sx={{ width: 30, height: 30, color: "red" }} />
+                  )}
+                </span>
+                <Link to={`/event/${event.id}`}>
+                  <img className="event-image" src={event.logo} />
+                </Link>
+              </span>
+            </div>
+          </div>
+        ))}
       </div>
-    );
-  }
+    </div>
+  );
 };
 
-const mapState = (state) => {
-  return {
-    auth: state.auth,
-  };
-};
-
-
-export default connect(mapState)(EventSuggestion);
+export default EventSuggestion;

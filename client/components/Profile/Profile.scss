@@ -1,14 +1,33 @@
-.css-nen11g-MuiStack-root {
-  align-items: center;
-}
+.profile {
+  .profile-header {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 50px 0;
+    text-align: center;
+  }
 
-.user-avatar {
-  position: relative;
+  .user-avatar {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .user-info-container {
+    margin: 100px 100px 50px 100px;
+  }
 
-  > :last-child {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    background-color: green;
+  .btn-container {
+    display: flex;
+    justify-content: end;
+    margin: 0 100px 50px 0;
+
+    .edit-profile-btn {
+      padding: 5px;
+      margin: 10px;
+      width: 100px;
+      height: 50px;
+      border-radius: 10px;
+    }
   }
 }

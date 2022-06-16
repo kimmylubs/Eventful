@@ -1,0 +1,126 @@
+@import "../../variables.scss";
+
+
+.create-event-btn {
+  width: 150px;
+  border-radius: 30px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  cursor: pointer;
+  border: 2px solid $turquoise;
+  margin-bottom: 9.77px;
+}
+
+
+/* modal styling */
+.create-event-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1100px;
+  height: 1000px;
+  outline: none;
+  box-shadow: 24;
+  background-color: white;
+  color: grey;
+
+  .create-event-header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    
+    p {
+      font-size: 30px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      margin-left: 90px;
+    }
+  }
+
+  .create-event-main {
+    padding: 0 30px 30px 30px;
+
+    .form-container {
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      max-height: 600px;
+
+      .input-form-left {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        align-items: center;
+
+        .input-event {
+          display: flex;
+          flex-direction: column;
+          margin: 0 20px 12px 20px;
+          width: 400px;
+      
+          .label {
+            margin: 0 20px 0 0;
+            color: rgb(134, 134, 134);
+          }
+        }
+
+        .input-event-small {
+          display: flex;
+          width: 440px;
+        }
+
+        .input-img {
+          align-self: flex-start;
+          padding-left: 50px;
+
+          .label {
+            margin: 0 20px 0 0;
+            color: rgb(134, 134, 134);
+          }
+
+          .img {
+            height: 200px;
+            width: 400px;
+            border: solid lightgray 1px;
+            border-radius: 5px;
+            object-fit: cover;
+          }
+        }
+
+        .upload-img {
+          margin-top: 30px;
+
+          .upload-btn {
+            width: 400px;
+            border-radius: 10px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            cursor: pointer;
+            border: solid 2px goldenrod;
+          }
+        }
+      }
+
+      .input-form-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        margin-right: 30px;
+
+        .date-picker,
+        .time-picker {
+          align-self: center;
+        }
+      }
+    }
+  }
+}
