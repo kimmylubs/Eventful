@@ -43,6 +43,7 @@ const EventSuggestion = (props) => {
   };
 
   const handleJoin = (id) => {
+    console.log("id: ", id);
     dispatch(joinEvent(id));
   };
 
