@@ -14,12 +14,12 @@ const myprivatetoken = "B6THKWOK44JPHM3UHUIM";
 // VENUE IDS
 const allvenueids = [
   // NEW
-  91310299, 96678299, 61946327, 87029679, 96493399, 84764769, 60894531,88116599,
+  // 91310299, 96678299, 61946327, 87029679, 96493399, 84764769, 60894531,88116599,
 
   // OLD
-  // 95082199,
-  // 99219569, 53044587, 88179059,
-  // 78543159,
+  95082199,
+  99219569, 53044587, 88179059,
+  78543159,
   // 99994959, 99948699, 99940489,
   //  99926989, 99925819, 99925639, 99924299,
   // 99922359, 99869419, 99811989, 99803679, 99763149, 99753429, 99747879,
@@ -60,13 +60,14 @@ const allvenueids = [
 
 // EVENT ID
 const alleventids = [
-  // NEW
-  313790394517, 337433983127, 274471009177, 338346823457, 328105782227,
-  304776433517, 297447131377, 292877914727,
+  // // NEW
+  // 313790394517, 337433983127, 274471009177, 338346823457, 328105782227,
+  // 304776433517, 297447131377, 292877914727,
 
   // OLD
-  // 238638142107,
-  // 297996614897, 241546380727, 351067681887, 331309223807,
+  238638142107,
+  297996614897, 241546380727, 351067681887, 331309223807,
+
   //   // 339272863267, 294282907097, 312103418727, 333911296677, 308177084957,
   //   // 336662435407, 156816788235, 252398409437, 238625684847, 338197797717,
   //   // 349504446207, 258857318207, 290994060067, 337074738617, 322275202807,
@@ -124,21 +125,6 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
 
-  // Creating Users
-  const users = await Promise.all([
-    User.create({
-      username: "cody",
-      password: "123",
-      fistName: "Cody",
-      lastName: "Murphy",
-    }),
-    User.create({
-      username: "murphy",
-      password: "123",
-      firstName: "Murphy",
-      lastName: "Cody",
-    }),
-  ]);
   // const venues = await Promise.all(
   //   allvenueids.map(id => (axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/events/`, {
   //     headers:{
@@ -273,6 +259,22 @@ async function seed() {
   //   name: allEventsByID.map((e) => e.name.text),
   //   address: allvenuesfromId.map((e) => e.address.localized_address_display),
   // });
+
+    // Creating Users
+    const users = await Promise.all([
+      User.create({
+        username: "cody",
+        password: "123",
+        fistName: "Cody",
+        lastName: "Murphy",
+      }),
+      User.create({
+        username: "murphy",
+        password: "123",
+        firstName: "Murphy",
+        lastName: "Cody",
+      }),
+    ]);
 
   console.log(`seeded successfully`);
 
