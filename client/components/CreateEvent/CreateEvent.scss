@@ -65,8 +65,9 @@
           width: 400px;
       
           .label {
-            margin: 0 20px 0 0;
+            margin: 0 20px 5px 0;
             color: rgb(134, 134, 134);
+            font-weight: bolder;
           }
         }
 
@@ -75,37 +76,9 @@
           width: 440px;
         }
 
-        .input-img {
-          align-self: flex-start;
-          padding-left: 50px;
-
-          .label {
-            margin: 0 20px 0 0;
-            color: rgb(134, 134, 134);
-          }
-
-          .img {
-            height: 200px;
-            width: 400px;
-            border: solid lightgray 1px;
-            border-radius: 5px;
-            object-fit: cover;
-          }
-        }
-
-        .upload-img {
-          margin-top: 30px;
-
-          .upload-btn {
-            width: 400px;
-            border-radius: 10px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: black;
-            cursor: pointer;
-            border: solid 2px goldenrod;
+        .input-event-large {
+          .MuiOutlinedInput-input {
+            height: 140px;
           }
         }
       }
