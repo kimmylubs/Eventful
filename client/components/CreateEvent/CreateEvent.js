@@ -77,6 +77,7 @@ const CreateEvent = (props) => {
         <div className="create-event-modal" >
           <div className="create-event-header">
             <p>New Event</p>
+            <hr />
           </div>
           <div className="create-event-main">
             <form className="form-container" onSubmit={handleSubmit}>

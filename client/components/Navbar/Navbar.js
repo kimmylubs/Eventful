@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <Link to="/">
-        <h1 className="app-name">App Name</h1>
+        <h1 className="app-name">Eventful</h1>
       </Link>
       <h2 className="user-name">Hello, {user.firstName}!</h2>
       <span className="user-avatar">
