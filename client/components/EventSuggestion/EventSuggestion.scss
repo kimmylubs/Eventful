@@ -1,6 +1,13 @@
 .event-suggestion {
-  .header {
-    margin: 30px 0 50px 20px;
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 50px 50px 30px;
+    
+    .sort-container {
+      padding: 10px;
+    }
   }
 
   .event-container {

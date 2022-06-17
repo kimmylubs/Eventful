@@ -3,7 +3,7 @@ const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Friendship = require("./Friendship");
-const { BOOLEAN, STRING } = require("sequelize");
+const { BOOLEAN, STRING, INTEGER } = require("sequelize");
 
 const SALT_ROUNDS = 5;
 
@@ -35,7 +35,7 @@ const User = db.define("user", {
     type: STRING,
   },
   zip: {
-    type: Sequelize.INTEGER,
+    type: STRING,
   },
   phone: {
     type: STRING,

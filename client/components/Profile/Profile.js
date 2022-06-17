@@ -14,14 +14,14 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: this.props.auth.username ? this.props.auth.username : "",
-      streetAddress: this.props.auth.streetAddress ? this.props.auth.streetAddress : "",
-      email: this.props.auth.email ? this.props.auth.email : "",
-      city: this.props.auth.city ? this.props.auth.city : "",
-      state: this.props.auth.state ? this.props.auth.state : "",
-      zip: this.props.auth.zip ? this.props.auth.zip : "",
-      phone: this.props.auth.phone ? this.props.auth.phone : "",
-      imageUrl: this.props.auth.imageUrl ? this.props.auth.imageUrl : "",
+      username: this.props.auth.username || "",
+      streetAddress: this.props.auth.streetAddress || "",
+      email: this.props.auth.email || "",
+      city: this.props.auth.city || "",
+      state: this.props.auth.state || "",
+      zip: this.props.auth.zip || "",
+      phone: this.props.auth.phone || "",
+      imageUrl: this.props.auth.imageUrl || "",
     };
   }
 
@@ -34,7 +34,7 @@ class Profile extends Component {
 
   saveProfile = (ev) => {
     ev.preventDefault();
-    this.props.update(this.state);
+    this.props.update({...this.state, });
   };
   render() {
     const { username, streetAddress, email, city, state, zip, phone, imageUrl } = this.state;
