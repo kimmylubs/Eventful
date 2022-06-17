@@ -9,6 +9,7 @@ export const TOKEN = "token";
 const SET_AUTH = "SET_AUTH";
 const UPDATE_AUTH = "UPDATE_AUTH";
 const JOIN_EVENT = "JOIN_EVENT";
+const LEAVE_EVENT = "LEAVE_EVENT";
 
 /**
  * ACTION CREATORS
@@ -70,12 +71,12 @@ export const logout = () => async (dispatch) => {
   });
 };
 
-export const joinEvent = (id) => {
+export const joinOrLeaveEvent = (id) => {
   return async (dispatch, getState) => {
     const { auth } = getState();
     const response = await axios.post(`/api/events/${id}`, { id: auth.id });
     dispatch({
-      type: JOIN_EVENT,
+      type: auth.joinedEvents.find((event) => event.id === +id) ? LEAVE_EVENT : JOIN_EVENT,
       event: response.data,
     });
   };
@@ -90,6 +91,11 @@ export default function (state = {}, action) {
       return action.auth;
     case JOIN_EVENT:
       return { ...state, joinedEvents: [...state.joinedEvents, action.event] };
+    case LEAVE_EVENT:
+      return {
+        ...state,
+        joinedEvents: state.joinedEvents.filter((event) => event.id !== action.event.id),
+      };
     default:
       return state;
   }

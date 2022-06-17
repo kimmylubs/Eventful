@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
 import axios from "axios";
 
-import { TOKEN, me, logout } from "../../store/auth";
+import { TOKEN, me } from "../../store/auth";
+import { getIsLoggedIn } from "../../store";
 
 function GoogleAuth() {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
   useEffect(() => {
     gapi.load("client:auth2", () => {

@@ -4,14 +4,14 @@ import { Route, Routes as RouterRoutes, Navigate } from "react-router-dom";
 import AuthForm from "./components/AuthForm";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile";
-import { me } from "./store";
+import { me, getIsLoggedIn } from "./store";
 
 /**
  * COMPONENT
  */
 
 const Routes = () => {
-  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  const isLoggedIn = useSelector(getIsLoggedIn);
   const dispatch = useDispatch();
 
   useEffect(() => {
