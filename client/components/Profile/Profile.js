@@ -36,6 +36,7 @@ class Profile extends Component {
     ev.preventDefault();
     this.props.update({...this.state, });
   };
+  
   render() {
     const { username, streetAddress, email, city, state, zip, phone, imageUrl } = this.state;
     const { saveProfile, onChange } = this;

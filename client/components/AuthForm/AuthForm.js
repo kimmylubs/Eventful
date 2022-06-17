@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { authenticate } from "../../store";
+import { authenticate, selectUser } from "../../store";
 import GoogleAuth from "../GoogleAuth";
 
 /**
  * COMPONENT
  */
 const AuthForm = ({ name, displayName }) => {
-  const { error } = useSelector((state) => state.auth);
+  const { error } = useSelector(selectUser);
   const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {

@@ -6,7 +6,7 @@ import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import Layout from "./components/Layout";
 import AuthForm from "./components/AuthForm";
 import Home from "./components/Home/Home";
-import { me } from "./store";
+import { me, getIsLoggedIn } from "./store";
 
 import "./App.scss";
 import Profile from "./components/Profile";
@@ -16,7 +16,7 @@ import UserCalendar from "./components/UserCalendar";
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  const isLoggedIn = useSelector(getIsLoggedIn);
   const location = useLocation();
 
   useEffect(() => {

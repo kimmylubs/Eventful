@@ -94,6 +94,10 @@
 
       .join-btn {
         background-color: beige;
+
+        &.joined {
+          background-color: bisque;
+        }
       }
 
       .invite-btn {

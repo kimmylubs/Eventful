@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
@@ -14,54 +14,38 @@ import { createEvent } from "../../store";
 
 import "./CreateEvent.scss";
 
+const getDefaultState = () => ({
+  name: "",
+  address: "",
+  venue: "",
+  city: "",
+  region: "",
+  postal: "",
+  description: "",
+  logo: "",
+  date: new Date(),
+  time: new Date(),
+});
 
 const CreateEvent = (props) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth);
   const [open, setOpen] = useState(false);
-  const [event, setEvent] = useState({
-    name: "",
-    address: "",
-    venue: "",
-    city: "",
-    region: "",
-    postal: "",
-    description: "",
-    logo: "",
-    date: new Date(),
-    time: new Date(),
-  });
+  const [event, setEvent] = useState(getDefaultState());
 
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setEvent(getDefaultState());
     setOpen(false);
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { address, city, region, postal, name, description, logo, venue, date, time } = event;
-    const YYYYMMDD = date.toISOString().split("T")[0];
-    const HHmmss = time.toISOString().split("T")[1];
-    const eventStart = new Date(YYYYMMDD + " " + HHmmss);
-    const localizedAddress = [address, city, region].join(", ") + postal;
-    const newEvent = {
-      name,
-      description,
-      logo,
-      city,
-      region,
-      postal,
-      venueName: venue,
-      localStart: eventStart,
-      address1: address,
-      localizedAddress: localizedAddress,
-      userId: user.id,
-    };
-    dispatch(createEvent(newEvent));
+    dispatch(createEvent(event));
+    setEvent(getDefaultState());
+    setOpen(false);
   };
 
   const handleChange = (e) => {
@@ -74,7 +58,7 @@ const CreateEvent = (props) => {
         + create event
       </span>
       <Modal open={open} onClose={handleClose}>
-        <div className="create-event-modal" >
+        <div className="create-event-modal">
           <div className="create-event-header">
             <p>New Event</p>
             <hr />
@@ -132,7 +116,7 @@ const CreateEvent = (props) => {
                       onChange={handleChange}
                       value={event.zip}
                       fullWidth
-                      rows={1}                    
+                      rows={1}
                     />
                   </span>
                 </div>
@@ -152,12 +136,7 @@ const CreateEvent = (props) => {
                 <div className="input-event">
                   <span className="label">Image URL</span>
                   <span>
-                    <TextField
-                      name="logo"
-                      fullWidth
-                      onChange={handleChange}
-                      value={event.logo}
-                    />
+                    <TextField name="logo" fullWidth onChange={handleChange} value={event.logo} />
                   </span>
                 </div>
               </div>

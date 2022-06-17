@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
 
-import { logout } from "../../store";
+import { logout, selectUser } from "../../store";
 import EventBrite from "../EventBrite/EventBrite";
 
 import "./Navbar.scss";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth);
+  const user = useSelector(selectUser);
   console.log("navbar auth: ", user);
 
   return (

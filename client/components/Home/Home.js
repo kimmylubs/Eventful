@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 
 import { getEvents } from "../../store";
@@ -18,7 +18,6 @@ import "./Home.scss";
  */
 const Home = (props) => {
   const dispatch = useDispatch();
-  const username = useSelector((state) => state.auth.username);
 
   useEffect(() => {
     dispatch(getEvents());
@@ -30,11 +29,11 @@ const Home = (props) => {
         <CreateEvent />
         <span className="search">
           <SearchIcon fontSize="large" />
-          <TextField id="standard-basic" variant="standard"/>
+          <TextField id="standard-basic" variant="standard" />
         </span>
       </div>
       <UpcomingEvents />
-      <FriendSuggestion/>
+      <FriendSuggestion />
       <EventSuggestion />
     </div>
   );
