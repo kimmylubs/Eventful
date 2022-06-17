@@ -85,3 +85,16 @@ router.put("/me", async (req, res, next) => {
     next(ex);
   }
 });
+
+router.put("/pic", async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    const updatedUser = await user.update({
+      imageUrl: "https://capstone-fsa.s3.amazonaws.com/" + req.body.filename,
+    });
+    console.log("updatedUser: ", updatedUser);
+    res.send(updatedUser);
+  } catch (ex) {
+    next(ex);
+  }
+});

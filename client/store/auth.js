@@ -1,5 +1,4 @@
 import axios from "axios";
-import history from "../history";
 
 export const TOKEN = "token";
 
@@ -7,7 +6,6 @@ export const TOKEN = "token";
  * ACTION TYPES
  */
 const SET_AUTH = "SET_AUTH";
-const UPDATE_AUTH = "UPDATE_AUTH";
 const JOIN_EVENT = "JOIN_EVENT";
 const LEAVE_EVENT = "LEAVE_EVENT";
 
@@ -15,7 +13,6 @@ const LEAVE_EVENT = "LEAVE_EVENT";
  * ACTION CREATORS
  */
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
-const updateAuth = (updatedUser) => ({ type: UPDATE_AUTH, updatedUser });
 
 /**
  * THUNK CREATORS
@@ -52,7 +49,26 @@ export const updateProfile = (user) => {
         },
       })
     ).data;
-    return dispatch(updateAuth(updatedUser));
+    return dispatch(setAuth(updatedUser));
+  };
+};
+
+export const updateProfilePic = (filename) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN);
+    const updatedUser = (
+      await axios.put(
+        "/auth/pic",
+        { filename },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      )
+    ).data;
+    console.log("updatedUser: ", updatedUser);
+    return dispatch(setAuth(updatedUser));
   };
 };
 
