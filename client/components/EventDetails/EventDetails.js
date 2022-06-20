@@ -68,6 +68,7 @@ class EventDetails extends Component {
           <div className="event-details-main">
             <div className="details-left">
               <img src={event.logo} className="event-img" />
+              <div className="event-place">View on <a href={event.url}>EventBrite</a></div>
             </div>
             <div className="details-right">
               <div className="event-name">{event.name}</div>

@@ -4,9 +4,11 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const Event = db.define("event", {
-  data: {
-    type: db.Sequelize.JSON
-  },
+
+  // data: {
+  //   type: db.Sequelize.JSON
+  // },
+
   // venueAddress: {
   //   type: db.Sequelize.JSON
   // },
