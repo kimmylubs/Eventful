@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import { useForm } from 'react-hook-form';
+import { useDispatch } from "react-redux";
 
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
@@ -9,65 +8,53 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
 import { Paper } from "@mui/material";
-import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import Button from "@mui/material/Button";
 
 import { createEvent } from "../../store";
+import ImageUploader from "../ImageUploader";
 
 import "./CreateEvent.scss";
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+const getDefaultState = () => ({
+  name: "",
+  address: "",
+  venue: "",
+  city: "",
+  region: "",
+  postal: "",
+  description: "",
+  logo: "",
+  date: new Date(),
+  time: new Date(),
+});
 
 const CreateEvent = (props) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth);
   const [open, setOpen] = useState(false);
-  const [event, setEvent] = useState({
-    name: "",
-    address: "",
-    venue: "",
-    city: "",
-    region: "",
-    postal: "",
-    description: "",
-    date: new Date(),
-    time: new Date(),
-  });
-  // const [textValue, setValue] = useState<string>("");
+  const [event, setEvent] = useState(getDefaultState());
 
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setEvent(getDefaultState());
     setOpen(false);
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { address, city, region, postal, name, description, venue, date, time } = event;
-    const YYYYMMDD = date.toISOString().split("T")[0];
-    const HHmmss = time.toISOString().split("T")[1];
-    const eventStart = new Date(YYYYMMDD + " " + HHmmss);
-    const localizedAddress = [address, city, region].join(", ") + postal;
-    const newEvent = {
-      name,
-      description,
-      city,
-      region,
-      postal,
-      venueName: venue,
-      localStart: eventStart,
-      address1: address,
-      localizedAddress: localizedAddress,
-      userId: user.id,
-    };
-    dispatch(createEvent(newEvent));
+    dispatch(createEvent(event));
+    setEvent(getDefaultState());
+    setOpen(false);
   };
 
   const handleChange = (e) => {
     setEvent({ ...event, [e.target.name]: e.target.value });
+  };
+
+  const handleUploadPic = (filename) => {
+    setEvent({ ...event, logo: filename });
   };
 
   return (
@@ -79,6 +66,7 @@ const CreateEvent = (props) => {
         <div className="create-event-modal">
           <div className="create-event-header">
             <p>New Event</p>
+            <hr />
           </div>
           <div className="create-event-main">
             <form className="form-container" onSubmit={handleSubmit}>
@@ -132,30 +120,28 @@ const CreateEvent = (props) => {
                       name="postal"
                       onChange={handleChange}
                       value={event.zip}
-                      sx={{ width: "180px" }}
+                      fullWidth
+                      rows={1}
                     />
                   </span>
                 </div>
                 <div className="input-event">
                   <span className="label">Description</span>
-                  <span>
+                  <span className="input-event-large">
                     <TextField
                       name="description"
                       fullWidth
-                      rows={4}
+                      rows={6}
                       onChange={handleChange}
                       value={event.description}
+                      multiline
                     />
                   </span>
                 </div>
-                <div className="input-img">
-                  <div className="label">Photo</div>
-                  <div className="img">
-                    <CloudUploadOutlinedIcon />
-                  </div>
-                </div>
-                <div className="upload-img">
-                  <span className="upload-btn">Add Photo</span>
+                <div className="input-event">
+                  <span className="label">Image</span>
+                  {event.logo && <img src={event.logo} />}
+                  <ImageUploader callback={handleUploadPic} />
                 </div>
               </div>
               <div className="input-form-right">
@@ -192,6 +178,7 @@ const CreateEvent = (props) => {
                   </Paper>
                 </div>
                 <Button
+                  type="submit"
                   variant="contained"
                   size="large"
                   sx={{

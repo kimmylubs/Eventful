@@ -23,9 +23,21 @@ export const getCategories = () => {
 
 export const createEvent = (event) => {
   return async (dispatch) => {
-    const response = await axios.post("/api/events", event);
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    const response = await axios.post("/api/events", event, {
+      headers: {
+        authorization: token,
+      },
+    });
     dispatch({
       type: CREATE_EVENT,
+      event: response.data,
+    });
+    dispatch({
+      type: "JOIN_EVENT",
       event: response.data,
     });
   };

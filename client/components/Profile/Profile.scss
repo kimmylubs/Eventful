@@ -5,12 +5,20 @@
     margin: 50px 0;
     text-align: center;
   }
-
-  .user-avatar {
+  
+  .css-nen11g-MuiStack-root {
     align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
+
+    .user-avatar {
+      position: relative;
+    
+      > :last-child {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background-color: green;
+      }
+    }
   }
   
   .user-info-container {
@@ -28,6 +36,21 @@
       width: 100px;
       height: 50px;
       border-radius: 10px;
+      font-size: 18px;
     }
   }
+}
+
+/* modal styling */
+.image-uploader-modal {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  outline: none;
+  box-shadow: 24;
+  background-color: white;
+  color: grey;
 }

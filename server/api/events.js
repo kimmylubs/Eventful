@@ -17,10 +17,29 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  console.log(req.body);
   try {
-    const event = await Event.create({ ...req.body });
-    const owner = await User.findOne({ where: { id: event.userId } });
+    const { address, city, region, postal, name, description, logo, venue, date, time } = req.body;
+    const YYYYMMDD = new Date(date).toISOString().split("T")[0];
+    const HHmmss = new Date(time).toISOString().split("T")[1];
+    const eventStart = new Date(YYYYMMDD + " " + HHmmss);
+    const localizedAddress = [address, city, region].join(", ") + " " + postal;
+    const localizedArea =  city + ", " + region;
+    const owner = await User.findByToken(req.headers.authorization);
+    const newEvent = {
+      name,
+      description,
+      logo,
+      city,
+      region,
+      postal,
+      localizedAddress,
+      localizedArea,
+      venueName: venue,
+      localStart: eventStart,
+      address1: address,
+      userId: owner.id,
+    };
+    const event = await Event.create(newEvent);
     event.setOwner(owner);
     event.addAttendee(owner);
     res.status(201).send(event);
@@ -45,7 +64,7 @@ router.post("/:id", async (req, res, next) => {
   try {
     const event = await Event.findOne({
       where: {
-        id: req.params.id
+        id: req.params.id,
       },
     });
     const user = await User.findOne({
@@ -53,7 +72,12 @@ router.post("/:id", async (req, res, next) => {
         id: req.body.id,
       },
     });
-    event.addAttendee(user);
+    if (await event.hasAttendee(user)) {
+      console.log('already has user')
+      await event.removeAttendee(user);
+    } else {
+      await event.addAttendee(user);
+    }
     res.status(200).send(event);
   } catch (e) {
     next(e);
