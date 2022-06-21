@@ -1,12 +1,19 @@
 import React, { Component, useEffect, useState } from "react";
 import axios from 'axios'
+import { useDispatch, useSelector } from "react-redux";
 
 function SearchBar({placeholder}) {
     const [users, setUsers] = useState([])
     const [filteredData, setFilteredData] = useState([])
+    const [currentUser, setCurrentUser] = useState({})
+
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.auth)
+    
 
     useEffect (() => {
-        getUsers()
+        getUsers();
+        setCurrentUser(user)
     }, [])
 
     function getUsers () {
@@ -23,10 +30,15 @@ function SearchBar({placeholder}) {
     
     const handleFilter = (event) => {
         const searched = event.target.value
-        const filter = userEmails.filter((value) => {
-            return value.includes(searched)
+        const filter = users.filter((value) => {
+            return value.email.indexOf(searched) >= 0
         })
         setFilteredData(filter)
+    }
+
+    const addFriend = (friendUUID) => {
+        console.log('currentUser', currentUser.UUID)
+        console.log('friendUUID', friendUUID)
     }
 
     console.log('users', users)
@@ -39,9 +51,10 @@ function SearchBar({placeholder}) {
                     <input type="text" placeholder={placeholder} onChange={handleFilter}></input>
                 </div>
                     <div className="searchResults">
-                    {users.map(user => {
+                    {filteredData.map(user => {
+                        // console.log('filteredData', filteredData)
                         return <div key={user.UUID}>
-                            <a>{user.email}<button>+</button></a>
+                            <a>{user.email}<button onClick={() => addFriend(user.UUID)}>+</button></a>
                         </div>
                     })}
                 </div>
@@ -51,3 +64,4 @@ function SearchBar({placeholder}) {
 }
 
 export default SearchBar
+
