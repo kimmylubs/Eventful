@@ -52,11 +52,11 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123', fistName: 'Cody', lastName: 'Murphy' }),
-    User.create({ username: 'murphy', password: '123', firstName: 'Murphy', lastName: 'Cody' }),
-    User.create({ username: 'aubrey', password: '123', firstName: 'Aubrey', lastName: 'Aubrey' }),
-    User.create({ username: 'stephanie', password: '123', firstName: 'Stephanie', lastName: 'Stephanie' }),
-    User.create({ username: 'felica', password: '123', firstName: 'Felicia', lastName: 'Felicia' })
+    User.create({ username: 'cody', email: "cody@cody.com", password: '123', fistName: 'Cody', lastName: 'Murphy' }),
+    User.create({ username: 'murphy', email:"murphy@murphy.com", password: '123', firstName: 'Murphy', lastName: 'Cody' }),
+    User.create({ username: 'aubrey', email:"aubrey@aubrey.com", password: '123', firstName: 'Aubrey', lastName: 'Aubrey' }),
+    User.create({ username: 'stephanie', email:"aubrey@aubrey.com", password: '123', firstName: 'Stephanie', lastName: 'Stephanie' }),
+    User.create({ username: 'felica', email:"felicia@felicia.com", password: '123', firstName: 'Felicia', lastName: 'Felicia' })
     
   ])
   // const venues = await Promise.all(
