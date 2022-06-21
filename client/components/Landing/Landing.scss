@@ -1,0 +1,36 @@
+.landing-page {
+  .landing-hero {
+    display: flex;
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-left,
+    .hero-right {
+      flex: 1;
+    }
+  }
+
+  .random-events {
+    .random-events-title {
+      display: flex;
+      justify-content: center;
+    }
+
+    .random-events-cards {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+
+  .landing-footer {
+    display: flex;
+
+    .footer-left,
+    .footer-right {
+      flex: 1;
+    }
+  }
+}

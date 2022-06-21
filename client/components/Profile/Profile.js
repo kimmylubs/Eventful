@@ -1,61 +1,18 @@
-import React, { Component, useMemo } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 
+import Modal from "@mui/material/Modal";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
-import Dropzone from "react-dropzone";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import Stack from "@mui/material/Stack";
 
 import { updateProfile, updateProfilePic } from "../../store";
+import ImageUploader from "../ImageUploader/ImageUploader";
 
 import "./Profile.scss";
-
-const style = {
-  flex: 1,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "20px",
-  borderWidth: 2,
-  borderRadius: 2,
-  borderColor: "#eeeeee",
-  borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
-  outline: "none",
-  transition: "border .24s ease-in-out",
-};
-
-function StyledDropzone(props) {
-  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } = useDropzone({
-    accept: {
-      "image/*": [".png", ".jpeg", ".jpg"],
-    },
-  });
-
-  const style = useMemo(
-    () => ({
-      ...baseStyle,
-      ...(isFocused ? focusedStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
-    }),
-    [isFocused, isDragAccept, isDragReject]
-  );
-
-  return (
-    <div className="container">
-      <div {...getRootProps({ style })}>
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
-      </div>
-    </div>
-  );
-}
-
-<StyledDropzone />;
 
 class Profile extends Component {
   constructor(props) {
@@ -68,8 +25,13 @@ class Profile extends Component {
       state: this.props.auth.state || "",
       zip: this.props.auth.zip || "",
       phone: this.props.auth.phone || "",
+      imageUrl: this.props.auth.imageUrl || "",
+      open: false,
     };
   }
+
+  handleOpen = () => this.setState({ open: true });
+  handleClose = () => this.setState({ open: false });
 
   onChange = (ev) => {
     this.setState({
@@ -82,27 +44,8 @@ class Profile extends Component {
     this.props.update({ ...this.state });
   };
 
-  handleProfilePicUpload = async (files) => {
-    console.log("asdf");
-    try {
-      const file = files[0];
-      let response = await axios.post("/api/upload", {
-        filename: file.name,
-        filetype: file.type,
-      });
-
-      const signedUrl = response.data;
-      const options = {
-        headers: {
-          "Content-Type": file.type,
-        },
-      };
-
-      response = await axios.put(signedUrl, file, options);
-      this.props.updateProfilePic(file.name);
-    } catch (err) {
-      console.log(err);
-    }
+  handleUploadPic = (filename) => {
+    this.setState({ imageUrl: filename, open: false });
   };
 
   render() {
@@ -114,9 +57,19 @@ class Profile extends Component {
           <Typography variant="h6" gutterBottom className="profile-header">
             Edit Profile
           </Typography>
-          <div className="user-avatar">
-            <Avatar sx={{ width: 200, height: 200 }} src={this.props.auth.imageUrl}></Avatar>
-          </div>
+          <Stack>
+            <span className="user-avatar">
+              <Avatar sx={{ width: 200, height: 200 }} src={this.state.imageUrl} />
+              <Avatar sx={{ width: 50, height: 50 }} onClick={this.handleOpen}>
+                <ModeEditIcon />
+              </Avatar>
+              <Modal open={this.state.open} onClose={this.handleClose}>
+                <div className="image-uploader-modal">
+                  <ImageUploader callback={this.handleUploadPic} />
+                </div>
+              </Modal>
+            </span>
+          </Stack>
           <div className="user-info-container">
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
@@ -217,16 +170,6 @@ class Profile extends Component {
             </button>
           </div>
         </React.Fragment>
-        <Dropzone onDrop={this.handleProfilePicUpload}>
-          {({ getRootProps, getInputProps }) => (
-            <section className="container">
-              <div {...getRootProps({ style })}>
-                <input {...getInputProps()} />
-                <p>Drag 'n' drop some files here, or click to select files</p>
-              </div>
-            </section>
-          )}
-        </Dropzone>
       </div>
     );
   }
@@ -243,7 +186,6 @@ const mapDispatch = (dispatch) => {
     update: (user) => {
       dispatch(updateProfile(user));
     },
-    updateProfilePic: (filename) => dispatch(updateProfilePic(filename)),
   };
 };
 

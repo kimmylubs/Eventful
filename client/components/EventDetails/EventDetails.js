@@ -4,26 +4,89 @@ import { useParams } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
-import Paper from "@mui/material/Paper";
 
-import { getEvents } from "../../store";
+import { joinOrLeaveEvent, selectUser, selectEvent, getIsLoggedIn } from "../../store";
+import { parseTime, parseDate, getDayOfWeek, getHasUserJoinedEvent } from "../../utils";
+import UserAvatar from "../Avatar";
 
 import "./EventDetails.scss";
 import events from "../../store/events";
 
+const EventDetails = (props) => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const isLoggedIn = useSelector(getIsLoggedIn);
+  const { id } = useParams();
+  const event = useSelector(selectEvent(id));
+  console.log("event: ", event);
+  
 
 const parseTime = (time) => {
   if (!time) return "";
 
-  // const hrs = +time.substring(0, 2);
-  // const hh = ((+hrs + 8) % 12) ;
-  // const mm = time.substring(3, 5);
-  // return `${hh}:${mm} ${hrs > 11 ? "PM" : "AM"}`;
+  const hasJoinedEvent = user ? getHasUserJoinedEvent(user, event?.id) : false;
 
-  const hh = time.substring(11,13) ;
-  const hhs = ((+hh + 11) % 12 + 1);
-  const mm = time.substring(14, 16);
-  return `${hhs}:${mm} ${hh > 11 ? "PM" : "AM"}`;
+  return (
+    event && (
+      <div className="event-details">
+        <div className="details-left">
+          <div className="image-container">
+            <img src={event.logo} className="event-img" />
+            <span>
+              View on <a href={event.url}>EventBrite</a>
+            </span>
+          </div>
+          <div className="event-join-list">
+            <div className="join-users">who join this event</div>
+            <div className="avatar-container">
+              <AvatarGroup max={6} className="avatars">
+                <Avatar className="avatar"></Avatar>
+                <Avatar className="avatar"></Avatar>
+                <Avatar className="avatar"></Avatar>
+                <Avatar className="avatar"></Avatar>
+                <Avatar className="avatar"></Avatar>
+                <Avatar className="avatar"></Avatar>
+                <Avatar className="avatar"></Avatar>
+                <Avatar className="avatar"></Avatar>
+              </AvatarGroup>
+            </div>
+          </div>
+        </div>
+        <div className="details-right">
+          <div className="event-name">{event.name}</div>
+          <div className="event-date">
+            {getDayOfWeek(event.localStart)}, {parseDate(event.localStart)},{" "}
+            {parseTime(event.localStart)}
+          </div>
+          <div className="event-place">
+            <div> {event.venueName}</div>
+            <div>{event.localizedAddress}</div>
+          </div>
+          <div className="event-holder">
+            <div className="event-owner">
+              {event.userId ? <UserAvatar userId={event.userId} /> : <Avatar className="avatar" />}
+            </div>
+            <div className="comments">
+              <div className="speech-bubble">
+                <div>{event.description}</div>
+              </div>
+            </div>
+          </div>
+          {isLoggedIn && (
+            <div className="btn-container">
+              <span
+                className={`join-btn ${hasJoinedEvent ? "joined" : ""}`}
+                onClick={handleJoinOrLeave}
+              >
+                {hasJoinedEvent ? "Leave" : "Join"} this event
+              </span>
+              <span className="invite-btn">Invite friends</span>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  );
 };
 
 const parseTimeEnd = (time) => {
@@ -114,6 +177,7 @@ class EventDetails extends Component {
       )
     );
   }
+ }
 }
 
 const mapDispatchToProps = (dispatch) => {

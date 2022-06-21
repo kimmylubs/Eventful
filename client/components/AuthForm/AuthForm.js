@@ -4,9 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { authenticate, selectUser } from "../../store";
 import GoogleAuth from "../GoogleAuth";
 
+import "./AuthForm.scss";
+
 /**
  * COMPONENT
  */
+
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector(selectUser);
   const dispatch = useDispatch();

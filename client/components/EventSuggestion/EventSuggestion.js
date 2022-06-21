@@ -1,22 +1,17 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-import { joinOrLeaveEvent, selectEvents, selectUser } from "../../store";
-import { parseTime, parseDate, getDayOfWeek, getHasUserJoinedEvent } from "../../utils";
+import { selectEvents } from "../../store";
+import EventCard from "../EventCard";
 
 import "./EventSuggestion.scss";
 
-const EventSuggestion = (props) => {
-  const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+const EventSuggestion = () => {
   const events = useSelector(selectEvents);
   const [sortBy, setSortBy] = useState("dateDesc");
 
@@ -33,10 +28,6 @@ const EventSuggestion = (props) => {
     }
     console.log(sortBy);
     return events;
-  };
-
-  const handleJoinOrLeave = (id) => {
-    dispatch(joinOrLeaveEvent(id));
   };
 
   const handleSort = (e) => {
@@ -67,29 +58,7 @@ const EventSuggestion = (props) => {
       </h2>
       <div className="event-container">
         {getSortedEvents(events).map((event) => (
-          <div className="suggested-event" key={event.id}>
-            <div className="event">
-              <span className="event-name">{event.name}</span>
-              <span className="event-date">
-                {getDayOfWeek(event.localStart)}, {parseDate(event.localStart)},{" "}
-                {parseTime(event.localStart)}
-              </span>
-              <span className="event-place">{event.localizedArea}</span>
-              <span className="">
-                <span className="like-btn" onClick={() => handleJoinOrLeave(event.id)}>
-                  <span className="like-btn-circle"></span>
-                  {getHasUserJoinedEvent(user, event.id) ? (
-                    <FavoriteIcon sx={{ width: 30, height: 30, color: "red" }} />
-                  ) : (
-                    <FavoriteBorderIcon sx={{ width: 30, height: 30, color: "red" }} />
-                  )}
-                </span>
-                <Link to={`/event/${event.id}`}>
-                  <img className="event-image" src={event.logo} />
-                </Link>
-              </span>
-            </div>
-          </div>
+          <EventCard key={event.id} event={event} />
         ))}
       </div>
     </div>
