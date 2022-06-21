@@ -1,10 +1,9 @@
 "use strict";
-
 const { default: axios } = require("axios");
 const { all } = require("../server/api");
 const {
   db,
-  models: { User, Event },
+  models: { User, Event, Friendship },
 } = require("../server/db");
 // const SeedEvents = require('./seedEvents');
 
@@ -126,7 +125,16 @@ const alleventids = [
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
-
+  
+  // Creating Users
+  const users = await Promise.all([
+    User.create({ username: 'cody', password: '123', fistName: 'Cody', lastName: 'Murphy' }),
+    User.create({ username: 'murphy', password: '123', firstName: 'Murphy', lastName: 'Cody' }),
+    User.create({ username: 'aubrey', password: '123', firstName: 'Aubrey', lastName: 'Aubrey' }),
+    User.create({ username: 'stephanie', password: '123', firstName: 'Stephanie', lastName: 'Stephanie' }),
+    User.create({ username: 'felica', password: '123', firstName: 'Felicia', lastName: 'Felicia' })
+    
+  ])
   // const venues = await Promise.all(
   //   allvenueids.map(id => (axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/events/`, {
   //     headers:{
