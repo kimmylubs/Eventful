@@ -1,19 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 
-import {
-  joinOrLeaveEvent,
-  selectUser,
-  selectEvent,
-  selectEvents,
-  getIsLoggedIn,
-  getEvents,
-} from "../../store";
+import { joinOrLeaveEvent, selectUser, selectEvent, getIsLoggedIn } from "../../store";
 import { parseTime, parseDate, getDayOfWeek, getHasUserJoinedEvent } from "../../utils";
+import UserAvatar from "../Avatar";
 
 import "./EventDetails.scss";
 
@@ -21,7 +15,6 @@ const EventDetails = (props) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const isLoggedIn = useSelector(getIsLoggedIn);
-  const events = useSelector(selectEvents);
   const { id } = useParams();
   const event = useSelector(selectEvent(id));
   console.log("event: ", event);
@@ -31,12 +24,6 @@ const EventDetails = (props) => {
   };
 
   const hasJoinedEvent = user ? getHasUserJoinedEvent(user, event?.id) : false;
-
-  useEffect(() => {
-    if (!events.length) {
-      dispatch(getEvents());
-    }
-  }, []);
 
   return (
     event && (
@@ -76,7 +63,7 @@ const EventDetails = (props) => {
           </div>
           <div className="event-holder">
             <div className="event-owner">
-              <Avatar className="avatar"></Avatar>
+              {event.userId ? <UserAvatar userId={event.userId} /> : <Avatar className="avatar" />}
             </div>
             <div className="comments">
               <div className="speech-bubble">

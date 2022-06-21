@@ -11,6 +11,7 @@ import { Paper } from "@mui/material";
 import Button from "@mui/material/Button";
 
 import { createEvent } from "../../store";
+import ImageUploader from "../ImageUploader";
 
 import "./CreateEvent.scss";
 
@@ -50,6 +51,10 @@ const CreateEvent = (props) => {
 
   const handleChange = (e) => {
     setEvent({ ...event, [e.target.name]: e.target.value });
+  };
+
+  const handleUploadPic = (filename) => {
+    setEvent({ ...event, logo: filename });
   };
 
   return (
@@ -134,10 +139,9 @@ const CreateEvent = (props) => {
                   </span>
                 </div>
                 <div className="input-event">
-                  <span className="label">Image URL</span>
-                  <span>
-                    <TextField name="logo" fullWidth onChange={handleChange} value={event.logo} />
-                  </span>
+                  <span className="label">Image</span>
+                  {event.logo && <img src={event.logo} />}
+                  <ImageUploader callback={handleUploadPic} />
                 </div>
               </div>
               <div className="input-form-right">
