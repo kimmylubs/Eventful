@@ -15,11 +15,14 @@ const myprivatetoken = "B6THKWOK44JPHM3UHUIM";
 const allvenueids = [
   // NEW
   // 91310299, 96678299, 61946327, 87029679, 96493399, 84764769, 60894531,88116599,
-
+  93106589, 87932719, 96293469, 81618829, 58397049, 90047749, 86491789,
+  88179059, 98953279, 75221189, 84451279, 95082199, 96397509, 80568129,
+  76925749, 96881509, 78541779, 99219569, 87353229, 78543159, 80828879,
+  53044587, 80424799, 91487569, 87432329,
   // OLD
-  95082199,
-  99219569, 53044587, 88179059,
-  78543159,
+  // 95082199,
+  // 99219569, 53044587, 88179059,
+  // 78543159,
   // 99994959, 99948699, 99940489,
   //  99926989, 99925819, 99925639, 99924299,
   // 99922359, 99869419, 99811989, 99803679, 99763149, 99753429, 99747879,
@@ -65,13 +68,12 @@ const alleventids = [
   // 304776433517, 297447131377, 292877914727,
 
   // OLD
-  238638142107,
-  297996614897, 241546380727, 351067681887, 331309223807,
+  238638142107, 297996614897, 241546380727, 351067681887, 331309223807,
 
-  //   // 339272863267, 294282907097, 312103418727, 333911296677, 308177084957,
-  //   // 336662435407, 156816788235, 252398409437, 238625684847, 338197797717,
-  //   // 349504446207, 258857318207, 290994060067, 337074738617, 322275202807,
-  //   // 273102415677, 254721186927, 293952228027, 253478289387, 326723618137,
+  339272863267, 294282907097, 312103418727, 333911296677, 308177084957,
+  336662435407, 156816788235, 252398409437, 238625684847, 338197797717,
+  349504446207, 258857318207, 290994060067, 337074738617, 322275202807,
+  273102415677, 254721186927, 293952228027, 253478289387, 326723618137,
   //   // 341917162437, 345010785547, 317203753967, 341929238557, 346332187897,
   //   // 331601959387, 224291250167, 290056806717, 252377787757, 271093095747,
   //   // 226726845097, 268164837247, 225122315907, 339028271687, 312399785167,
@@ -195,6 +197,7 @@ async function seed() {
     Event.create({
       // data: e,
       // venueAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)),
+
       eventId: e.id,
       name: e.name.text,
       description: e.description.text,
@@ -228,9 +231,9 @@ async function seed() {
       postal: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
         .postal_code,
       country: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
-        .country,
+      .country,
 
-        // LOOP DE LOOP
+      // LOOP DE LOOP
       // (allvenuesfromId.find(venue => e.venue_id === venue.id)),
       // .map(e => e)
 
@@ -260,21 +263,45 @@ async function seed() {
   //   address: allvenuesfromId.map((e) => e.address.localized_address_display),
   // });
 
-    // Creating Users
-    const users = await Promise.all([
-      User.create({
-        username: "cody",
-        password: "123",
-        fistName: "Cody",
-        lastName: "Murphy",
-      }),
-      User.create({
-        username: "murphy",
-        password: "123",
-        firstName: "Murphy",
-        lastName: "Cody",
-      }),
-    ]);
+  // Creating Users
+  const users = await Promise.all([
+    User.create({
+      username: "cody",
+      password: "123",
+      fistName: "cody",
+      lastName: "moldy",
+    }),
+    User.create({
+      username: "murphy",
+      password: "123",
+      firstName: "murphy",
+      lastName: "purphy",
+    }),
+    User.create({
+      username: "miyuki",
+      password: "123",
+      firstName: "miyuki",
+      lastName: "biyuki",
+    }),
+    User.create({
+      username: "yehezkiel",
+      password: "123",
+      firstName: "yehezkiel",
+      lastName: "lehezkiel",
+    }),
+    User.create({
+      username: "bharadwaj",
+      password: "123",
+      firstName: "bharadwaj",
+      lastName: "charadwaj",
+    }),
+    User.create({
+      username: "",
+      password: "123",
+      firstName: "kimberly",
+      lastName: "bimberly",
+    }),
+  ]);
 
   console.log(`seeded successfully`);
 
