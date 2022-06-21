@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 
-import { getEvents } from "../../store";
+import { getEvents, getIsLoggedIn } from "../../store";
 
 import UpcomingEvents from "../UpcomingEvents/UpcomingEvents";
 import FriendSuggestion from "../FriendSuggestion/FriendSuggestion";
@@ -18,6 +18,7 @@ import "./Home.scss";
  */
 const Home = (props) => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
   useEffect(() => {
     dispatch(getEvents());
@@ -32,8 +33,12 @@ const Home = (props) => {
           <TextField id="standard-basic" variant="standard" />
         </span>
       </div>
-      <UpcomingEvents />
-      <FriendSuggestion />
+      {isLoggedIn && (
+        <>
+          <UpcomingEvents />
+          <FriendSuggestion />
+        </>
+      )}
       <EventSuggestion />
     </div>
   );

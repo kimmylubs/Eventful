@@ -9,7 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-import { joinOrLeaveEvent, selectEvents, selectUser } from "../../store";
+import { joinOrLeaveEvent, selectEvents, selectUser, getIsLoggedIn } from "../../store";
 import { parseTime, parseDate, getDayOfWeek, getHasUserJoinedEvent } from "../../utils";
 
 import "./EventSuggestion.scss";
@@ -17,6 +17,7 @@ import "./EventSuggestion.scss";
 const EventSuggestion = (props) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const isLoggedIn = useSelector(getIsLoggedIn);
   const events = useSelector(selectEvents);
   const [sortBy, setSortBy] = useState("dateDesc");
 
@@ -76,14 +77,16 @@ const EventSuggestion = (props) => {
               </span>
               <span className="event-place">{event.localizedArea}</span>
               <span className="">
-                <span className="like-btn" onClick={() => handleJoinOrLeave(event.id)}>
-                  <span className="like-btn-circle"></span>
-                  {getHasUserJoinedEvent(user, event.id) ? (
-                    <FavoriteIcon sx={{ width: 30, height: 30, color: "red" }} />
-                  ) : (
-                    <FavoriteBorderIcon sx={{ width: 30, height: 30, color: "red" }} />
-                  )}
-                </span>
+                {isLoggedIn && (
+                  <span className="like-btn" onClick={() => handleJoinOrLeave(event.id)}>
+                    <span className="like-btn-circle"></span>
+                    {getHasUserJoinedEvent(user, event.id) ? (
+                      <FavoriteIcon sx={{ width: 30, height: 30, color: "red" }} />
+                    ) : (
+                      <FavoriteBorderIcon sx={{ width: 30, height: 30, color: "red" }} />
+                    )}
+                  </span>
+                )}
                 <Link to={`/event/${event.id}`}>
                   <img className="event-image" src={event.logo} />
                 </Link>

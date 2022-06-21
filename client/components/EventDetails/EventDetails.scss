@@ -4,7 +4,6 @@
   justify-content: space-evenly;
   margin: 110px 0;
   
-  
   .details-left {
     .image-container {
       display: flex;
@@ -43,8 +42,6 @@
       }
     }
   }
-
-  
 
   .details-right {
     .event-name {
@@ -91,6 +88,7 @@
           border: solid 3px grey;
           box-sizing: border-box;
           height: 180px;
+          width: 300px;
         }
 
         .speech-bubble::before {
@@ -194,6 +192,7 @@
 
         .comments {
           .speech-bubble {
+            width: 250px;
             height: 140px;
             margin: 1em 0 1em 20px;
           }
@@ -206,7 +205,6 @@
     }
   }
 }
-
 
 @media only screen and (max-width: 1300px) {
   .event-details {
@@ -231,10 +229,11 @@
             width: 60px;
           }
         }
-        
+
         .comments {
           .speech-bubble {
             height: 120px;
+            width: 250px;
           }
         }
       }

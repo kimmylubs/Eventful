@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { authenticate, selectUser } from "../../store";
 import GoogleAuth from "../GoogleAuth";
 
+import "./AuthForm.scss";
+
 /**
  * COMPONENT
  */

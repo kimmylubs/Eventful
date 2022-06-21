@@ -37,6 +37,5 @@ export const getDayOfWeek = (date) => {
   return day;
 };
 
-export const getHasUserJoinedEvent = (user, eventId) => {
+export const getHasUserJoinedEvent = (user, eventId) =>
   Boolean(user?.joinedEvents?.find((event) => event.id === eventId));
-};

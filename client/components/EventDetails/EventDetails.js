@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 
-import { joinOrLeaveEvent, selectUser, selectEvent } from "../../store";
+import {
+  joinOrLeaveEvent,
+  selectUser,
+  selectEvent,
+  selectEvents,
+  getIsLoggedIn,
+  getEvents,
+} from "../../store";
 import { parseTime, parseDate, getDayOfWeek, getHasUserJoinedEvent } from "../../utils";
 
 import "./EventDetails.scss";
@@ -13,14 +20,23 @@ import "./EventDetails.scss";
 const EventDetails = (props) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const isLoggedIn = useSelector(getIsLoggedIn);
+  const events = useSelector(selectEvents);
   const { id } = useParams();
   const event = useSelector(selectEvent(id));
+  console.log("event: ", event);
 
   const handleJoinOrLeave = () => {
     dispatch(joinOrLeaveEvent(id));
   };
 
-  const hasJoinedEvent = getHasUserJoinedEvent(user, event?.id);
+  const hasJoinedEvent = user ? getHasUserJoinedEvent(user, event?.id) : false;
+
+  useEffect(() => {
+    if (!events.length) {
+      dispatch(getEvents());
+    }
+  }, []);
 
   return (
     event && (
@@ -28,7 +44,9 @@ const EventDetails = (props) => {
         <div className="details-left">
           <div className="image-container">
             <img src={event.logo} className="event-img" />
-            <span>View on <a href={event.url}>EventBrite</a></span>
+            <span>
+              View on <a href={event.url}>EventBrite</a>
+            </span>
           </div>
           <div className="event-join-list">
             <div className="join-users">who join this event</div>
@@ -53,7 +71,7 @@ const EventDetails = (props) => {
             {parseTime(event.localStart)}
           </div>
           <div className="event-place">
-            <div> {event.venueName}</div> 
+            <div> {event.venueName}</div>
             <div>{event.localizedAddress}</div>
           </div>
           <div className="event-holder">
@@ -66,15 +84,17 @@ const EventDetails = (props) => {
               </div>
             </div>
           </div>
-          <div className='btn-container'>
-            <span
-              className={`join-btn ${hasJoinedEvent ? "joined" : ""}`}
-              onClick={handleJoinOrLeave}
-            >
-              {hasJoinedEvent ? "Leave" : "Join"} this event
-            </span>
-            <span className="invite-btn">Invite friends</span>
-          </div>
+          {isLoggedIn && (
+            <div className="btn-container">
+              <span
+                className={`join-btn ${hasJoinedEvent ? "joined" : ""}`}
+                onClick={handleJoinOrLeave}
+              >
+                {hasJoinedEvent ? "Leave" : "Join"} this event
+              </span>
+              <span className="invite-btn">Invite friends</span>
+            </div>
+          )}
         </div>
       </div>
     )
