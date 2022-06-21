@@ -9,11 +9,10 @@ import Avatar from "@mui/material/Avatar";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Stack from "@mui/material/Stack";
 
-import { updateProfile } from "../../store";
+import { updateProfile, updateProfilePic } from "../../store";
 import ImageUploader from "../ImageUploader/ImageUploader";
 
 import "./Profile.scss";
-
 
 class Profile extends Component {
   constructor(props) {
@@ -26,12 +25,13 @@ class Profile extends Component {
       state: this.props.auth.state || "",
       zip: this.props.auth.zip || "",
       phone: this.props.auth.phone || "",
+      imageUrl: this.props.auth.imageUrl || "",
       open: false,
     };
   }
 
   handleOpen = () => this.setState({ open: true });
-  handleClose = () => this.setState({ open: false }); 
+  handleClose = () => this.setState({ open: false });
 
   onChange = (ev) => {
     this.setState({
@@ -42,6 +42,10 @@ class Profile extends Component {
   saveProfile = (ev) => {
     ev.preventDefault();
     this.props.update({ ...this.state });
+  };
+
+  handleUploadPic = (filename) => {
+    this.setState({ imageUrl: filename, open: false });
   };
 
   render() {
@@ -55,16 +59,13 @@ class Profile extends Component {
           </Typography>
           <Stack>
             <span className="user-avatar">
-              <Avatar sx={{ width: 200, height: 200 }} src={this.props.auth.imageUrl} />
+              <Avatar sx={{ width: 200, height: 200 }} src={this.state.imageUrl} />
               <Avatar sx={{ width: 50, height: 50 }} onClick={this.handleOpen}>
                 <ModeEditIcon />
               </Avatar>
-              <Modal
-                open={this.state.open}
-                onClose={this.handleClose}
-              >
+              <Modal open={this.state.open} onClose={this.handleClose}>
                 <div className="image-uploader-modal">
-                  <ImageUploader handleClose={this.handleClose} />
+                  <ImageUploader callback={this.handleUploadPic} />
                 </div>
               </Modal>
             </span>
@@ -169,7 +170,6 @@ class Profile extends Component {
             </button>
           </div>
         </React.Fragment>
-        
       </div>
     );
   }

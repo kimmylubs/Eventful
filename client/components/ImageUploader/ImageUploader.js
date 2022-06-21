@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import Dropzone from "react-dropzone";
 
-import { updateProfilePic } from "../../store";
-
 import "./ImageUploader.scss";
 
 const style = {
@@ -52,14 +50,12 @@ function StyledDropzone(props) {
 
 <StyledDropzone />;
 
-const ImageUploader = ({ handleClose }) => {
-  const dispatch = useDispatch();
+const ImageUploader = ({ callback }) => {
 
-  const handleProfilePicUpload = async (files) => {
-    console.log("asdf");
+  const handleUpload = async (files) => {
     try {
       const file = files[0];
-      let response = await axios.post("/api/upload", {
+      const response = await axios.post("/api/upload", {
         filename: file.name,
         filetype: file.type,
       });
@@ -71,10 +67,9 @@ const ImageUploader = ({ handleClose }) => {
         },
       };
 
-      response = await axios.put(signedUrl, file, options);
-      console.log("response: ", response);
-      dispatch(updateProfilePic(file.name));
-      handleClose();
+      const awsResponse = await axios.put(signedUrl, file, options);
+      console.log("awsResponse: ", awsResponse);
+      callback("https://capstone-fsa.s3.amazonaws.com/"+file.name);
     } catch (err) {
       console.log(err);
     }
@@ -82,7 +77,7 @@ const ImageUploader = ({ handleClose }) => {
 
   return (
     <div>
-      <Dropzone onDrop={handleProfilePicUpload}>
+      <Dropzone onDrop={handleUpload}>
         {({ getRootProps, getInputProps }) => (
           <section className="image-uploader">
             <div {...getRootProps({ style })}>

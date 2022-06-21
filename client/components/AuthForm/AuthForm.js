@@ -9,6 +9,7 @@ import "./AuthForm.scss";
 /**
  * COMPONENT
  */
+
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector(selectUser);
   const dispatch = useDispatch();

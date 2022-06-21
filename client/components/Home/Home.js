@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 
-import { getEvents, getIsLoggedIn } from "../../store";
+import { getIsLoggedIn } from "../../store";
 
 import UpcomingEvents from "../UpcomingEvents/UpcomingEvents";
 import FriendSuggestion from "../FriendSuggestion/FriendSuggestion";
 import EventSuggestion from "../EventSuggestion";
 import CreateEvent from "../CreateEvent";
+import Landing from "../Landing";
 
 import "./Home.scss";
 
@@ -20,26 +21,24 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn);
 
-  useEffect(() => {
-    dispatch(getEvents());
-  }, []);
-
   return (
     <div className="home">
-      <div className="icon-container">
-        <CreateEvent />
-        <span className="search">
-          <SearchIcon fontSize="large" />
-          <TextField id="standard-basic" variant="standard" />
-        </span>
-      </div>
-      {isLoggedIn && (
+      {isLoggedIn ? (
         <>
+          <div className="icon-container">
+            <CreateEvent />
+            <span className="search">
+              <SearchIcon fontSize="large" />
+              <TextField id="standard-basic" variant="standard" />
+            </span>
+          </div>
           <UpcomingEvents />
           <FriendSuggestion />
+          <EventSuggestion />
         </>
+      ) : (
+        <Landing />
       )}
-      <EventSuggestion />
     </div>
   );
 };
