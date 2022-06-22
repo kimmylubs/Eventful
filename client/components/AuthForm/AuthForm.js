@@ -36,8 +36,8 @@ const AuthForm = ({ name, displayName }) => {
         <div className="submit-btn-container">
           <button type="submit">{displayName}</button>
         </div>
-        {error && error.response && <div> {error.response.data} </div>}
       </form>
+      {error?.response && <div>{error.response.data}</div>}
       <GoogleAuth />
     </div>
   );

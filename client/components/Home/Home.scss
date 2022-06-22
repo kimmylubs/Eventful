@@ -1,11 +1,12 @@
 @import "../../variables.scss";
 
 .home {
-  padding: 0 25px;
 
   .icon-container {
     display: flex;
     margin-top: 21.44px;
+    padding: 0 25px;
+
 
     .create-events-btn {
       width: 150px;

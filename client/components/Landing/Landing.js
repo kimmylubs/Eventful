@@ -25,8 +25,10 @@ const Landing = () => {
     <div className="landing-page">
       <section className="landing-hero">
         <div className="hero-left">
-          <p>Join events and enjoy summer!</p>
-          <button>create your account</button>
+          <p>Join events with your friends!</p>
+          <span className="create-account-btn">
+            <Link to="">Create your account</Link>
+          </span>
         </div>
         <div className="hero-right">
           <img className="hero-img" />
@@ -34,9 +36,9 @@ const Landing = () => {
       </section>
       <section className="random-events">
         <div className="random-events-title">
-          <span className="text">Find your local events or create your own events </span>
+          <span className="text" title="&amp;">Find your local events &amp; create your own events</span>
           <span className="event-link-btn">
-            <Link to="/events">check out events in NYC</Link>
+            <Link to="/events">Check out events</Link>
           </span>
         </div>
         <div className="random-events-cards">
@@ -49,7 +51,7 @@ const Landing = () => {
         <div className="footer-left">
           <img className="footer-img" />
         </div>
-        <div className="footer-right">connect with your friends</div>
+        <div className="footer-right">Connect with your friends</div>
       </section>
     </div>
   );
