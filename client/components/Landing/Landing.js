@@ -28,12 +28,16 @@ const Landing = () => {
           <p>Join events and enjoy summer!</p>
           <button>create your account</button>
         </div>
-        <div className="hero-right">image</div>
+        <div className="hero-right">
+          <img className="hero-img" />
+        </div>
       </section>
       <section className="random-events">
         <div className="random-events-title">
-          <span>Find your local events or create your own events</span>
-          <Link to="/events">check out events in NYC</Link>
+          <span className="text">Find your local events or create your own events </span>
+          <span className="event-link-btn">
+            <Link to="/events">check out events in NYC</Link>
+          </span>
         </div>
         <div className="random-events-cards">
           {randomEvents.map((event) => (
@@ -42,7 +46,9 @@ const Landing = () => {
         </div>
       </section>
       <section className="landing-footer">
-        <div className="footer-left">image</div>
+        <div className="footer-left">
+          <img className="footer-img" />
+        </div>
         <div className="footer-right">connect with your friends</div>
       </section>
     </div>
