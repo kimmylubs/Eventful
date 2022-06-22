@@ -4,62 +4,90 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const Event = db.define("event", {
-  name: {
-    type: db.Sequelize.JSON
-  },
-  // id: {
-  //   type: Sequelize.UUID,
-  //   // primaryKey: true,
+
+  // data: {
+  //   type: db.Sequelize.JSON
   // },
-  imageUrl: {
-    type: Sequelize.STRING,
-    // defaultValue:
-  },
-  description: {
-    type: Sequelize.STRING,
-  },
-  category: {
-    type: Sequelize.INTEGER,
-  },
-  price: {
-    type: Sequelize.STRING,
-  },
-  // image for the boxes
-//   // image when you click on event
-//   imageClick: {
-//     type: Sequelize.STRING,
-//   },
-  local: {
-    type: Sequelize.STRING,
-  },
-// //   key: {
-// //     type: Sequelize.ENUM(
-// //       "business",
-// //       "fashion",
-// //       "food",
-// //       "general",
-// //       "music",
-// //       "sports",
-// //     ),
-// //   },
-  timezone: {
-    type: Sequelize.STRING,
-  },
-  venueId: {
-    type: Sequelize.STRING,
-  },
-//   city: {
-//     type: Sequelize.STRING,
-//   },
-  address: {
-    type: Sequelize.STRING,
-  },
-//   state: {
-//     type: Sequelize.STRING,
-//   },
-//   zipcode: {
-//     type: Sequelize.INTEGER,
-//   },
+
+  // venueAddress: {
+  //   type: db.Sequelize.JSON
+  // },
+
+    eventId: {
+      type: db.Sequelize.JSON,
+    },
+    name: {
+      type: db.Sequelize.JSON,
+    },
+    description: {
+      type: db.Sequelize.JSON,
+    },
+    url: {
+      type: db.Sequelize.JSON,
+    },
+    timezone: {
+      type: db.Sequelize.JSON,
+    },
+    localStart: {
+      type: db.Sequelize.JSON,
+    },
+    localEnd: {
+      type: db.Sequelize.JSON,
+    },
+    organizationId: {
+      type: db.Sequelize.JSON,
+    },
+    status: {
+      type: db.Sequelize.JSON,
+    },
+    eventVenueId: {
+      type: db.Sequelize.JSON,
+    },
+    isFree: {
+      type: db.Sequelize.JSON,
+    },
+    category: {
+      type: db.Sequelize.JSON,
+    },
+    subcategory: {
+      type: db.Sequelize.JSON,
+    },
+    logo: {
+      type: db.Sequelize.JSON,
+    },
+    venueId: {
+      type: db.Sequelize.JSON,
+    },
+    venueName: {
+      type: db.Sequelize.JSON,
+    },
+    fullAddress: {
+      type: db.Sequelize.JSON,
+    },
+    localizedAddress: {
+      type: db.Sequelize.JSON,
+    },
+    localizedArea: {
+      type: db.Sequelize.JSON,
+    },
+    address1: {
+      type: db.Sequelize.JSON,
+    },
+    address2: {
+      type: db.Sequelize.JSON,
+    },
+    city: {
+      type: db.Sequelize.JSON,
+    },
+    region: {
+      type: db.Sequelize.JSON,
+    },
+    postal: {
+      type: db.Sequelize.JSON,
+    },
+    country: {
+      type: db.Sequelize.JSON,
+    },
 });
 
-module.exports = Event
+module.exports = Event;
