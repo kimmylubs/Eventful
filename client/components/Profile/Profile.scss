@@ -1,14 +1,56 @@
-.css-nen11g-MuiStack-root {
-  align-items: center;
+.profile {
+  .profile-header {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 50px 0;
+    text-align: center;
+  }
+  
+  .css-nen11g-MuiStack-root {
+    align-items: center;
+
+    .user-avatar {
+      position: relative;
+    
+      > :last-child {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background-color: green;
+      }
+    }
+  }
+  
+  .user-info-container {
+    margin: 100px 100px 50px 100px;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: end;
+    margin: 0 100px 50px 0;
+
+    .edit-profile-btn {
+      padding: 5px;
+      margin: 10px;
+      width: 100px;
+      height: 50px;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+  }
 }
 
-.user-avatar {
-  position: relative;
-
-  > :last-child {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    background-color: green;
-  }
+/* modal styling */
+.image-uploader-modal {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  outline: none;
+  box-shadow: 24;
+  background-color: white;
+  color: grey;
 }

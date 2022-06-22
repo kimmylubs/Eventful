@@ -1,6 +1,6 @@
 .upcoming-events {
   .header {
-    margin: 30px 0 30px 0;
+    margin: 30px 0 50px 20px;
   }
 
   .slider-img {
@@ -27,31 +27,36 @@
           width: 200px;
           border: solid grey 1px;
           margin-bottom: 10px;
+          object-fit: cover;
+          border-radius: 5px;
         }
 
         .text {
-          height: 80px;
+          height: 90px;
           width: 200px;
           border: solid grey 1px;
           margin: 0;
           text-align: start;
+          border-radius: 5px;
+
 
           .event-name {
             font-weight: bold;
             padding: 0 5px;
-            font-size: 22px;
+            font-size: 14px;
+            color: black;
           }
 
           .event-date {
             padding: 5px 5px;
             color: orangered;
-            font-size: 16px;
+            font-size: 13px;
           }
 
           .event-place {
             padding: 0 5px;
             color: grey;
-            font-size: 16px;
+            font-size: 13px;
           }
         }
       }

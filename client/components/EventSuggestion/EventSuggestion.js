@@ -1,67 +1,68 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-import Stack from "@mui/material/Stack";
-import Avatar from "@mui/material/Avatar";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
+import { selectEvents } from "../../store";
+import EventCard from "../EventCard";
 
 import "./EventSuggestion.scss";
 
-const events = [
-  { id: 1, title: "event 1" },
-  { id: 2, title: "event 2" },
-  { id: 3, title: "event 3" },
-  { id: 4, title: "event 4" },
-  { id: 5, title: "event 5" },
-  { id: 6, title: "event 6" },
-  { id: 7, title: "event 7" },
-  { id: 8, title: "event 8" },
-  { id: 9, title: "event 9" },
-]
+const EventSuggestion = () => {
+  const events = useSelector(selectEvents);
+  const [sortBy, setSortBy] = useState("dateDesc");
 
-class EventSuggestion extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      imageUrl: this.props.auth.imageUrl ? this.props.auth.imageUrl : "",
+  const getSortedEvents = (events) => {
+    const sortOption = {
+      nameAsc: (a, b) => a.name.localeCompare(b.name),
+      nameDesc: (a, b) => b.name.localeCompare(a.name),
+      dateAsc: (a, b) => new Date(a.localStart) - new Date(b.localStart),
+      dateDesc: (a, b) => new Date(b.localStart) - new Date(a.localStart),
     };
+
+    if (sortBy in sortOption) {
+      return [...events].sort(sortOption[sortBy]);
+    }
+    console.log(sortBy);
+    return events;
   };
 
-  render() {
-    const { imageUrl } = this.state;
+  const handleSort = (e) => {
+    setSortBy(e.target.value);
+  };
 
-    return (
-      <div className="event-suggestion">
-        <h2 className="header">Join events</h2>
-        <div className="event-container">
-          {events.map((event) => (
-            <Stack key={event.id}>
-              <span className="user-avator">
-                <Avatar sx={{ width:100, height: 100 }}>{imageUrl}</Avatar>
-              </span>
-              <div className="suggested-event">
-                <div className="event">
-                  <span className="event-name">{event.title}</span>
-                  <span className="event-date">date, time</span>
-                  <span className="event-place">place</span>
-                  <span className="event-image">
-                    <img />
-                  </span>
-                </div>
-              </div>
-            </Stack>
-            
-          ))}
-        </div>
+  return (
+    <div className="event-suggestion">
+      <h2 className="header-container">
+        <span className="header">Join events</span>
+        <span className="sort-container">
+          <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+            <InputLabel id="container-sort">Sort By</InputLabel>
+            <Select
+              labelId="container-sort"
+              id="container-sort"
+              value={sortBy}
+              lagel="Sort By"
+              onChange={handleSort}
+            >
+              <MenuItem value="nameAsc">Name: A - Z</MenuItem>
+              <MenuItem value="nameDesc">Name: Z - A</MenuItem>
+              <MenuItem value="dateDesc">Most Recent</MenuItem>
+              <MenuItem value="dateAsc">Oldest</MenuItem>
+            </Select>
+          </FormControl>
+        </span>
+      </h2>
+      <div className="event-container">
+        {getSortedEvents(events).map((event) => (
+          <EventCard key={event.id} event={event} />
+        ))}
       </div>
-    );
-  }
+    </div>
+  );
 };
 
-const mapState = (state) => {
-  return {
-    auth: state.auth,
-  };
-};
-
-
-export default connect(mapState)(EventSuggestion);
+export default EventSuggestion;
