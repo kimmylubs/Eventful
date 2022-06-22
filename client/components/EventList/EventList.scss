@@ -1,3 +1,10 @@
 .event-list {
-  border: none;
+  .event-list-banner {
+    border: solid grey 1px;
+    height: 290px;
+  }
+
+  .event-suggestion {
+    padding-top: 15px;
+  }
 }

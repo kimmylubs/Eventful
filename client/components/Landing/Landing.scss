@@ -2,7 +2,7 @@
   .landing-hero {
     display: flex;
     height: 700px;
-    background-color: azure;
+    background-color: rgb(245, 245, 245);
 
     .hero-left {
       display: flex;
@@ -12,10 +12,22 @@
       font-size: 30px;
 
 
-      button {
-        height: 60px;
+      .create-account-btn {
+        border: solid grey 1px;
         border-radius: 10px;
-        font-size: 20px;
+        height: 60px;
+        max-width: 200px;
+        display: flex;
+        justify-content: center;
+        background-color: rgba(186, 210, 0, 1);
+
+        a {
+          display: flex;
+          align-items: center;
+          color: black;
+          font-size: 18px;
+          padding: 5px;
+        }
       }
     }
 
@@ -41,7 +53,7 @@
 
   .random-events {
     height: 700px;
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -73,7 +85,7 @@
         flex: 1;
         display: flex;
         justify-content: center;
-        background-color: #EFEFEF;
+        background-color: #f3ef08;
 
         a {
           display: flex;
@@ -86,11 +98,15 @@
     .random-events-cards {
       display: flex;
       justify-content: space-evenly;
+
+      .event-card {
+        margin: 0 20px;
+      }
     }
   }
 
   .landing-footer {
-    background-color: azure;
+    background-color: whitesmoke;
     display: flex;
     height: 600px;
 
