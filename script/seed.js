@@ -18,7 +18,7 @@ const allvenueids = [
   93106589, 87932719, 96293469, 81618829, 58397049, 90047749, 86491789,
   88179059, 98953279, 75221189, 84451279, 95082199, 96397509, 80568129,
   76925749, 96881509, 78541779, 99219569, 87353229, 78543159, 80828879,
-  53044587, 80424799, 91487569, 87432329,
+  53044587, 80424799, 91487569, 87432329,99175819
   // OLD
   // 95082199,
   // 99219569, 53044587, 88179059,
@@ -72,8 +72,8 @@ const alleventids = [
 
   339272863267, 294282907097, 312103418727, 333911296677, 308177084957,
   336662435407, 156816788235, 252398409437, 238625684847, 338197797717,
-  349504446207, 258857318207, 290994060067, 337074738617, 322275202807,
-  273102415677, 254721186927, 293952228027, 253478289387, 326723618137,
+  349504446207, 258857318207, 337074738617, 322275202807,
+  273102415677, 293952228027, 253478289387, 326723618137, 350679079567, 
   //   // 341917162437, 345010785547, 317203753967, 341929238557, 346332187897,
   //   // 331601959387, 224291250167, 290056806717, 252377787757, 271093095747,
   //   // 226726845097, 268164837247, 225122315907, 339028271687, 312399785167,
@@ -296,10 +296,64 @@ async function seed() {
       lastName: "charadwaj",
     }),
     User.create({
-      username: "",
+      username: "kimberly",
       password: "123",
       firstName: "kimberly",
       lastName: "bimberly",
+    }),
+    User.create({
+      username: "elmo",
+      password: "123",
+      firstName: "elmo",
+      lastName: "delmo",
+    }),
+    User.create({
+      username: "cookiemonster",
+      password: "123",
+      firstName: "cookie",
+      lastName: "monster",
+    }),
+    User.create({
+      username: "oscar",
+      password: "123",
+      firstName: "oscar",
+      lastName: "trashcan",
+    }),
+    User.create({
+      username: "ernie",
+      password: "123",
+      firstName: "ernie",
+      lastName: "bernie",
+    }),
+    User.create({
+      username: "abby",
+      password: "123",
+      firstName: "abby",
+      lastName: "crabby",
+    }),
+    User.create({
+      username: "grover",
+      password: "123",
+      firstName: "grover",
+      lastName: "prover",
+    }),
+    User.create({
+      username: "thecount",
+      password: "123",
+      firstName: "the count",
+      lastName: "dracula",
+    }),
+    User.create({
+      username: "alice",
+      password: "123",
+      firstName: "alice",
+      lastName: "palice",
+    }),
+    User.create({
+      username: "bigbird",
+      password: "123",
+      firstName: "big",
+      lastName: "bird",
     }),
   ]);
 
@@ -309,6 +363,10 @@ async function seed() {
     users: {
       cody: users[0],
       murphy: users[1],
+      miyuki: users[2],
+      yehezkiel: users[3],
+      bharadwaj: users[4],
+      kimberly: users[5],
     },
   };
 }
