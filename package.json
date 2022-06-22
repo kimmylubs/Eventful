@@ -36,6 +36,7 @@
     "node-fetch": "^3.2.5",
     "pg": "^8.5.1",
     "pizzly-js": "^0.2.8",
+    "react-calendar": "^3.7.0",
     "sequelize": "^6.3.5",
     "uuid": "^8.3.2"
   },
