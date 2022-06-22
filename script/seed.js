@@ -1,11 +1,16 @@
 "use strict";
 
+<<<<<<< HEAD
 const { default: axios } = require("axios");
 const { all } = require("../server/api");
 const {
   db,
   models: { User, Event },
 } = require("../server/db");
+=======
+const { default: axios } = require('axios')
+const {db, models: {User, Event, Friendship} } = require('../server/db')
+>>>>>>> calendar
 // const SeedEvents = require('./seedEvents');
 
 // PRIVATE TOKEN
@@ -114,6 +119,7 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
+<<<<<<< HEAD
     User.create({
       username: "cody",
       password: "123",
@@ -127,6 +133,15 @@ async function seed() {
       lastName: "Cody",
     }),
   ]);
+=======
+    User.create({ username: 'cody', email: "cody@cody.com", password: '123', fistName: 'Cody', lastName: 'Murphy' }),
+    User.create({ username: 'murphy', email:"murphy@murphy.com", password: '123', firstName: 'Murphy', lastName: 'Cody' }),
+    User.create({ username: 'aubrey', email:"aubrey@aubrey.com", password: '123', firstName: 'Aubrey', lastName: 'Aubrey' }),
+    User.create({ username: 'stephanie', email:"aubrey@aubrey.com", password: '123', firstName: 'Stephanie', lastName: 'Stephanie' }),
+    User.create({ username: 'felica', email:"felicia@felicia.com", password: '123', firstName: 'Felicia', lastName: 'Felicia' })
+    
+  ])
+>>>>>>> calendar
   // const venues = await Promise.all(
   //   allvenueids.map(id => (axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/events/`, {
   //     headers:{
@@ -145,6 +160,7 @@ async function seed() {
   });
   // ])
 
+<<<<<<< HEAD
   //event information
   const allEventsByID = (
     await Promise.all(
@@ -185,6 +201,14 @@ async function seed() {
   Event.create({ name: allEventsByID.map((e) => e.name.text), address: allvenuesfromId.map((e) => e.address.address_1)  });
 
   console.log(`seeded successfully`);
+=======
+  const friends = await Promise.all([
+    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "cccceda6-5357-4246-80e6-64c1b9bbe2a0", status: "confirmed" }),
+    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "f9f55392-4fe3-4063-91cb-38117d92b8b6", status: "confirmed" }),
+    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "fb93c3ff-12c6-4f6a-84ea-24a5b4904705", status: "confirmed" })
+  ])
+
+>>>>>>> calendar
 
   return {
     users: {
