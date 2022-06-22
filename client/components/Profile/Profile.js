@@ -54,7 +54,7 @@ class Profile extends Component {
     return (
       <div className="profile">
         <React.Fragment>
-          <Typography variant="h6" gutterBottom className="profile-header">
+          <Typography variant="h6" gutterBottom className="profile-header" sx={{ fontWeight: "lighter" }}>
             Edit Profile
           </Typography>
           <Stack>

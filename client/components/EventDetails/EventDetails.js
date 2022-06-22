@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
