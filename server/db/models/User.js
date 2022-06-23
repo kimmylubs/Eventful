@@ -42,7 +42,7 @@ const User = db.define("user", {
   },
   imageUrl: {
     type: STRING,
-  }
+  },
 });
 
 User.associate = function (models) {
