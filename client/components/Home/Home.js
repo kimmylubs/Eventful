@@ -27,7 +27,7 @@ const Home = (props) => {
         <>
           <div className="icon-container">
             <CreateEvent />
-            <span className="search">
+            <span className="search"> 
               <SearchIcon fontSize="large" />
               <TextField id="standard-basic" variant="standard" />
             </span>
