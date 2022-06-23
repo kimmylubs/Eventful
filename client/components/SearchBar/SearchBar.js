@@ -6,6 +6,8 @@ function SearchBar({placeholder}) {
     const [users, setUsers] = useState([])
     const [filteredData, setFilteredData] = useState([])
     const [currentUser, setCurrentUser] = useState({})
+    const [friend, setFriend] = useState('')
+    const [status, setStatus] = useState('')
 
     const dispatch = useDispatch()
     const user = useSelector((state) => state.auth)
@@ -24,9 +26,6 @@ function SearchBar({placeholder}) {
         }))
         .catch( error => console.log(error))
     }
-
-    const userEmails = users.map(user => {
-        return user.email})
     
     const handleFilter = (event) => {
         const searched = event.target.value
@@ -34,14 +33,22 @@ function SearchBar({placeholder}) {
             return value.email.indexOf(searched) >= 0
         })
         setFilteredData(filter)
+        console.log('--filteredData--', filteredData)
     }
 
-    const addFriend = (friendUUID) => {
-        console.log('currentUser', currentUser.UUID)
-        console.log('friendUUID', friendUUID)
+    const submitRequest = async (friendUUID) => {
+        try {
+            const response = await axios.post('http://localhost:8080/api/friendships', {
+                requester: currentUser.UUID,
+                requestee: friendUUID,
+                status: "pending"
+            })
+        }
+        catch(e) {
+            console.log(e)
+        }
     }
 
-    console.log('users', users)
 
     return (
         <div>
@@ -52,9 +59,9 @@ function SearchBar({placeholder}) {
                 </div>
                     <div className="searchResults">
                     {filteredData.map(user => {
-                        // console.log('filteredData', filteredData)
+                        //console.log('filteredData', filteredData)
                         return <div key={user.UUID}>
-                            <a>{user.email}<button onClick={() => addFriend(user.UUID)}>+</button></a>
+                            <a>{user.email}<button onClick={() => submitRequest(user.UUID)}>+</button></a>
                         </div>
                     })}
                 </div>

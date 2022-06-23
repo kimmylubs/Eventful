@@ -4,18 +4,25 @@ module.exports = router;
 
 router.get('/', async (req, res, next) => {
     try {
-        const friends = await User.findAll({
-            include: {
-              model: Friendship,
-              as: 'Friends'
-            }
-          });
+        const friends = await Friendship.findAll();
         res.send(friends)
     }
     catch (e) {
         console.log(e)
     }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    const data = await Friendship.create(req.body);
+    console.log(data)
+  }
+  catch (e) {
+      console.log(e)
+  }
+})
+
+
 
 // router.get('/confirmed', async (req, res, next) => {
 //     try {

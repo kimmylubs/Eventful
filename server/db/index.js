@@ -17,6 +17,10 @@ Event.hasOne(User, { through: "Owner", as: "owner" });
 User.belongsToMany(Event, { through: "Attendee", as: "joinedEvents" });
 Event.belongsToMany(User, { through: "Attendee", as: "attendees" });
 
+//User and Friends
+// User.belongsToMany(User, {as: 'friends', foreignKey: 'user_id', through: Friendship})
+// User.belongsToMany(User, {as: 'userFriends', foreignKey: 'friend_id', through: Friendship})
+
 module.exports = {
   db,
   models: {
