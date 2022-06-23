@@ -29,21 +29,27 @@ const User = db.define("user", {
   },
   email: {
     type: STRING,
+    defaultValue: 'bingbong@aol.com',
   },
   streetAddress: {
     type: STRING,
+    defaultValue: 'Pinkyton',
   },
   city: {
     type: STRING,
+    defaultValue: 'Pilly',
   },
   state: {
     type: STRING,
+    defaultValue: 'PK',
   },
   zip: {
     type: STRING,
+    defaultValue: '88888',
   },
   phone: {
     type: STRING,
+    defaultValue: '123-456-7890',
   },
   imageUrl: {
     type: STRING,
