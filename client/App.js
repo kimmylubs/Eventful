@@ -11,6 +11,7 @@ import Profile from "./components/Profile";
 import EventDetails from "./components/EventDetails";
 import UserCalendar from "./components/UserCalendar";
 import EventList from "./components/EventList";
+import FriendRequests from "./components/FriendRequests";
 
 import "./App.scss";
 
@@ -34,6 +35,7 @@ const App = () => {
             <>
               <Route path="/profile" element={<Profile />} />
               <Route path="/calendar" element={<UserCalendar />} />
+              <Route path="/friendrequests" element={<FriendRequests />} />
             </>
           )}
           <Route path="/events" element={<EventList />} />

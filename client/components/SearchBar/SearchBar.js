@@ -6,8 +6,6 @@ function SearchBar({placeholder}) {
     const [users, setUsers] = useState([])
     const [filteredData, setFilteredData] = useState([])
     const [currentUser, setCurrentUser] = useState({})
-    const [friend, setFriend] = useState('')
-    const [status, setStatus] = useState('')
 
     const dispatch = useDispatch()
     const user = useSelector((state) => state.auth)
