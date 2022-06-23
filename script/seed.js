@@ -129,15 +129,104 @@ async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
 
+   //event information
+   const allEventsByID = (
+    await Promise.all(
+      alleventids.map((id) =>
+        axios.get(`https://www.eventbriteapi.com/v3/events/${id}/`, {
+          headers: {
+            Authorization: `Bearer ${myprivatetoken}`,
+          },
+        })
+      )
+    )
+  ).map((el) => el.data);
+  // console.log("allEventsfromId", allEventsByID);
+
+  // addresss
+  const allvenuesfromId = (
+    await Promise.all(
+      allvenueids.map((id) =>
+        axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/`, {
+          headers: {
+            Authorization: `Bearer ${myprivatetoken}`,
+          },
+        })
+      )
+    )
+  ).map((e) => e.data);
+  // console.log('allvenuesfromID', allvenuesfromId);
+
+  // const fetchEvents = allEventsByID.data.map((e) => {
+  //   if (e.tag[0] !== null) {
+  //     try {
+  //       return {
+  //         name: e.name.text,
+  //       };
+  //     } catch (e) {
+  //       next(e);
+  //     }
+  //   }
+  // });
+
+  // const allEvents = allEventsByID.map((e => {
+  //     return Event.create({name: e.name.text})
+  // })
+
+  // const eventVenueId = allEventsByID.map((e) => {
+  //   return  e.venue_id
+  // })
+
+  let allEvents = allEventsByID.map((e) =>
+    Event.create({
+      // data: e,
+      // venueAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)),
+
+      eventId: e.id,
+      name: e.name.text,
+      description: e.description.text,
+      url: e.url,
+      timezone: e.start.timezone,
+      localStart: e.start.local,
+      localEnd: e.end.local,
+      organizationId: e.organization_id,
+      status: e.status,
+      eventVenueId: e.venue_id,
+      isFree: e.is_free,
+      category: e.category_id,
+      subcategory: e.subcategory_id,
+      logo: e.logo.url,
+      venueId: allvenuesfromId.find((venue) => e.venue_id === venue.id).id,
+      venueName: allvenuesfromId.find((venue) => e.venue_id === venue.id).name,
+      fullAddress: allvenuesfromId.find((venue) => e.venue_id === venue.id)
+        .address.localized_multi_line_address_display,
+      localizedAddress: allvenuesfromId.find((venue) => e.venue_id === venue.id)
+        .address.localized_address_display,
+      localizedArea: allvenuesfromId.find((venue) => e.venue_id === venue.id)
+        .address.localized_area_display,
+      address1: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+        .address_1,
+      address2: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+        .address_2,
+      city: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+        .city,
+      region: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+        .region,
+      postal: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+        .postal_code,
+      country: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
+      .country,
+    }))
+  
   // Creating Users
   const users = await Promise.all([
     User.create({ username: 'cody', email: "cody@cody.com", password: '123', fistName: 'Cody', lastName: 'Murphy' }),
     // User.create({ username: 'murphy', email:"murphy@murphy.com", password: '123', firstName: 'Murphy', lastName: 'Cody' }),
     User.create({ username: 'aubrey', email:"aubrey@aubrey.com", password: '123', firstName: 'Aubrey', lastName: 'Aubrey' }),
     User.create({ username: 'stephanie', email:"aubrey@aubrey.com", password: '123', firstName: 'Stephanie', lastName: 'Stephanie' }),
-    User.create({ username: 'felica', email:"felicia@felicia.com", password: '123', firstName: 'Felicia', lastName: 'Felicia' })
+    User.create({ username: 'felica', email:"felicia@felicia.com", password: '123', firstName: 'Felicia', lastName: 'Felicia' }),
     
-  ])
+  // ])
   // const venues = await Promise.all(
   //   allvenueids.map(id => (axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/events/`, {
   //     headers:{
@@ -145,9 +234,9 @@ async function seed() {
   //     },
   //   })).data)
   // )
-  const events = await Promise.all([
-    Event.create({ data: 'stuff'
-    }),
+  // const events = await Promise.all([
+  //   Event.create({ data: 'stuff'
+  //   }),
     User.create({
       username: "murphy",
       password: "123",

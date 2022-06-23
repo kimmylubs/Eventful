@@ -10,6 +10,12 @@ import EventBrite from "../EventBrite/EventBrite";
 
 import "./Navbar.scss";
 
+import logo from "./Navbar";
+
+// const image = {
+//   logo
+// }
+
 const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -19,6 +25,9 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <Link to="/">
+       <img className="logo" src={logo}/> 
+      {/* <Link to="/home"> <img className="logo" src={image}/> </Link>  */}
+        {/* <div> <img className="logo" src="/navbar/logo.png"/> </div> */}
         <h1 className="app-name">EVENTFUL</h1>
       </Link>
       {isLoggedIn ? (
