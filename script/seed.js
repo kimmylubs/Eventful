@@ -1,17 +1,10 @@
-"use strict";
+'use strict'
 
-const { default: axios } = require("axios");
-const { all } = require("../server/api");
-const {
-  db,
-  models: { User, Event },
-} = require("../server/db");
+const { default: axios } = require('axios')
+const {db, models: {User, Event, Friendship} } = require('../server/db')
 // const SeedEvents = require('./seedEvents');
+const myprivatetoken = "B6THKWOK44JPHM3UHUIM"; //** */
 
-// PRIVATE TOKEN
-const myprivatetoken = "B6THKWOK44JPHM3UHUIM";
-
-// VENUE IDS
 const allvenueids = [
   // NEW
   // 91310299, 96678299, 61946327, 87029679, 96493399, 84764769, 60894531,88116599,\
@@ -133,9 +126,18 @@ const alleventids = [
  *      match the models, and populates the database.
  */
 async function seed() {
-  await db.sync({ force: true }); // clears db and matches models to tables
-  console.log("db synced!");
+  await db.sync({ force: true }) // clears db and matches models to tables
+  console.log('db synced!')
 
+  // Creating Users
+  const users = await Promise.all([
+    User.create({ username: 'cody', email: "cody@cody.com", password: '123', fistName: 'Cody', lastName: 'Murphy' }),
+    User.create({ username: 'murphy', email:"murphy@murphy.com", password: '123', firstName: 'Murphy', lastName: 'Cody' }),
+    User.create({ username: 'aubrey', email:"aubrey@aubrey.com", password: '123', firstName: 'Aubrey', lastName: 'Aubrey' }),
+    User.create({ username: 'stephanie', email:"aubrey@aubrey.com", password: '123', firstName: 'Stephanie', lastName: 'Stephanie' }),
+    User.create({ username: 'felica', email:"felicia@felicia.com", password: '123', firstName: 'Felicia', lastName: 'Felicia' })
+    
+  ])
   // const venues = await Promise.all(
   //   allvenueids.map(id => (axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/events/`, {
   //     headers:{
@@ -143,142 +145,8 @@ async function seed() {
   //     },
   //   })).data)
   // )
-  // const events = await Promise.all([
-  //   Event.create({ data: 'stuff'
-  //   }),
-  //   Event.create({name: 'Fullstack Graduation', description: 'Fullstack Part-Time Cohort Graduation'}),
-  //   Event.create({name: 'Bar Hangout', description: 'Bar hangout with friends from university'}),
-  // Event.create({
-  //   name: "Movie",
-  //   description: "Watching the new Marvel film with friends from work",
-  // });
-  // ])
-
-  //event information
-  const allEventsByID = (
-    await Promise.all(
-      alleventids.map((id) =>
-        axios.get(`https://www.eventbriteapi.com/v3/events/${id}/`, {
-          headers: {
-            Authorization: `Bearer ${myprivatetoken}`,
-          },
-        })
-      )
-    )
-  ).map((el) => el.data);
-  // console.log("allEventsfromId", allEventsByID);
-
-  // addresss
-  const allvenuesfromId = (
-    await Promise.all(
-      allvenueids.map((id) =>
-        axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/`, {
-          headers: {
-            Authorization: `Bearer ${myprivatetoken}`,
-          },
-        })
-      )
-    )
-  ).map((e) => e.data);
-  // console.log('allvenuesfromID', allvenuesfromId);
-
-  // const fetchEvents = allEventsByID.data.map((e) => {
-  //   if (e.tag[0] !== null) {
-  //     try {
-  //       return {
-  //         name: e.name.text,
-  //       };
-  //     } catch (e) {
-  //       next(e);
-  //     }
-  //   }
-  // });
-
-  // const allEvents = allEventsByID.map((e => {
-  //     return Event.create({name: e.name.text})
-  // })
-
-  // const eventVenueId = allEventsByID.map((e) => {
-  //   return  e.venue_id
-  // })
-
-  let allEvents = allEventsByID.map((e) =>
-    Event.create({
-      // data: e,
-      // venueAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)),
-
-      eventId: e.id,
-      name: e.name.text,
-      description: e.description.text,
-      url: e.url,
-      timezone: e.start.timezone,
-      localStart: e.start.local,
-      localEnd: e.end.local,
-      organizationId: e.organization_id,
-      status: e.status,
-      eventVenueId: e.venue_id,
-      isFree: e.is_free,
-      category: e.category_id,
-      subcategory: e.subcategory_id,
-      logo: e.logo.url,
-      venueId: allvenuesfromId.find((venue) => e.venue_id === venue.id).id,
-      venueName: allvenuesfromId.find((venue) => e.venue_id === venue.id).name,
-      fullAddress: allvenuesfromId.find((venue) => e.venue_id === venue.id)
-        .address.localized_multi_line_address_display,
-      localizedAddress: allvenuesfromId.find((venue) => e.venue_id === venue.id)
-        .address.localized_address_display,
-      localizedArea: allvenuesfromId.find((venue) => e.venue_id === venue.id)
-        .address.localized_area_display,
-      address1: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
-        .address_1,
-      address2: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
-        .address_2,
-      city: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
-        .city,
-      region: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
-        .region,
-      postal: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
-        .postal_code,
-      country: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
-      .country,
-
-      // LOOP DE LOOP
-      // (allvenuesfromId.find(venue => e.venue_id === venue.id)),
-      // .map(e => e)
-
-      //CUT
-
-      // venueId: allEventsByID.map((e) => e.venue_id),
-      // address: allEventsByID.map((e =>
-      //   // {
-      //   // return {
-      //   //   // ...e.venue_id,
-
-      //     // venue:
-      //     (allvenuesfromId.find(venue => e.venue_id === venue.id))
-      //   // }
-      // // }
-      // )),
-      // name: allEventsByID.map((e) => e.name.text),
-
-      //CUT
-      // address: allvenuesfromId.map((e) => e.address.localized_address_display),
-    })
-  );
-  // await Event.create({
-  //   venueIdEvents: allEventsByID.map((e) => e.venue_id),
-  //   venueIdVenues: allvenuesfromId.map((e) => e.id),
-  //   name: allEventsByID.map((e) => e.name.text),
-  //   address: allvenuesfromId.map((e) => e.address.localized_address_display),
-  // });
-
-  // Creating Users
-  const users = await Promise.all([
-    User.create({
-      username: "cody",
-      password: "123",
-      fistName: "cody",
-      lastName: "moldy",
+  const events = await Promise.all([
+    Event.create({ data: 'stuff'
     }),
     User.create({
       username: "murphy",
@@ -365,9 +233,20 @@ async function seed() {
       lastName: "bird",
     }),
   ]);
+  //   Event.create({name: 'Fullstack Graduation', description: 'Fullstack Part-Time Cohort Graduation'}),
+  //   Event.create({name: 'Bar Hangout', description: 'Bar hangout with friends from university'}),
+  //   Event.create({name: 'Movie', description: 'Watching the new Marvel film with friends from work'})
+  // ])
 
-  console.log(`seeded successfully`);
+  const friends = await Promise.all([
+    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "cccceda6-5357-4246-80e6-64c1b9bbe2a0", status: "confirmed" }),
+    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "f9f55392-4fe3-4063-91cb-38117d92b8b6", status: "confirmed" }),
+    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "fb93c3ff-12c6-4f6a-84ea-24a5b4904705", status: "confirmed" })
+  ])
 
+
+  console.log(`seeded successfully`)
+  
   return {
     users: {
       cody: users[0],
@@ -386,17 +265,17 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log("seeding...");
+  console.log('seeding...')
   try {
-    await seed();
+    await seed()
     // await SeedEvents();
   } catch (err) {
-    console.error(err);
-    process.exitCode = 1;
+    console.error(err)
+    process.exitCode = 1
   } finally {
-    console.log("closing db connection");
-    await db.close();
-    console.log("db connection closed");
+    console.log('closing db connection')
+    await db.close()
+    console.log('db connection closed')
   }
 }
 
@@ -406,8 +285,8 @@ async function runSeed() {
   any errors that might occur inside of `seed`.
 */
 if (module === require.main) {
-  runSeed();
+  runSeed()
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed;
+module.exports = seed

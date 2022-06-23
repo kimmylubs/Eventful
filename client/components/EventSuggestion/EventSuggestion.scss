@@ -1,9 +1,15 @@
 .event-suggestion {
+  padding: 0 25px;
+
   .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 50px 50px 30px;
+
+    .header {
+      font-weight: normal;
+    }
 
     .sort-container {
       padding: 10px;

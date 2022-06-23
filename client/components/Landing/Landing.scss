@@ -1,36 +1,139 @@
 .landing-page {
   .landing-hero {
     display: flex;
+    height: 700px;
+    background-color: rgb(245, 245, 245);
 
     .hero-left {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      font-size: 30px;
+
+
+      .create-account-btn {
+        border: solid grey 1px;
+        border-radius: 10px;
+        height: 60px;
+        max-width: 200px;
+        display: flex;
+        justify-content: center;
+        background-color: rgba(186, 210, 0, 1);
+
+        a {
+          display: flex;
+          align-items: center;
+          color: black;
+          font-size: 18px;
+          padding: 5px;
+        }
+      }
     }
 
     .hero-left,
     .hero-right {
       flex: 1;
     }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      padding-left: 100px;
+
+      .hero-img {
+        border: solid grey 0.5px;
+        border-radius: 10px;
+        height: 380px;
+        width: 350px;
+      }
+    }
   }
 
   .random-events {
+    height: 700px;
+    background-color: rgb(255, 255, 255);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+
     .random-events-title {
       display: flex;
       justify-content: center;
+
+      .text,
+      .event-link-btn {
+        margin: 40px 0 60px 0;
+      }
+
+      .text {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        justify-content: space-around;
+        font-size: 30px;
+      }
+
+      .event-link-btn {
+        border: solid grey 1px;
+        border-radius: 10px;
+        height: 60px;
+        max-width: 200px;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        background-color: #f3ef08;
+
+        a {
+          display: flex;
+          align-items: center;
+          color: black;
+        }
+      }
     }
 
     .random-events-cards {
       display: flex;
       justify-content: space-evenly;
+
+      .event-card {
+        margin: 0 20px;
+      }
     }
   }
 
   .landing-footer {
+    background-color: whitesmoke;
     display: flex;
+    height: 600px;
 
     .footer-left,
     .footer-right {
       flex: 1;
+    }
+
+    .footer-left {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .footer-img {
+        width: 350px;
+        height: 260px;
+        border: solid grey 1px;
+        border-radius: 10px;
+      }
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      font-size: 30px;
+      margin-left: 50px;
     }
   }
 }
