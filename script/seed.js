@@ -1,25 +1,27 @@
-"use strict";
+'use strict'
 
-const { default: axios } = require("axios");
-const { all } = require("../server/api");
-const {
-  db,
-  models: { User, Event },
-} = require("../server/db");
+const { default: axios } = require('axios')
+const {db, models: {User, Event, Friendship} } = require('../server/db')
 // const SeedEvents = require('./seedEvents');
+const myprivatetoken = "B6THKWOK44JPHM3UHUIM"; //** */
 
-// PRIVATE TOKEN
-const myprivatetoken = "B6THKWOK44JPHM3UHUIM";
-
-// VENUE IDS
 const allvenueids = [
   // NEW
-  // 91310299, 96678299, 61946327, 87029679, 96493399, 84764769, 60894531,88116599,
+  // 91310299, 96678299, 61946327, 87029679, 96493399, 84764769, 60894531,88116599,\
+
+
+  // 93106589, 87932719, 96293469, 81618829, 58397049, 
+  // 90047749, 86491789,
+  // 88179059, 98953279, 75221189, 84451279, 95082199, 96397509, 80568129,
+  // 76925749, 96881509, 78541779, 99219569, 87353229, 78543159, 80828879,
+  // 53044587, 80424799, 91487569, 87432329, 99175819
+
 
   // OLD
   95082199,
   99219569, 53044587, 88179059,
   78543159,
+
   // 99994959, 99948699, 99940489,
   //  99926989, 99925819, 99925639, 99924299,
   // 99922359, 99869419, 99811989, 99803679, 99763149, 99753429, 99747879,
@@ -64,14 +66,16 @@ const alleventids = [
   // 313790394517, 337433983127, 274471009177, 338346823457, 328105782227,
   // 304776433517, 297447131377, 292877914727,
 
-  // OLD
-  238638142107,
-  297996614897, 241546380727, 351067681887, 331309223807,
 
-  //   // 339272863267, 294282907097, 312103418727, 333911296677, 308177084957,
-  //   // 336662435407, 156816788235, 252398409437, 238625684847, 338197797717,
-  //   // 349504446207, 258857318207, 290994060067, 337074738617, 322275202807,
-  //   // 273102415677, 254721186927, 293952228027, 253478289387, 326723618137,
+  // OLD
+  238638142107, 297996614897, 241546380727, 351067681887, 331309223807,
+
+  // 339272863267, 294282907097, 312103418727, 333911296677, 308177084957,
+  // 336662435407, 156816788235, 252398409437, 238625684847, 338197797717,
+  // 349504446207, 258857318207, 337074738617, 322275202807,
+  // 273102415677, 293952228027, 253478289387, 326723618137, 350679079567, 
+
+
   //   // 341917162437, 345010785547, 317203753967, 341929238557, 346332187897,
   //   // 331601959387, 224291250167, 290056806717, 252377787757, 271093095747,
   //   // 226726845097, 268164837247, 225122315907, 339028271687, 312399785167,
@@ -122,29 +126,11 @@ const alleventids = [
  *      match the models, and populates the database.
  */
 async function seed() {
-  await db.sync({ force: true }); // clears db and matches models to tables
-  console.log("db synced!");
+  await db.sync({ force: true }) // clears db and matches models to tables
+  console.log('db synced!')
 
-  // const venues = await Promise.all(
-  //   allvenueids.map(id => (axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/events/`, {
-  //     headers:{
-  //       Authorization: `Bearer ${myprivatetoken}`,
-  //     },
-  //   })).data)
-  // )
-  // const events = await Promise.all([
-  //   Event.create({ data: 'stuff'
-  //   }),
-  //   Event.create({name: 'Fullstack Graduation', description: 'Fullstack Part-Time Cohort Graduation'}),
-  //   Event.create({name: 'Bar Hangout', description: 'Bar hangout with friends from university'}),
-  // Event.create({
-  //   name: "Movie",
-  //   description: "Watching the new Marvel film with friends from work",
-  // });
-  // ])
-
-  //event information
-  const allEventsByID = (
+   //event information
+   const allEventsByID = (
     await Promise.all(
       alleventids.map((id) =>
         axios.get(`https://www.eventbriteapi.com/v3/events/${id}/`, {
@@ -195,6 +181,7 @@ async function seed() {
     Event.create({
       // data: e,
       // venueAddress: (allvenuesfromId.find(venue => e.venue_id === venue.id)),
+
       eventId: e.id,
       name: e.name.text,
       description: e.description.text,
@@ -228,60 +215,135 @@ async function seed() {
       postal: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
         .postal_code,
       country: allvenuesfromId.find((venue) => e.venue_id === venue.id).address
-        .country,
+      .country,
+    }))
+  
+  // Creating Users
+  const users = await Promise.all([
+    User.create({ username: 'cody', email: "cody@cody.com", password: '123', fistName: 'Cody', lastName: 'Murphy' }),
+    // User.create({ username: 'murphy', email:"murphy@murphy.com", password: '123', firstName: 'Murphy', lastName: 'Cody' }),
+    User.create({ username: 'aubrey', email:"aubrey@aubrey.com", password: '123', firstName: 'Aubrey', lastName: 'Aubrey' }),
+    User.create({ username: 'stephanie', email:"aubrey@aubrey.com", password: '123', firstName: 'Stephanie', lastName: 'Stephanie' }),
+    User.create({ username: 'felica', email:"felicia@felicia.com", password: '123', firstName: 'Felicia', lastName: 'Felicia' }),
+    
+  // ])
+  // const venues = await Promise.all(
+  //   allvenueids.map(id => (axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/events/`, {
+  //     headers:{
+  //       Authorization: `Bearer ${myprivatetoken}`,
+  //     },
+  //   })).data)
+  // )
+  // const events = await Promise.all([
+  //   Event.create({ data: 'stuff'
+  //   }),
+    User.create({
+      username: "murphy",
+      password: "123",
+      firstName: "murphy",
+      lastName: "purphy",
+    }),
+    User.create({
+      username: "miyuki",
+      password: "123",
+      firstName: "miyuki",
+      lastName: "biyuki",
+    }),
+    User.create({
+      username: "yehezkiel",
+      password: "123",
+      firstName: "yehezkiel",
+      lastName: "lehezkiel",
+    }),
+    User.create({
+      username: "bharadwaj",
+      password: "123",
+      firstName: "bharadwaj",
+      lastName: "charadwaj",
+    }),
+    User.create({
+      username: "kimberly",
+      password: "123",
+      firstName: "kimberly",
+      lastName: "bimberly",
+    }),
+    User.create({
+      username: "elmo",
+      password: "123",
+      firstName: "elmo",
+      lastName: "delmo",
+    }),
+    User.create({
+      username: "cookiemonster",
+      password: "123",
+      firstName: "cookie",
+      lastName: "monster",
+    }),
+    User.create({
+      username: "oscar",
+      password: "123",
+      firstName: "oscar",
+      lastName: "trashcan",
+    }),
+    User.create({
+      username: "ernie",
+      password: "123",
+      firstName: "ernie",
+      lastName: "bernie",
+    }),
+    User.create({
+      username: "abby",
+      password: "123",
+      firstName: "abby",
+      lastName: "crabby",
+    }),
+    User.create({
+      username: "grover",
+      password: "123",
+      firstName: "grover",
+      lastName: "prover",
+    }),
+    User.create({
+      username: "thecount",
+      password: "123",
+      firstName: "the count",
+      lastName: "dracula",
+    }),
+    User.create({
+      username: "alice",
+      password: "123",
+      firstName: "alice",
+      lastName: "palice",
+    }),
+    User.create({
+      username: "bigbird",
+      password: "123",
+      firstName: "big",
+      lastName: "bird",
+    }),
+  ]);
+  //   Event.create({name: 'Fullstack Graduation', description: 'Fullstack Part-Time Cohort Graduation'}),
+  //   Event.create({name: 'Bar Hangout', description: 'Bar hangout with friends from university'}),
+  //   Event.create({name: 'Movie', description: 'Watching the new Marvel film with friends from work'})
+  // ])
 
-        // LOOP DE LOOP
-      // (allvenuesfromId.find(venue => e.venue_id === venue.id)),
-      // .map(e => e)
+  const friends = await Promise.all([
+    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "cccceda6-5357-4246-80e6-64c1b9bbe2a0", status: "confirmed" }),
+    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "f9f55392-4fe3-4063-91cb-38117d92b8b6", status: "confirmed" }),
+    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "fb93c3ff-12c6-4f6a-84ea-24a5b4904705", status: "confirmed" })
+  ])
 
-      //CUT
 
-      // venueId: allEventsByID.map((e) => e.venue_id),
-      // address: allEventsByID.map((e =>
-      //   // {
-      //   // return {
-      //   //   // ...e.venue_id,
-
-      //     // venue:
-      //     (allvenuesfromId.find(venue => e.venue_id === venue.id))
-      //   // }
-      // // }
-      // )),
-      // name: allEventsByID.map((e) => e.name.text),
-
-      //CUT
-      // address: allvenuesfromId.map((e) => e.address.localized_address_display),
-    })
-  );
-  // await Event.create({
-  //   venueIdEvents: allEventsByID.map((e) => e.venue_id),
-  //   venueIdVenues: allvenuesfromId.map((e) => e.id),
-  //   name: allEventsByID.map((e) => e.name.text),
-  //   address: allvenuesfromId.map((e) => e.address.localized_address_display),
-  // });
-
-    // Creating Users
-    const users = await Promise.all([
-      User.create({
-        username: "cody",
-        password: "123",
-        fistName: "Cody",
-        lastName: "Murphy",
-      }),
-      User.create({
-        username: "murphy",
-        password: "123",
-        firstName: "Murphy",
-        lastName: "Cody",
-      }),
-    ]);
-
-  console.log(`seeded successfully`);
-
+  console.log(`seeded successfully`)
+  
   return {
     users: {
       cody: users[0],
       murphy: users[1],
+      miyuki: users[2],
+      yehezkiel: users[3],
+      bharadwaj: users[4],
+      kimberly: users[5],
     },
   };
 }
@@ -292,17 +354,17 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log("seeding...");
+  console.log('seeding...')
   try {
-    await seed();
+    await seed()
     // await SeedEvents();
   } catch (err) {
-    console.error(err);
-    process.exitCode = 1;
+    console.error(err)
+    process.exitCode = 1
   } finally {
-    console.log("closing db connection");
-    await db.close();
-    console.log("db connection closed");
+    console.log('closing db connection')
+    await db.close()
+    console.log('db connection closed')
   }
 }
 
@@ -312,8 +374,8 @@ async function runSeed() {
   any errors that might occur inside of `seed`.
 */
 if (module === require.main) {
-  runSeed();
+  runSeed()
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed;
+module.exports = seed

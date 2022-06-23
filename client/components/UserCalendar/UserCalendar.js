@@ -4,6 +4,8 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 // import timeGridPlugin from "@fullcalendar/timegrid";
 
+import { Search } from "@mui/icons-material";
+import SearchBar from "../SearchBar/SearchBar"
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
@@ -39,6 +41,7 @@ const UserCalendar = () => {
       <h1>Calendar Test Page</h1>
       <button>RSVP</button>
       {/* <Calendar /> */}
+<SearchBar placeholder="Search User By Email"/>
       <div style={{ marginLeft: "20px", marginRight: "20px" }}>
         <FullCalendar
           defaultView="dayGridMonth"

@@ -7,6 +7,9 @@ import axios from "axios";
 import { TOKEN, me } from "../../store/auth";
 import { getIsLoggedIn } from "../../store";
 
+import "./GoogleAuth.scss";
+
+
 function GoogleAuth() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn);

@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
 import axios from "axios";
-import Dropzone from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 
 import "./ImageUploader.scss";
 
@@ -19,38 +18,16 @@ const style = {
   color: "#bdbdbd",
   outline: "none",
   transition: "border .24s ease-in-out",
+  justifyContent: "center"
 };
 
-function StyledDropzone(props) {
-  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } = useDropzone({
+const ImageUploader = ({ callback }) => {
+  const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
     accept: {
-      "image/*": [".png", ".jpeg", ".jpg"],
+      "image/jpeg": [".jpg", ".jpeg"],
+      "image/png": [".png"],
     },
   });
-
-  const style = useMemo(
-    () => ({
-      ...baseStyle,
-      ...(isFocused ? focusedStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
-    }),
-    [isFocused, isDragAccept, isDragReject]
-  );
-
-  return (
-    <div className="container">
-      <div {...getRootProps({ style })}>
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
-      </div>
-    </div>
-  );
-}
-
-<StyledDropzone />;
-
-const ImageUploader = ({ callback }) => {
 
   const handleUpload = async (files) => {
     try {
@@ -69,24 +46,22 @@ const ImageUploader = ({ callback }) => {
 
       const awsResponse = await axios.put(signedUrl, file, options);
       console.log("awsResponse: ", awsResponse);
-      callback("https://capstone-fsa.s3.amazonaws.com/"+file.name);
+      callback("https://capstone-fsa.s3.amazonaws.com/" + file.name);
     } catch (err) {
       console.log(err);
     }
   };
 
+  useEffect(() => {
+    handleUpload(acceptedFiles);
+  }, [acceptedFiles]);
+
   return (
-    <div>
-      <Dropzone onDrop={handleUpload}>
-        {({ getRootProps, getInputProps }) => (
-          <section className="image-uploader">
-            <div {...getRootProps({ style })}>
-              <input {...getInputProps()} />
-              <p>Drag 'n' drop some files here, or click to select files</p>
-            </div>
-          </section>
-        )}
-      </Dropzone>
+    <div className="image-uploader">
+      <div className="click" {...getRootProps({ style })}>
+        <input className="selected-img" {...getInputProps()} />
+        <p className="label">Drag 'n' drop some files here, or click to select files</p>
+      </div>
     </div>
   );
 };

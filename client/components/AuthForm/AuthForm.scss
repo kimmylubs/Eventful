@@ -1,0 +1,39 @@
+.auth-form {
+  .user-name,
+  .password {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px 10px 10px;
+    align-items: center;
+    font-weight: normal;
+    letter-spacing: 1.5px;
+
+    .label-username,
+    .label-password {
+      align-self: flex-start;
+      margin-left: 10px;
+    }
+
+    .label-password {
+      margin: 0;
+    }
+
+    input {
+      height: 25px;
+      border-radius: 5px;
+      width: 160px;
+      align-items: center;
+    }
+  }
+
+  .submit-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 10px 0 0;
+
+    button {
+      border-radius: 5px;
+      height: 28px;
+    }
+  }
+}

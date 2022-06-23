@@ -4,6 +4,9 @@ import EventSuggestion from "../EventSuggestion";
 
 import "./EventList";
 
+import "./EventList.scss";
+
+
 const EventList = () => {
   return (
     <div className="event-list">
