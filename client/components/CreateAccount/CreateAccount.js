@@ -36,6 +36,7 @@ const CreateAccount = () => {
       msgs.push("Your username must only contain letters and numbers.");
     }
     if (!validatePassword(password)) {
+      // need to make this a req in users model
       msgs.push("Your password must be at least 4 characters.");
     }
     if (msgs.length > 0) {
