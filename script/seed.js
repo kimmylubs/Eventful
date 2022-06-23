@@ -224,9 +224,9 @@ async function seed() {
     // User.create({ username: 'murphy', email:"murphy@murphy.com", password: '123', firstName: 'Murphy', lastName: 'Cody' }),
     User.create({ username: 'aubrey', email:"aubrey@aubrey.com", password: '123', firstName: 'Aubrey', lastName: 'Aubrey' }),
     User.create({ username: 'stephanie', email:"aubrey@aubrey.com", password: '123', firstName: 'Stephanie', lastName: 'Stephanie' }),
-    User.create({ username: 'felica', email:"felicia@felicia.com", password: '123', firstName: 'Felicia', lastName: 'Felicia' })
+    User.create({ username: 'felica', email:"felicia@felicia.com", password: '123', firstName: 'Felicia', lastName: 'Felicia' }),
     
-  ])
+  // ])
   // const venues = await Promise.all(
   //   allvenueids.map(id => (axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/events/`, {
   //     headers:{
@@ -234,9 +234,9 @@ async function seed() {
   //     },
   //   })).data)
   // )
-  const events = await Promise.all([
-    Event.create({ data: 'stuff'
-    }),
+  // const events = await Promise.all([
+  //   Event.create({ data: 'stuff'
+  //   }),
     User.create({
       username: "murphy",
       password: "123",
