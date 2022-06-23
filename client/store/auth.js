@@ -8,11 +8,12 @@ export const TOKEN = "token";
 const SET_AUTH = "SET_AUTH";
 const JOIN_EVENT = "JOIN_EVENT";
 const LEAVE_EVENT = "LEAVE_EVENT";
+const CREATE_ACCOUNT = "CREATE_ACCOUNT";
 
 /**
  * ACTION CREATORS
  */
-const setAuth = (auth) => ({ type: SET_AUTH, auth });
+const setAuth = (auth = {}) => ({ type: SET_AUTH, auth });
 
 /**
  * THUNK CREATORS
@@ -74,17 +75,14 @@ export const updateProfilePic = (filename) => {
 
 export const logout = () => async (dispatch) => {
   window.localStorage.removeItem(TOKEN);
-  if (window.gapi) {
+  if (window.gapi?.auth2) {
     const auth2 = await window.gapi.auth2.getAuthInstance();
     if (auth2 != null) {
       await auth2.signOut();
       auth2.disconnect();
     }
   }
-  return dispatch({
-    type: SET_AUTH,
-    auth: {},
-  });
+  return dispatch(setAuth());
 };
 
 export const joinOrLeaveEvent = (id) => {
@@ -96,6 +94,16 @@ export const joinOrLeaveEvent = (id) => {
       event: response.data,
     });
   };
+};
+
+export const createAccount = (user) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/auth/signup`, { ...user });
+    window.localStorage.setItem(TOKEN, res.data.token);
+    dispatch(me());
+  } catch (authError) {
+    return dispatch(setAuth({ error: authError }));
+  }
 };
 
 /**

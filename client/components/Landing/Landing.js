@@ -27,7 +27,7 @@ const Landing = () => {
         <div className="hero-left">
           <p>Join events with your friends!</p>
           <span className="create-account-btn">
-            <Link to="">Create your account</Link>
+            <Link to="/signup">Create your account</Link>
           </span>
         </div>
         <div className="hero-right">
