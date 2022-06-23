@@ -62,7 +62,6 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/:id", async (req, res, next) => {
   try {
-    console.log('id?');
     const event = await Event.findOne({
       where: {
         id: req.params.id,
