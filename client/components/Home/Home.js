@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Route, useParams } from "react-router-dom";
 
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
@@ -23,6 +23,8 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const isLoggedIn = useSelector(getIsLoggedIn);
+  const events = useSelector(state => state.events)
+
   
   return (
     <div className="home">
@@ -32,12 +34,16 @@ const Home = (props) => {
             <CreateEvent />
             <span className="search"> 
               <SearchIcon fontSize="large" />
-            {/* <Autocomplete 
-            id='search-event'
+              {/* <div> {`value: ${value !== null ? `'${value}'` : 'null'}`}</div> */}
+            <Autocomplete 
+            id='search event'
+            // value={value}
             freeSolo
-            options={event.map(e => e.name)}
-            renderInput={(params) => <TextField {...params} label='search-events' id="standard-basic" variant="standard" />} 
-              /> */}
+            options={events.map(e => e.name)}
+            renderInput={(params) => <TextField {...params} label='search-events' id="standard-basic" variant="standard" />}
+            // onClick={(events.map(e => e.name)) (<a href={`/event/${e.id}`} />)}
+
+              />
             </span>
           </div>
           <UpcomingEvents />
