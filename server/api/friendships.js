@@ -3,18 +3,27 @@ const { models: { Friendship, User }} = require('../db')
 
 module.exports = router;
 
-router.get('/:id', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
       console.log('friendship')
-      const friends = await Friendship.findAll({
-        where: { user: id },
-        include: [{
-            model: User,
-            as: 'info'
-        }]
-    });
-    // const friends = await Friendship.findAll()
+    //   const friends = await Friendship.findAll({
+    //     where: { user: user.id},
+    //     include: [{
+    //         model: User,
+    //         as: 'info'
+    //     }]
+    // });
+    const friends = await Friendship.findAll({
+      where: {
+        user: 1
+      },
+      include: [{
+        model: User,
+        as: 'info'
+      }]
+    })
     res.send(friends)
+    console.log('--friends--', friends)
     }
     catch (e) {
       console.log(e)
