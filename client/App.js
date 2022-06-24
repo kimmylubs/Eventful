@@ -12,13 +12,14 @@ import EventDetails from "./components/EventDetails";
 import UserCalendar from "./components/UserCalendar";
 import EventList from "./components/EventList";
 import FriendRequests from "./components/FriendRequests";
+import CreateAccount from "./components/CreateAccount";
 
 import "./App.scss";
 
 const App = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn);
-  
+
   useEffect(() => {
     dispatch(me());
     dispatch(getUsers());
@@ -40,6 +41,7 @@ const App = () => {
           )}
           <Route path="/events" element={<EventList />} />
         </Route>
+        {!isLoggedIn && <Route path="/signup" element={<CreateAccount />} />}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>

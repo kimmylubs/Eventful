@@ -1,11 +1,12 @@
 @import "../../variables.scss";
 
 .home {
-  padding: 0 25px;
 
   .icon-container {
     display: flex;
     margin-top: 21.44px;
+    padding: 0 25px;
+
 
     .create-events-btn {
       width: 150px;
@@ -26,6 +27,10 @@
       align-items: center;
       padding-left: 30px;
       height: 45px;
+    }
+    
+    .css-16awh2u-MuiAutocomplete-root .MuiAutocomplete-inputRoot .MuiAutocomplete-input {
+      width: 300px;
     }
   }
   

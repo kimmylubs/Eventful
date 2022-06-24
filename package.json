@@ -20,6 +20,10 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@fullcalendar/core": "^5.11.0",
+    "@fullcalendar/daygrid": "^5.11.0",
+    "@fullcalendar/react": "^5.11.1",
+    "@fullcalendar/timegrid": "^5.11.0",
     "ajax": "^0.0.4",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.0",
@@ -36,6 +40,8 @@
     "node-fetch": "^3.2.5",
     "pg": "^8.5.1",
     "pizzly-js": "^0.2.8",
+    "react-calendar": "^3.7.0",
+    "react-event-calendar": "^0.3.0",
     "sequelize": "^6.3.5",
     "uuid": "^8.3.2"
   },
