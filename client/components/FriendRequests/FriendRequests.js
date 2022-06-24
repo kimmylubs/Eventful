@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios'
+import SearchBar from "../SearchBar/SearchBar"
 
 function FriendRequests() {
     // const [users, setUsers] = useState([])
@@ -27,12 +28,17 @@ function FriendRequests() {
 
     return (
         <div className="friendRequests-main">
-            <h1>Incoming Friend Requests</h1>
-            {friendReq.map((req) => {
-                return <div key={req.id}>
-                    <a>{req.info.username}<button>approve</button><button>decline</button></a>
-                </div>
-            })}
+            <div className="searchFriends">
+                <SearchBar placeholder="Search User By Email"/>
+            </div>
+            <div className="incomingRequests">
+                <h1>Incoming Friend Requests</h1>
+                {friendReq.map((req) => {
+                    return <div key={req.id}>
+                        <a>{req.info.username}<button>approve</button><button>decline</button></a>
+                    </div>
+                })}
+            </div>
         </div>
     )
 }

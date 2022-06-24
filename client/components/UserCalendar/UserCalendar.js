@@ -11,7 +11,6 @@ class UserCalendar extends Component {
             <div>
                 <h1>Calendar Test Page</h1>
                 <button>RSVP</button>
-                <SearchBar placeholder="Search User By Email"/>
             </div>      
         )
     }
