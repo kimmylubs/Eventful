@@ -24,9 +24,6 @@ function SearchBar({placeholder}) {
         }))
         .catch( error => console.log(error))
     }
-
-    const userEmails = users.map(user => {
-        return user.email})
     
     const handleFilter = (event) => {
         const searched = event.target.value
@@ -34,14 +31,24 @@ function SearchBar({placeholder}) {
             return value.email.indexOf(searched) >= 0
         })
         setFilteredData(filter)
+        console.log('--filteredData--', filteredData)
     }
 
-    const addFriend = (friendUUID) => {
-        console.log('currentUser', currentUser.UUID)
-        console.log('friendUUID', friendUUID)
+    const submitRequest = async (friendId) => {
+        try {
+            // console.log('currentUser', currentUser.id)
+            // console.log('users', friendId)
+            const response = await axios.post('http://localhost:8080/api/friendships', {
+                user: currentUser.id,
+                friend: friendId,
+                status: false,
+            })
+        }
+        catch(e) {
+            console.log(e)
+        }
     }
 
-    console.log('users', users)
 
     return (
         <div>
@@ -52,9 +59,9 @@ function SearchBar({placeholder}) {
                 </div>
                     <div className="searchResults">
                     {filteredData.map(user => {
-                        // console.log('filteredData', filteredData)
-                        return <div key={user.UUID}>
-                            <a>{user.email}<button onClick={() => addFriend(user.UUID)}>+</button></a>
+                        //console.log('filteredData', filteredData)
+                        return <div key={user.id}>
+                            <a>{user.email}<button onClick={() => submitRequest(user.id)}>+</button></a>
                         </div>
                     })}
                 </div>

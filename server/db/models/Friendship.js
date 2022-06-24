@@ -1,16 +1,27 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Friendship = db.define('friendship', {
-  requester: {
-    type: Sequelize.UUID
+var Friendship = db.define('friendship', {
+  user: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+          model: 'users',
+          key: 'user_id'
+      }
   },
-  requestee: {
-    type: Sequelize.UUID
+  friend: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+          model: 'users',
+          key: 'user_id'
+      }
   },
   status: {
-    type: Sequelize.STRING
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
-  })
+});
 
 module.exports = Friendship

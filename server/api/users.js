@@ -11,8 +11,7 @@ router.get("/", async (req, res, next) => {
       // users' passwords are encrypted, it won't help if we just
 
       // send everything to anyone who asks!
-      // attributes: ["id", "username", "imageUrl"],
-      attributes: ["UUID", "id", "username", "imageUrl"],
+      attributes: ["id", "email", "username", "imageUrl"],
     });
     res.json(users);
   } catch (err) {
