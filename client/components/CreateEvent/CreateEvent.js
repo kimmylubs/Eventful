@@ -70,129 +70,98 @@ const CreateEvent = (props) => {
           </div>
           <div className="create-event-main">
             <form className="form-container" onSubmit={handleSubmit}>
-              <div className="input-form-left">
+              <div className="input-event">
+                <span className="label">Event Name</span>
+                <TextField name="name" fullWidth onChange={handleChange} value={event.name} />
+              </div>
+              <div className="input-event">
+                <span className="label">Venue</span>
+                <TextField name="venue" fullWidth onChange={handleChange} value={event.venue} />
+              </div>
+              <div className="input-event">
+                <span className="label">Address</span>
+                <TextField name="address" fullWidth onChange={handleChange} value={event.address} />
+              </div>
+              <div className="input-event small">
                 <div className="input-event">
-                  <span className="label">Event Name</span>
-                  <span>
-                    <TextField name="name" fullWidth onChange={handleChange} value={event.name} />
-                  </span>
+                  <span className="label">City</span>
+                  <TextField name="city" onChange={handleChange} value={event.city} />
                 </div>
                 <div className="input-event">
-                  <span className="label">Venue</span>
-                  <span>
-                    <TextField name="venue" fullWidth onChange={handleChange} value={event.venue} />
-                  </span>
-                </div>
-                <div className="input-event">
-                  <span className="label">Address</span>
-                  <span>
-                    <TextField
-                      name="address"
-                      fullWidth
-                      onChange={handleChange}
-                      value={event.address}
-                    />
-                  </span>
-                </div>
-                <div className="input-event-small">
-                  <div className="input-event">
-                    <span className="label">City</span>
-                    <span>
-                      <TextField name="city" onChange={handleChange} value={event.city} />
-                    </span>
-                  </div>
-                  <div className="input-event">
-                    <span className="label">State</span>
-                    <span>
-                      <TextField
-                        name="region"
-                        onChange={handleChange}
-                        value={event.state}
-                        fullWidth
-                      />
-                    </span>
-                  </div>
-                </div>
-                <div className="input-event">
-                  <span className="label">Zipcode</span>
-                  <span>
-                    <TextField
-                      name="postal"
-                      onChange={handleChange}
-                      value={event.zip}
-                      fullWidth
-                      rows={1}
-                    />
-                  </span>
-                </div>
-                <div className="input-event">
-                  <span className="label">Description</span>
-                  <span className="input-event-large">
-                    <TextField
-                      name="description"
-                      fullWidth
-                      rows={6}
-                      onChange={handleChange}
-                      value={event.description}
-                      multiline
-                    />
-                  </span>
-                </div>
-                <div className="input-event">
-                  <span className="label">Image</span>
-                  {event.logo && <img src={event.logo} />}
-                  <ImageUploader callback={handleUploadPic} />
+                  <span className="label">State</span>
+                  <TextField name="region" onChange={handleChange} value={event.state} fullWidth />
                 </div>
               </div>
-              <div className="input-form-right">
-                <div className="date-picker">
-                  <Paper elevation={3}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <StaticDatePicker
-                        sx={{ width: "320px" }}
-                        okLabel=""
-                        cancelLabel=""
-                        orientation="landscape"
-                        openTo="day"
-                        name="date"
-                        value={event.date}
-                        onChange={(date) => setEvent({ ...event, date })}
-                        renderInput={(params) => <TextField {...params} />}
-                      />
-                    </LocalizationProvider>
-                  </Paper>
-                </div>
-                <div className="time-picker">
-                  <Paper elevation={3} sx={{ marginTop: "30px" }}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <StaticTimePicker
-                        ampm
-                        orientation="landscape"
-                        openTo="minutes"
-                        name="time"
-                        value={event.time}
-                        onChange={(time) => setEvent({ ...event, time })}
-                        renderInput={(params) => <TextField {...params} />}
-                      />
-                    </LocalizationProvider>
-                  </Paper>
-                </div>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  size="large"
-                  sx={{
-                    borderRadius: "20px",
-                    width: "100px",
-                    alignSelf: "end",
-                    marginTop: "30px",
-                    backgroundColor: "blue",
-                  }}
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </Button>
+              <div className="input-event">
+                <span className="label">Zipcode</span>
+                <TextField
+                  name="postal"
+                  onChange={handleChange}
+                  value={event.zip}
+                  fullWidth
+                  rows={1}
+                />
               </div>
+              <div className="input-event">
+                <span className="label">Description</span>
+                <span className="input-event-large">
+                  <TextField
+                    name="description"
+                    fullWidth
+                    rows={6}
+                    onChange={handleChange}
+                    value={event.description}
+                    multiline
+                  />
+                </span>
+              </div>
+              <Paper elevation={3} sx={{ margin: "20px 0" }}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <StaticDatePicker
+                    sx={{ width: "320px" }}
+                    orientation="landscape"
+                    openTo="day"
+                    name="date"
+                    value={event.date}
+                    onChange={(date) => setEvent({ ...event, date })}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+              </Paper>
+              <Paper elevation={3} sx={{ margin: "20px 0" }}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <StaticTimePicker
+                    ampm
+                    orientation="landscape"
+                    openTo="minutes"
+                    name="time"
+                    value={event.time}
+                    onChange={(time) => setEvent({ ...event, time })}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+              </Paper>
+              <div className="input-event">
+                <span className="label">Image</span>
+                <ImageUploader callback={handleUploadPic} />
+                {event.logo && <img src={event.logo} />}
+              </div>
+              <Button
+                type="submit"
+                size="large"
+                sx={{
+                  borderRadius: "20px",
+                  width: "140px",
+                  height: "50px",
+                  alignSelf: "end",
+                  margin: "20px 0",
+                  backgroundColor: "#f3ef08",
+                  color: "black",
+                }}
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
             </form>
           </div>
         </div>

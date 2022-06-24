@@ -30,7 +30,7 @@ const UpcomingEvents = (props) => {
       <h2 className="header">Upcoming Events</h2>
       <div className="slider-img">
         <ChevronLeftIcon slot="container-start" onClick={handlePrev} />
-        <Swiper modules={[Navigation]} navigation spaceBetween={25} slidesPerView={4}>
+        <Swiper modules={[Navigation]} navigation spaceBetween={25} slidesPerView={4} >
           {joinedEvents?.sort(eventDateSorter).map((event) => (
             <SwiperSlide key={event.id}>
               <Link to={`/event/${event.id}`} className="event">

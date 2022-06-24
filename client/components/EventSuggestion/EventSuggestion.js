@@ -50,8 +50,8 @@ const EventSuggestion = () => {
             >
               <MenuItem value="nameAsc">Name: A - Z</MenuItem>
               <MenuItem value="nameDesc">Name: Z - A</MenuItem>
-              <MenuItem value="dateDesc">Most Recent</MenuItem>
-              <MenuItem value="dateAsc">Oldest</MenuItem>
+              <MenuItem value="dateDesc">Date Descending </MenuItem>
+              <MenuItem value="dateAsc">Date Ascending</MenuItem>
             </Select>
           </FormControl>
         </span>
