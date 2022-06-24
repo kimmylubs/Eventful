@@ -34,12 +34,14 @@ function SearchBar({placeholder}) {
         console.log('--filteredData--', filteredData)
     }
 
-    const submitRequest = async (friendUUID) => {
+    const submitRequest = async (friendId) => {
         try {
+            // console.log('currentUser', currentUser.id)
+            // console.log('users', friendId)
             const response = await axios.post('http://localhost:8080/api/friendships', {
-                requester: currentUser.UUID,
-                requestee: friendUUID,
-                status: "pending"
+                user: currentUser.id,
+                friend: friendId,
+                status: false,
             })
         }
         catch(e) {
@@ -58,8 +60,8 @@ function SearchBar({placeholder}) {
                     <div className="searchResults">
                     {filteredData.map(user => {
                         //console.log('filteredData', filteredData)
-                        return <div key={user.UUID}>
-                            <a>{user.email}<button onClick={() => submitRequest(user.UUID)}>+</button></a>
+                        return <div key={user.id}>
+                            <a>{user.email}<button onClick={() => submitRequest(user.id)}>+</button></a>
                         </div>
                     })}
                 </div>
