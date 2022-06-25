@@ -2,8 +2,16 @@
 
 const { default: axios } = require('axios')
 const {db, models: {User, Event, Friendship} } = require('../server/db')
+const aws = require("aws-sdk");
+require("dotenv").config();
+
+const myprivatetoken=process.env.PRIVATE_TOKE
+
+
+
+// const privatetoke = require("./secrets")
 // const SeedEvents = require('./seedEvents');
-const myprivatetoken = "B6THKWOK44JPHM3UHUIM"; //** */
+// const myprivatetoken = `"${privatetoke}"`; //** */
 
 const allvenueids = [
   // NEW
@@ -147,8 +155,8 @@ async function seed() {
   const allvenuesfromId = (
     await Promise.all(
       allvenueids.map((id) =>
-        axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/`, {
-          headers: {
+      axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/`, {
+        headers: {
             Authorization: `Bearer ${myprivatetoken}`,
           },
         })

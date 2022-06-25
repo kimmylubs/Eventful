@@ -97,7 +97,7 @@ class Profile extends Component {
                   variant="standard"
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <TextField
                   id="firstName"
                   name="firstName"
@@ -107,7 +107,7 @@ class Profile extends Component {
                   fullWidth
                   variant="standard"
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12} sm={6}>
                 <TextField
                   id="city"
@@ -119,7 +119,7 @@ class Profile extends Component {
                   variant="standard"
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <TextField
                   id="lastName"
                   name="lastName"
@@ -129,7 +129,7 @@ class Profile extends Component {
                   fullWidth
                   variant="standard"
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12} sm={6}>
                 <TextField
                   id="state"

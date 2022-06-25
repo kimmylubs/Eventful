@@ -42,11 +42,18 @@ const Home = (props) => {
             options={events.map(e => e.name)}
             renderInput={
               (params) => <TextField {...params} label='search-events' id="standard-basic" variant="standard" 
-            onClick={(events.map(e => {
-              return (
-                (<a href={`/event/${e.id}`} />)
-              )
-            })) } />
+              onClick={() => {
+                events.map(e => {
+                  return (<a href={`/event/${e.id}`}></a>)
+                })
+              }}
+
+            // onClick={(events.map(e => {
+            //   return (
+            //     (<a href={`/event/${e.id}`} />)
+            //   )
+            // })) } 
+            />
           }
 
               />
