@@ -10,11 +10,11 @@ var Friendship = db.define("friendship", {
   },
   userId: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    // allowNull: false,
   },
   friendId: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    // allowNull: false,
   },
   status: {
     type: Sequelize.BOOLEAN,

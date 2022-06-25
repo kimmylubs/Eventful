@@ -19,6 +19,8 @@ class Profile extends Component {
     super(props);
     this.state = {
       username: this.props.auth.username || "",
+      firstName: this.props.auth.firstName || "",
+      lastName: this.props.auth.lastName || "",
       streetAddress: this.props.auth.streetAddress || "",
       email: this.props.auth.email || "",
       city: this.props.auth.city || "",
@@ -49,7 +51,7 @@ class Profile extends Component {
   };
 
   render() {
-    const { username, streetAddress, email, city, state, zip, phone, imageUrl } = this.state;
+    const { username, firstName, lastName, streetAddress, email, city, state, zip, phone, imageUrl } = this.state;
     const { saveProfile, onChange } = this;
     return (
       <div className="profile">
@@ -57,6 +59,7 @@ class Profile extends Component {
           <Typography variant="h6" gutterBottom className="profile-header">
             Edit Profile
           </Typography>
+              {/* <div className="profile-header2">{firstName} {lastName}</div> */}
           <Stack>
             <span className="user-avatar">
               <Avatar sx={{ width: 200, height: 200 }} src={this.state.imageUrl} />
@@ -94,6 +97,17 @@ class Profile extends Component {
                   variant="standard"
                 />
               </Grid>
+              {/* <Grid item xs={12} sm={6}>
+                <TextField
+                  id="firstName"
+                  name="firstName"
+                  label="First Name"
+                  value={firstName}
+                  onChange={onChange}
+                  fullWidth
+                  variant="standard"
+                />
+              </Grid> */}
               <Grid item xs={12} sm={6}>
                 <TextField
                   id="city"
@@ -105,6 +119,17 @@ class Profile extends Component {
                   variant="standard"
                 />
               </Grid>
+              {/* <Grid item xs={12} sm={6}>
+                <TextField
+                  id="lastName"
+                  name="lastName"
+                  label="Last Name"
+                  value={lastName}
+                  onChange={onChange}
+                  fullWidth
+                  variant="standard"
+                />
+              </Grid> */}
               <Grid item xs={12} sm={6}>
                 <TextField
                   id="state"
@@ -118,22 +143,22 @@ class Profile extends Component {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  id="zip"
-                  name="zip"
-                  value={zip}
+                  id="email"
+                  name="email"
+                  value={email}
                   onChange={onChange}
-                  label="Zip / Postal code"
+                  label="E-mail"
                   fullWidth
                   variant="standard"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  id="email"
-                  name="email"
-                  value={email}
+                  id="zip"
+                  name="zip"
+                  value={zip}
                   onChange={onChange}
-                  label="E-mail"
+                  label="Zip / Postal code"
                   fullWidth
                   variant="standard"
                 />

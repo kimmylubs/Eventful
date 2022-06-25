@@ -40,8 +40,21 @@ const Home = (props) => {
             // value={value}
             freeSolo
             options={events.map(e => e.name)}
-            renderInput={(params) => <TextField {...params} label='search-events' id="standard-basic" variant="standard" />}
-            // onClick={(events.map(e => e.name)) (<a href={`/event/${e.id}`} />)}
+            renderInput={
+              (params) => <TextField {...params} label='search-events' id="standard-basic" variant="standard" 
+              onClick={() => {
+                events.map(e => {
+                  return (<a href={`/event/${e.id}`}></a>)
+                })
+              }}
+
+            // onClick={(events.map(e => {
+            //   return (
+            //     (<a href={`/event/${e.id}`} />)
+            //   )
+            // })) } 
+            />
+          }
 
               />
             </span>

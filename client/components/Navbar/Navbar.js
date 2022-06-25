@@ -6,11 +6,10 @@ import Avatar from "@mui/material/Avatar";
 
 import { logout, selectUser, getIsLoggedIn } from "../../store";
 import AuthForm from "../AuthForm";
-import EventBrite from "../EventBrite/EventBrite";
+
+import { Image } from "@mui/icons-material";
 
 import "./Navbar.scss";
-
-import logo from "./Navbar";
 
 // const image = {
 //   logo
@@ -24,10 +23,17 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <Link to="/">
-      <img className="app-name" src="./logo.png" />
+
+        {/* <Image className="logo" sx={{width:160, height:160}} src="./logo.jpg"/> */}
+        {/* <Image className="logo" sx={{width:160, height:160}} src="https://imgur.com/a/idhJtCr"/> */}
+
+       <img className="logo" src="./logo.jpg"/> 
+
       {/* <Link to="/home"> <img className="logo" src={image}/> </Link>  */}
         {/* <div> <img className="logo" src="/navbar/logo.png"/> </div> */}
+
+      <Link to="/">
+        <h1 className="app-name">EVENTFUL</h1>
       </Link>
       {isLoggedIn ? (
         <>
@@ -49,8 +55,7 @@ const Navbar = () => {
           <span className="logout-btn" onClick={() => dispatch(logout())}>
             Log out
           </span>
-          <EventBrite />
-        </>
+                  </>
       ) : (
         <>
           <AuthForm name="login" displayName="Login" />
