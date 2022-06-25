@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const {
-  models: { User },
+  db,
+  models: { User, Friendship },
 } = require("../db");
 module.exports = router;
 
@@ -11,9 +12,31 @@ router.get("/", async (req, res, next) => {
       // users' passwords are encrypted, it won't help if we just
 
       // send everything to anyone who asks!
-      attributes: ["id", "email", "username", "imageUrl"],
+      include: [
+        {
+          model: User,
+          attributes: ["id", "email", "username", "imageUrl"],
+          as: "acceptedFriends",
+        },
+        {
+          model: User,
+          attributes: ["id", "email", "username", "imageUrl"],
+          as: "requestedFriends",
+        },
+      ],
     });
-    res.json(users);
+    
+    const usersWithConsolidatedFriends = users.map(
+      ({ id, email, username, imageUrl, acceptedFriends, requestedFriends }) => ({
+        id,
+        email,
+        username,
+        imageUrl,
+        friends: acceptedFriends.concat(requestedFriends),
+      })
+    );
+
+    res.json(usersWithConsolidatedFriends);
   } catch (err) {
     next(err);
   }

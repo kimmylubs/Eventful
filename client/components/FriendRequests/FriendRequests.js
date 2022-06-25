@@ -1,46 +1,43 @@
-import React, { Component, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import axios from 'axios'
-import SearchBar from "../SearchBar/SearchBar"
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { selectUser, approveFriendRequest, declineFriendRequest } from "../../store";
+import SearchBar from "../SearchBar/SearchBar";
+
+import "./FriendRequests.scss";
 
 function FriendRequests() {
-    // const [users, setUsers] = useState([])
-    const [currentUser, setCurrentUser] = useState({})
-    const [friendReq, setFriendReq] = useState([])
-    const user = useSelector((state) => state.auth)
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const { incomingRequests } = user;
 
-    useEffect (() => {
-        setCurrentUser(user)
-        getRequests()
-    }, [])
+  const handleApprove = (id) => {
+    dispatch(approveFriendRequest(id));
+  };
+  const handleDecline = (id) => {
+    dispatch(declineFriendRequest(id));
+  };
 
-    console.log('--userID--', user.id)
-    console.log('--requests--', friendReq)
-
-    function getRequests () {
-        axios.get('http://localhost:8080/api/friendships/')
-        .then((response => {
-            const requests = response.data
-            setFriendReq(requests)
-        }))
-        .catch( error => console.log(error))
-    }
-
-    return (
-        <div className="friendRequests-main">
-            <div className="searchFriends">
-                <SearchBar placeholder="Search User By Email"/>
+  return (
+    <div className="friendRequests-main">
+      <div className="searchFriends">
+        <SearchBar placeholder="Search User By Email" />
+      </div>
+      <h1>Incoming Friend Requests</h1>
+      <div className="incomingRequests">
+        {incomingRequests.map((req) => {
+          return (
+            <div key={req.id} className="friend-request-box">
+              <span>{req.username}</span>
+              <img src={req.imageUrl} />
+              <button onClick={() => handleApprove(req.friendship.id)}>approve</button>
+              <button onClick={() => handleDecline(req.friendship.id)}>decline</button>
             </div>
-            <div className="incomingRequests">
-                <h1>Incoming Friend Requests</h1>
-                {friendReq.map((req) => {
-                    return <div key={req.id}>
-                        <a>{req.info.username}<button>approve</button><button>decline</button></a>
-                    </div>
-                })}
-            </div>
-        </div>
-    )
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
-export default FriendRequests
+export default FriendRequests;

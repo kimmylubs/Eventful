@@ -57,7 +57,19 @@ router.get("/me", async (req, res, next) => {
         where: {
           id: user.id,
         },
-        include: ["joinedEvents"],
+        include: [
+          "joinedEvents",
+          {
+            model: User,
+            attributes: ["id", "email", "username", "imageUrl"],
+            as: "acceptedFriends",
+          },
+          {
+            model: User,
+            attributes: ["id", "email", "username", "imageUrl"],
+            as: "requestedFriends",
+          },
+        ],
       });
     }
 

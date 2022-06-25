@@ -1,74 +1,67 @@
-import React, { Component, useEffect, useState } from "react";
-import axios from 'axios'
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import AddIcon from "@mui/icons-material/Add";
+import CheckIcon from "@mui/icons-material/Check";
 
-function SearchBar({placeholder}) {
-    const [users, setUsers] = useState([])
-    const [filteredData, setFilteredData] = useState([])
-    const [currentUser, setCurrentUser] = useState({})
+import { selectUser, selectUsers, sendFriendRequest, removeFriendRequest } from "../../store";
 
-    const dispatch = useDispatch()
-    const user = useSelector((state) => state.auth)
-    
+import "./SearchBar.scss";
 
-    useEffect (() => {
-        getUsers();
-        setCurrentUser(user)
-    }, [])
+function SearchBar({ placeholder }) {
+  const auth = useSelector(selectUser);
+  const users = useSelector(selectUsers);
+  const dispatch = useDispatch();
+  const [query, setQuery] = useState("");
 
-    function getUsers () {
-        axios.get('http://localhost:8080/api/users')
-        .then((response => {
-            const allUsers = response.data
-            setUsers(allUsers)
-        }))
-        .catch( error => console.log(error))
-    }
-    
-    const handleFilter = (event) => {
-        const searched = event.target.value
-        const filter = users.filter((value) => {
-            return value.email.indexOf(searched) >= 0
-        })
-        setFilteredData(filter)
-        console.log('--filteredData--', filteredData)
-    }
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
 
-    const submitRequest = async (friendId) => {
-        try {
-            // console.log('currentUser', currentUser.id)
-            // console.log('users', friendId)
-            const response = await axios.post('http://localhost:8080/api/friendships', {
-                user: currentUser.id,
-                friend: friendId,
-                status: false,
-            })
-        }
-        catch(e) {
-            console.log(e)
-        }
-    }
+  const filteredUsers = useMemo(
+    () =>
+      users.filter(
+        (user) =>
+          query &&
+          user.email.startsWith(query) &&
+          !Boolean(auth.friends.find((u) => u.id === user.id)) &&
+          auth.id !== user.id
+      ),
+    [query]
+  );
 
+  const removeRequest = (id) => dispatch(removeFriendRequest(id));
+  const sendRequest = (id) => dispatch(sendFriendRequest(id));
 
-    return (
-        <div>
-            <h1>Add Friends</h1>
-            <div className="search">
-                <div className="searchInput">
-                    <input type="text" placeholder={placeholder} onChange={handleFilter}></input>
-                </div>
-                    <div className="searchResults">
-                    {filteredData.map(user => {
-                        //console.log('filteredData', filteredData)
-                        return <div key={user.id}>
-                            <a>{user.email}<button onClick={() => submitRequest(user.id)}>+</button></a>
-                        </div>
-                    })}
-                </div>
-            </div>
-        </div>      
-        )
+  return (
+    <div className="search-bar">
+      <h1>Add Friends</h1>
+      <div className="search">
+        <div className="searchInput">
+          <input
+            type="text"
+            placeholder={placeholder}
+            onChange={handleChange}
+            value={query}
+          ></input>
+        </div>
+        <div className="searchResults">
+          {filteredUsers.map((user) => {
+            return (
+              <div className="search-result-user" key={user.id}>
+                <img src={user.imageUrl} />
+                {user.email}
+                {Boolean(auth.outgoingRequests.find((u) => u.id === user.id)) ? (
+                  <CheckIcon onClick={() => removeRequest(user.id)} />
+                ) : (
+                  <AddIcon onClick={() => sendRequest(user.id)} />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default SearchBar
-
+export default SearchBar;
