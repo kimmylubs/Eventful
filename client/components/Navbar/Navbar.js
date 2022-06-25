@@ -44,7 +44,6 @@ const Navbar = () => {
           <Link to="/calendar" className="calendar-link">
             my calendar
           </Link>
-          <a className="friends-link">my friends</a>
           <Link to="/friendrequests">
             <span className="add-friends-btn">+ add friends</span>
           </Link>

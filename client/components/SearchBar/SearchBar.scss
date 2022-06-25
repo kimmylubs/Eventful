@@ -1,0 +1,28 @@
+.search-bar {
+  .search-result-user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid lavender;
+    border-radius: 10px;
+    width: 300px;
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-left: 15px;
+    }
+
+    .MuiSvgIcon-root {
+      cursor: pointer;
+      transition: 0.2s ease;
+      margin-right: 15px;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+}

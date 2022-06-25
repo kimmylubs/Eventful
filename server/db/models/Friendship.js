@@ -1,27 +1,25 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-var Friendship = db.define('friendship', {
-  user: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-          model: 'users',
-          key: 'user_id'
-      }
+var Friendship = db.define("friendship", {
+  id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
   },
-  friend: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-          model: 'users',
-          key: 'user_id'
-      }
+  userId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  friendId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
   },
   status: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
-  }
+    defaultValue: false,
+  },
 });
 
-module.exports = Friendship
+module.exports = Friendship;
