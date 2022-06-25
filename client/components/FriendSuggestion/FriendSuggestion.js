@@ -22,7 +22,7 @@ const FriendSuggestion = () => {
 
   return (
     <div className="friend-suggestion">
-      <h2 className="header">Haven't met your friends recently?</h2>
+      <h2 className="header">Available Friends</h2>
       <div className="slider-friend">
         <ChevronLeftIcon slot="container-start" onClick={handlePrev} />
         <Swiper modules={[Navigation]} navigation spaceBetween={20} slidesPerView={5}>

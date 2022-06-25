@@ -93,7 +93,11 @@ const CreateAccount = () => {
             <button type="submit">Sign Up</button>
           </form>
         </div>
-        <div className="right"></div>
+        <div className="right">
+          <div className="img-container">
+            <img className="logo" src="./logo.png" />
+          </div>
+        </div>
       </Paper>
     </div>
   );
