@@ -13,7 +13,7 @@ const CREATE_ACCOUNT = "CREATE_ACCOUNT";
 /**
  * ACTION CREATORS
  */
-const setAuth = (auth = {}) => ({ type: SET_AUTH, auth });
+export const setAuth = (auth = {}) => ({ type: SET_AUTH, auth });
 
 /**
  * THUNK CREATORS
@@ -21,12 +21,31 @@ const setAuth = (auth = {}) => ({ type: SET_AUTH, auth });
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
   if (token) {
-    const res = await axios.get("/auth/me", {
+    const resp = await axios.get("/auth/me", {
       headers: {
         authorization: token,
       },
     });
-    return dispatch(setAuth(res.data));
+
+    const requests = resp.data.acceptedFriends.concat(resp.data.requestedFriends);
+    const connections = requests.reduce(
+      (res, req) => {
+        const which = req.friendship.status
+          ? res.friends
+          : req.friendship.friendId === resp.data.id
+          ? res.incomingRequests
+          : res.outgoingRequests;
+        which.push(req);
+        return res;
+      },
+      { friends: [], incomingRequests: [], outgoingRequests: [] }
+    );
+
+    const user = { ...resp.data, ...connections };
+    delete user.requestedFriends;
+    delete user.acceptedFriends;
+
+    return dispatch(setAuth(user));
   }
 };
 

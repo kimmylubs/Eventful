@@ -3,7 +3,7 @@
 
   
   .header {
-    margin: 30px 0 50px 20px;
+    margin: 80px 0 50px 20px;
     font-weight: normal;
   }
 
@@ -29,7 +29,7 @@
         .img {
           height: 150px;
           width: 200px;
-          border: solid grey 1px;
+          border: solid lightgray 0.3px;
           margin-bottom: 10px;
           object-fit: cover;
           border-radius: 5px;
@@ -42,18 +42,23 @@
           margin: 0;
           text-align: start;
           border-radius: 5px;
+          grid-template-rows: 40% 35% 23%;
+          display: grid;
+          padding: 3px 1px 3px 1px;
 
 
           .event-name {
             padding: 0 5px;
             font-size: 14px;
             color: black;
+            font-weight: normal;
+            overflow: hidden;
           }
 
           .event-date {
             padding: 5px 5px;
             color: orangered;
-            font-size: 13px;
+            font-size: 12px;
           }
 
           .event-place {

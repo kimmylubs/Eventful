@@ -17,3 +17,4 @@ export * from "./auth";
 export * from "./events";
 export * from "./users";
 export * from "./selectors";
+export * from "./friendRequests";

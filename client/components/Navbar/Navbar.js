@@ -49,8 +49,9 @@ const Navbar = () => {
           <Link to="/calendar" className="calendar-link">
             my calendar
           </Link>
-          <a className="friends-link">my friends</a>
-          <span className="add-friends-btn">+ add friends</span>
+          <Link to="/friendrequests">
+            <span className="add-friends-btn">+ add friends</span>
+          </Link>
           <span className="logout-btn" onClick={() => dispatch(logout())}>
             Log out
           </span>

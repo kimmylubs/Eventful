@@ -1,7 +1,7 @@
 'use strict'
 
 const { default: axios } = require('axios')
-const {db, models: {User, Event, Friendship} } = require('../server/db')
+const {db, models: {User, Event, Friendship, Friends} } = require('../server/db')
 const aws = require("aws-sdk");
 require("dotenv").config();
 
@@ -229,22 +229,9 @@ async function seed() {
   // Creating Users
   const users = await Promise.all([
     User.create({ username: 'cody', email: "cody@cody.com", password: '123', fistName: 'Cody', lastName: 'Murphy' }),
-    // User.create({ username: 'murphy', email:"murphy@murphy.com", password: '123', firstName: 'Murphy', lastName: 'Cody' }),
     User.create({ username: 'aubrey', email:"aubrey@aubrey.com", password: '123', firstName: 'Aubrey', lastName: 'Aubrey' }),
-    User.create({ username: 'stephanie', email:"aubrey@aubrey.com", password: '123', firstName: 'Stephanie', lastName: 'Stephanie' }),
+    User.create({ username: 'stephanie', email:"stephanie@stephanie.com", password: '123', firstName: 'Stephanie', lastName: 'Stephanie' }),
     User.create({ username: 'felica', email:"felicia@felicia.com", password: '123', firstName: 'Felicia', lastName: 'Felicia' }),
-    
-  // ])
-  // const venues = await Promise.all(
-  //   allvenueids.map(id => (axios.get(`https://www.eventbriteapi.com/v3/venues/${id}/events/`, {
-  //     headers:{
-  //       Authorization: `Bearer ${myprivatetoken}`,
-  //     },
-  //   })).data)
-  // )
-  // const events = await Promise.all([
-  //   Event.create({ data: 'stuff'
-  //   }),
     User.create({
       username: "murphy",
       password: "123",
@@ -330,15 +317,12 @@ async function seed() {
       lastName: "bird",
     }),
   ]);
-  //   Event.create({name: 'Fullstack Graduation', description: 'Fullstack Part-Time Cohort Graduation'}),
-  //   Event.create({name: 'Bar Hangout', description: 'Bar hangout with friends from university'}),
-  //   Event.create({name: 'Movie', description: 'Watching the new Marvel film with friends from work'})
-  // ])
+
 
   const friends = await Promise.all([
-    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "cccceda6-5357-4246-80e6-64c1b9bbe2a0", status: "confirmed" }),
-    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "f9f55392-4fe3-4063-91cb-38117d92b8b6", status: "confirmed" }),
-    Friendship.create({requester: "b107a45b-0ce5-4732-9953-e1aebcdb91c9", requestee: "fb93c3ff-12c6-4f6a-84ea-24a5b4904705", status: "confirmed" })
+    Friendship.create({user: 1, friend: 2}),
+    Friendship.create({user: 1, friend: 3}),
+    Friendship.create({user: 1, friend: 4}),
   ])
 
 

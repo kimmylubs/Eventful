@@ -65,31 +65,39 @@ const CreateAccount = () => {
   return (
     <div className="create-account-wrapper">
       <Paper className="create-account" elevation={6}>
-        <div className="errors">
-          {errors.map((error) => (
-            <p key={error}>{error}</p>
-          ))}
+        <div className="left">
+          <div className="text">Welcome to EVENTFUL</div>
+          <div className="errors">
+            {errors.map((error) => (
+              <p key={error}>{error}</p>
+            ))}
+          </div>
+          <form onSubmit={handleSubmit}>
+            <label>Email</label>
+            <input label="Email" name="email" value={form["email"]} onChange={handleChange} />
+            <label>Username</label>
+            <input
+              label="Username"
+              name="username"
+              value={form["username"]}
+              onChange={handleChange}
+            />
+            <label>Password</label>
+            <input
+              label="Password"
+              name="password"
+              type="password"
+              value={form["password"]}
+              onChange={handleChange}
+            />
+            <button type="submit">Sign Up</button>
+          </form>
         </div>
-        <form onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input label="Email" name="email" value={form["email"]} onChange={handleChange} />
-          <label>Username</label>
-          <input
-            label="Username"
-            name="username"
-            value={form["username"]}
-            onChange={handleChange}
-          />
-          <label>Password</label>
-          <input
-            label="Password"
-            name="password"
-            type="password"
-            value={form["password"]}
-            onChange={handleChange}
-          />
-          <button type="submit">Sign Up</button>
-        </form>
+        <div className="right">
+          <div className="img-container">
+            <img className="logo" src="./logo.png" />
+          </div>
+        </div>
       </Paper>
     </div>
   );

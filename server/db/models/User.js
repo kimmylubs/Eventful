@@ -2,15 +2,15 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const Friendship = require("./Friendship");
 const { BOOLEAN, STRING, INTEGER } = require("sequelize");
 
 const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
-  UUID: {
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
+  id: {
+    primaryKey: true,
+    autoIncrement: true,
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
   username: {
@@ -55,6 +55,7 @@ const User = db.define("user", {
     type: STRING,
     defaultValue: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2021%2F03%2F12%2Fpomeranian-white-puppy-921029690-2000.jpg'
   }
+
 });
 
 User.associate = function (models) {

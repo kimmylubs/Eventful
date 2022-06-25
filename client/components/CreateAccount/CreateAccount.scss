@@ -3,35 +3,70 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: lightgray;
 
   .create-account {
-    width: 600px;
-    padding: 100px;
+    width: 85%;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
 
-    .errors {
-      color: red;
-      width: 350px;
-      margin: 0 auto;
-    }
+    .left {
+      flex: 1;
+      align-self: center;
 
-    form {
-      width: 350px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-
-      label {
-        font-size: 14px;
-        margin-bottom: 5px;
+      .text {
+        font-size: 30px;
+        text-align: center;
+        padding-bottom: 50px;
+        letter-spacing: 3px;
       }
 
-      input, button {
-        margin-bottom: 20px;
-        padding: 12px;
-        font-size: 16px;
-        border-radius: 10px;
-        border: 1px solid silver;
-        outline: none;
+      .errors {
+        color: red;
+        width: 350px;
+        margin: 0 auto;
+      }
+
+      form {
+        width: 350px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+
+        label {
+          font-size: 14px;
+          margin-bottom: 5px;
+        }
+
+        input, button {
+          margin-bottom: 20px;
+          padding: 12px;
+          font-size: 16px;
+          border-radius: 10px;
+          border: 1px solid silver;
+          outline: none;
+        }
+
+        button {
+          margin-top: 10px;
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      flex: 1;
+      background-color: rgb(238, 238, 239);
+      justify-content: center;
+      align-items: center;
+
+      .img-container {
+
+        .logo {
+          height: 250px;
+          width: 250px;
+        }
       }
     }
   }
