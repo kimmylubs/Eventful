@@ -31,7 +31,7 @@ const Landing = () => {
           </span>
         </div>
         <div className="hero-right">
-          <img className="hero-img" />
+          <img className="hero-img" src="./events.jpeg" />
         </div>
       </section>
       <section className="random-events">
@@ -49,7 +49,7 @@ const Landing = () => {
       </section>
       <section className="landing-footer">
         <div className="footer-left">
-          <img className="footer-img" />
+          <img className="footer-img" src="./friends.jpeg" />
         </div>
         <div className="footer-right">Connect with your friends</div>
       </section>
