@@ -25,10 +25,9 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <Link to="/">
-       <img className="logo" src={logo}/> 
+      <img className="app-name" src="./logo.png" />
       {/* <Link to="/home"> <img className="logo" src={image}/> </Link>  */}
         {/* <div> <img className="logo" src="/navbar/logo.png"/> </div> */}
-        <h1 className="app-name">EVENTFUL</h1>
       </Link>
       {isLoggedIn ? (
         <>

@@ -10,7 +10,12 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="footer-container">
-        <span>App Logo</span> <span>Contact us</span> <span> <InstagramIcon /> <FacebookIcon /> <TwitterIcon /> </span>
+        <span>Contact us</span> 
+        <span> 
+          <InstagramIcon /> 
+          <FacebookIcon /> 
+          <TwitterIcon /> 
+        </span>
       </div>
     </div>
   )

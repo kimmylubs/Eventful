@@ -55,8 +55,19 @@
     }
 
     .right {
+      display: flex;
       flex: 1;
       background-color: rgb(238, 238, 239);
+      justify-content: center;
+      align-items: center;
+
+      .img-container {
+
+        .logo {
+          height: 250px;
+          width: 250px;
+        }
+      }
     }
   }
 }
