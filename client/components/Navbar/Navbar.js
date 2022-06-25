@@ -27,14 +27,11 @@ const Navbar = () => {
         {/* <Image className="logo" sx={{width:160, height:160}} src="./logo.jpg"/> */}
         {/* <Image className="logo" sx={{width:160, height:160}} src="https://imgur.com/a/idhJtCr"/> */}
 
-       <img className="logo" src="./logo.jpg"/> 
+        <Link to="/"> <img className="logo" src="./logo.jpg"/>       </Link>
 
       {/* <Link to="/home"> <img className="logo" src={image}/> </Link>  */}
         {/* <div> <img className="logo" src="/navbar/logo.png"/> </div> */}
-
-      <Link to="/">
-        <h1 className="app-name">EVENTFUL</h1>
-      </Link>
+      <Link to="/">  <h1 className="app-name">EVENTFUL</h1>  </Link>
       {isLoggedIn ? (
         <>
           <h2 className="user-name">Hello, {user.firstName}!</h2>
